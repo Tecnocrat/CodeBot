@@ -34,3 +34,13 @@ def setup_project_structure(base_folder="CodeBot", modules_folder="modules", tar
             print(f"Created file: {file_path}")
     
     print("Project structure setup complete!")
+def scan_test_folder(folder_path):
+    """
+    Scans the specified test folder for available tools and returns a list of files.
+    """
+    try:
+        return [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+    except FileNotFoundError:
+        print(f"Error: The folder '{folder_path}' does not exist.")
+        return []
+# CodeBot_Tracking
