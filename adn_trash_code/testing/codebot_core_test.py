@@ -2,6 +2,7 @@
 
 import os
 import sys
+sys.path.append("C:\\dev\\CodeBot")
 import threading
 import time
 import base64

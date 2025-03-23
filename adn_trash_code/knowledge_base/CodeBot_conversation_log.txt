@@ -13963,3 +13963,26 @@ CodeBot: Goodbye!
 You: quit
 CodeBot: Goodbye!
 
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+You: good
+CodeBot: I didn't recognize your input.
+
+You: bad
+CodeBot: I didn't recognize your input.
+
+You: quit
+CodeBot: Goodbye!
+
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+You: quit
+CodeBot: Goodbye!
+

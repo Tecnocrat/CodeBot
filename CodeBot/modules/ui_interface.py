@@ -18,34 +18,19 @@ def launch_ui():
 conversation_log_path = "C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"
 
 def handle_input(event=None):
-    """
-    Handles user input, processes CodeBot's response, appends both to the chat history,
-    and dynamically backs up interactions into the conversation log.
-    """
-    from modules.knowledge_base import save_conversation_to_log, retrieve_python_concept
+    from modules.dictionaries import word_recognition
 
     user_text = user_entry.get().strip().lower()
-    user_entry.delete(0, tk.END)  # Clear the input field
+    user_entry.delete(0, tk.END)
     output_area.insert(tk.END, f"You: {user_text}\n")
 
-    # Generate response based on user input
-    if user_text in ["hello", "hi", "hey", "greetings"]:
-        response = "CodeBot: Hello, I'm CodeBot!"
-    elif user_text in ["quit"]:
-        response = "CodeBot: Goodbye!"
-        root.quit()
-    elif user_text.startswith("explain"):
-        concept = user_text.replace("explain", "").strip()
-        response = retrieve_python_concept(concept)
+    if user_text in ["hello", "hi", "hey"]:
+        response = "CodeBot: Hello!"
     else:
-        response = "CodeBot: I didn't recognize your input."
+        recognized = word_recognition(user_text)
+        response = f"CodeBot: Recognized words: {', '.join(recognized)}" if recognized else "CodeBot: No valid words recognized."
 
-    # Append CodeBot's response to the chat history
     output_area.insert(tk.END, response + "\n")
-
-    # Backup the interaction
-    conversation = f"You: {user_text}\n{response}\n"
-    save_conversation_to_log(conversation, log_path=conversation_log_path)
 
 # UI Setup
     """
