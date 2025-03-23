@@ -18,11 +18,15 @@ if MODULES_DIR not in sys.path:
 # --- Import from modules ---
 from modules.file_manager import setup_project_structure
 from modules.compression import compress_libraries, decompress_library
+from modules.compression import compress_libraries, create_knowledge_archive
 from modules.summarization import summarize_runtime
 from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
 from modules.dictionaries import save_wordlists
 from modules.ui_interface import handle_input
+from modules.ui_interface import launch_ui
+from modules.compression import create_knowledge_archive
+from modules.file_manager import scan_test_folder
 
 # ------------------
 # CORE FUNCTIONS (processing functions)
@@ -294,8 +298,8 @@ if __name__ == "__main__":
     resource_monitor_thread = threading.Thread(target=monitor_resources, daemon=True)
     resource_monitor_thread.start()
 
-    print("\nStep 3: Runtime execution...")
-    runtime_execution()
+    print("\nStep 3: Launching UI Interface...")
+    launch_ui()
 
     print("\nStep 4: Creating knowledge archive...")
     create_knowledge_archive("../adn_trash_code")

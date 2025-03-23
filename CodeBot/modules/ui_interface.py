@@ -1,10 +1,28 @@
 import tkinter as tk
 from tkinter import scrolledtext
+from modules.dictionaries import word_recognition, suggest_word
+
+def launch_ui():
+    """
+    Launches the UI interface for CodeBot.
+    """
+    root.mainloop()  # Start the tkinter UI
 
 def handle_input(event=None):
+    """
+    Handles user input, processes CodeBot's response, and appends both to the chat history.
+    """
     user_text = user_entry.get().strip().lower()
     user_entry.delete(0, tk.END)  # Clear the input field
-    
+
+    # Append user input (collapsed if too long)
+    if len(user_text) > 50:
+        output_area.insert(tk.END, f"You: {user_text[:50]}... [full input hidden]\n")
+    else:
+        output_area.insert(tk.END, f"You: {user_text}\n")
+
+
+    # Generate CodeBot's response
     if user_text in ["hello", "hi", "hey", "greetings"]:
         response = "CodeBot: Hello, I'm CodeBot!"
     elif user_text in ["quit"]:
@@ -20,8 +38,9 @@ def handle_input(event=None):
         else:
             response = "CodeBot: I didn't recognize any valid words. Try again!"
 
-    # Display the response in the text area
+    # Append CodeBot's response to the chat history
     output_area.insert(tk.END, response + "\n")
+
 
 # Create the main UI window
 root = tk.Tk()
