@@ -21,6 +21,7 @@ from modules.compression import compress_libraries, decompress_library
 from modules.summarization import summarize_runtime
 from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
+from modules.dictionaries import save_wordlists
 
 # ------------------
 # CORE FUNCTIONS (processing functions)
@@ -231,6 +232,11 @@ def split_and_save_base64(encoded_text, volume_base="codebot_core_base64_vol", c
         print(f"Saved Volume {index} to {filename}")
     return volume_files
 
+def scan_test_folder(folder_path):
+    """
+    Scans the test folder for available tools and returns a list of files.
+    """
+    return [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
 # ------------------
 # MAIN EXECUTION
 # ------------------
@@ -256,5 +262,12 @@ if __name__ == "__main__":
 
     print("\nStep 6: Testing decompression of runtime library...")
     decompress_library(file_to_extract="runtime_library.txt")
+
+    print("\nStep 7: Scan test folder...")
+    test_tools = scan_test_folder("C:\\dev\\test")
+    print(f"Available tools in the test folder: {test_tools}")
+    
+    print("\nStep 8: Generating symbol library...")
+    save_wordlists("C:\\dev\\adn_trash_code\\dictionaries")
 
     print("\nAll tasks completed successfully.")
