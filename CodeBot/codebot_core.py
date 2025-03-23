@@ -133,26 +133,32 @@ def number_counter(filename="number_database.txt", max_iterations=1000):
         print(f"Counted and saved numbers up to {last_number + max_iterations}.")
 
 def runtime_execution():
-    actions = []
-    try:
-        runtime_length = int(input("Enter runtime length in seconds (0 for indefinite): "))
-        start_time = time.time()
-        print("\nExecution started. Press 'q' to stop execution.")
-        while True:
-            elapsed_time = time.time() - start_time
-            if runtime_length > 0 and elapsed_time >= runtime_length:
-                print("\nRuntime limit reached. Stopping execution.")
-                break
-            if keyboard.is_pressed('q'):
-                print("\nExecution manually stopped.")
-                break
-            action = f"Action at {int(elapsed_time)} seconds"
-            actions.append(action)
-            print(f"CodeBot running... Elapsed: {int(elapsed_time)} sec")
-            time.sleep(1)
-        summarize_runtime(start_time, actions)
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
+    """
+    Waits for user input and responds to greetings; quits after 60 seconds if no interaction.
+    """
+    import time
+    
+    print("CodeBot is waiting for your input. Type 'quit' to exit, or greet me!")
+    start_time = time.time()
+    
+    while True:
+        elapsed_time = time.time() - start_time
+        if elapsed_time > 60:
+            print("CodeBot: No interaction detected. Goodbye!")
+            break
+        
+        user_input = input("You: ").strip().lower()
+        if user_input in ["hello", "hi", "hey", "greetings"]:
+            print("CodeBot: Hello, I'm CodeBot!")
+        elif user_input in ["quit"]:
+            print("CodeBot: Goodbye!")
+            break
+        else:
+            recognized = word_recognition(user_input)
+            if recognized:
+                print(f"CodeBot: I recognized these words: {', '.join(recognized)}")
+            else:
+                print("CodeBot: I didn't recognize any valid words. Try again!")
 
 # ------------------
 # PROJECT STRUCTURE AND MODULARIZATION FUNCTIONS
@@ -237,6 +243,19 @@ def scan_test_folder(folder_path):
     Scans the test folder for available tools and returns a list of files.
     """
     return [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+
+def word_recognition(input_text, dictionary_path="C:\\dev\\adn_trash_code\\dictionaries\\english_words.txt"):
+    """
+    Checks if the input contains valid English words from the dictionary.
+    """
+    with open(dictionary_path, "r", encoding="utf-8") as f:
+        word_list = set(f.read().splitlines())
+    
+    input_words = set(input_text.lower().split())
+    recognized_words = input_words.intersection(word_list)
+    
+    return recognized_words
+
 # ------------------
 # MAIN EXECUTION
 # ------------------
