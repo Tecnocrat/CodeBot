@@ -22,6 +22,7 @@ from modules.summarization import summarize_runtime
 from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
 from modules.dictionaries import save_wordlists
+from modules.ui_interface import handle_input
 
 # ------------------
 # CORE FUNCTIONS (processing functions)
@@ -134,31 +135,45 @@ def number_counter(filename="number_database.txt", max_iterations=1000):
 
 def runtime_execution():
     """
-    Waits for user input and responds to greetings; quits after 60 seconds if no interaction.
+    CodeBot waits for user input, responds to greetings, recognizes words from a dictionary,
+    suggests similar words, and exits after 60 seconds of inactivity or when 'quit' is typed.
+    Includes a standby delay after each interaction to reduce resource usage.
     """
     import time
-    
-    print("CodeBot is waiting for your input. Type 'quit' to exit, or greet me!")
-    start_time = time.time()
-    
+
+    print("CodeBot is ready and waiting for your input. Type 'quit' to exit, or greet me!")
+    start_time = time.time()  # Track the time when the loop begins
+
     while True:
+        # Calculate elapsed time
         elapsed_time = time.time() - start_time
-        if elapsed_time > 60:
+        if elapsed_time > 60:  # Exit if there's no interaction for 60 seconds
             print("CodeBot: No interaction detected. Goodbye!")
             break
-        
+
+        # Get user input
         user_input = input("You: ").strip().lower()
+
+        # Handle user input
         if user_input in ["hello", "hi", "hey", "greetings"]:
             print("CodeBot: Hello, I'm CodeBot!")
         elif user_input in ["quit"]:
             print("CodeBot: Goodbye!")
             break
         else:
+            # Recognize words from the input using the dictionary
             recognized = word_recognition(user_input)
             if recognized:
                 print(f"CodeBot: I recognized these words: {', '.join(recognized)}")
+                # Suggest similar words for the first recognized word
+                suggestions = suggest_word(list(recognized)[0])
+                if suggestions:
+                    print(f"CodeBot: Here are some word suggestions: {', '.join(suggestions)}")
             else:
                 print("CodeBot: I didn't recognize any valid words. Try again!")
+
+        # Standby delay after each user interaction
+        time.sleep(0.5)
 
 # ------------------
 # PROJECT STRUCTURE AND MODULARIZATION FUNCTIONS
@@ -256,6 +271,16 @@ def word_recognition(input_text, dictionary_path="C:\\dev\\adn_trash_code\\dicti
     
     return recognized_words
 
+def suggest_word(input_word, dictionary_path="C:\\dev\\adn_trash_code\\dictionaries\\english_words.txt"):
+    """
+    Suggests words from the dictionary that start with the same letters as the input word.
+    """
+    with open(dictionary_path, "r", encoding="utf-8") as f:
+        word_list = [word.strip() for word in f.readlines()]
+
+    suggestions = [word for word in word_list if word.startswith(input_word.lower())]
+    return suggestions[:5]  # Return up to 5 suggestions
+
 # ------------------
 # MAIN EXECUTION
 # ------------------
@@ -272,21 +297,24 @@ if __name__ == "__main__":
     print("\nStep 3: Runtime execution...")
     runtime_execution()
 
-    print("\nStep 4: Compressing libraries...")
+    print("\nStep 4: Creating knowledge archive...")
+    create_knowledge_archive("../adn_trash_code")
+
+    print("\nStep 5: Compressing libraries...")
     compress_libraries()
 
-    print("\nStep 5: Encoding main script to Base64 and splitting into volumes...")
+    print("\nStep 6: Encoding main script to Base64 and splitting into volumes...")
     volumes_created = compress_and_encode_script()
     print("Volumes created:", volumes_created)
 
-    print("\nStep 6: Testing decompression of runtime library...")
+    print("\nStep 7: Testing decompression of runtime library...")
     decompress_library(file_to_extract="runtime_library.txt")
 
-    print("\nStep 7: Scan test folder...")
+    print("\nStep 8: Scan test folder...")
     test_tools = scan_test_folder("C:\\dev\\test")
     print(f"Available tools in the test folder: {test_tools}")
     
-    print("\nStep 8: Generating symbol library...")
+    print("\nStep 9: Generating symbol library...")
     save_wordlists("C:\\dev\\adn_trash_code\\dictionaries")
 
     print("\nAll tasks completed successfully.")

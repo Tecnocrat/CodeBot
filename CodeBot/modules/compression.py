@@ -1,6 +1,20 @@
 import os
 import zipfile
 
+def create_knowledge_archive(output_folder="../adn_trash_code"):
+    """
+    Creates an empty 'knowledge_archive.zip' file in the specified folder if it doesn't already exist.
+    """
+    archive_path = os.path.join(output_folder, "knowledge_archive.zip")
+    os.makedirs(output_folder, exist_ok=True)  # Ensure the folder exists
+    
+    if not os.path.exists(archive_path):
+        with zipfile.ZipFile(archive_path, "w") as zipf:
+            pass  # Create an empty archive
+        print(f"Created empty knowledge archive: {archive_path}")
+    else:
+        print(f"Knowledge archive already exists: {archive_path}")
+
 def compress_libraries(zip_filename="knowledge_archive.zip", target_folder="../adn_trash_code"):
     """
     Compresses all .txt files in the target folder (including runtime_library.txt) into a zip archive.
