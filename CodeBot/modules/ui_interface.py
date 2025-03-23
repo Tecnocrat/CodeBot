@@ -1,4 +1,7 @@
 # Imports
+import sys
+sys.path.append("C:\\dev\\test")  # Add the test folder to the module search path   # Add the test folder to the module search path
+from text_injector import inject_text
 import tkinter as tk
 from tkinter import scrolledtext
 from modules.dictionaries import word_recognition, suggest_word
@@ -16,14 +19,15 @@ def handle_input(event=None):
     """
     Handles user input, processes CodeBot's response, and appends both to the chat history.
     """
+    from modules.knowledge_base import retrieve_python_concept
+    from modules.text_injector import inject_text
+
+
     user_text = user_entry.get().strip().lower()
     user_entry.delete(0, tk.END)  # Clear the input field
 
-    # Append user input (collapsed if too long)
-    if len(user_text) > 50:
-        output_area.insert(tk.END, f"You: {user_text[:50]}... [full input hidden]\n")
-    else:
-        output_area.insert(tk.END, f"You: {user_text}\n")
+    # Append user input to the chat history
+    output_area.insert(tk.END, f"You: {user_text}\n")
 
     # Generate CodeBot's response
     if user_text in ["hello", "hi", "hey", "greetings"]:
@@ -31,11 +35,20 @@ def handle_input(event=None):
     elif user_text in ["quit"]:
         response = "CodeBot: Goodbye!"
         root.quit()  # Close the UI window
+    elif user_text.startswith("explain"):
+        concept = user_text.replace("explain", "").strip()
+        response = retrieve_python_concept(concept)
+    elif user_text.startswith("inject knowledge"):
+        parts = user_text.replace("inject knowledge", "").strip().split(";")
+        file_path = parts[0].strip() if len(parts) > 0 else None
+        text = parts[1].strip() if len(parts) > 1 else None
+        if file_path and text:
+            inject_text(file_path, text, "append")
+            response = f"Injected knowledge into {file_path}."
+        else:
+            response = "CodeBot: Invalid injection command."
     elif user_text.endswith("?"):
         response = "CodeBot: That's an interesting question. Let me think about it!"
-    elif user_text == "list tools":
-        test_tools = scan_test_folder("C:\\dev\\test")
-        response = f"CodeBot: Here are the tools I found in the test folder: {', '.join(test_tools)}"
     else:
         recognized = word_recognition(user_text)
         if recognized:
@@ -48,6 +61,8 @@ def handle_input(event=None):
 
     # Append CodeBot's response to the chat history
     output_area.insert(tk.END, response + "\n")
+
+
 
 
 # Create the main UI window
@@ -69,3 +84,5 @@ send_button.pack(pady=10)
 
 # Run the UI loop
 root.mainloop()
+
+# CodeBot_Tracking

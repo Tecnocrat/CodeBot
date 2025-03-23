@@ -44,3 +44,5 @@ def copy_core_for_testing(source="C:\\dev\\CodeBot\\codebot_core.py", dest="C:\\
         print(f"Copied {source} to {dest} for testing. Logged at {log_path}.")
     except FileNotFoundError:
         print(f"Error: Source file '{source}' not found.")
+
+# CodeBot_Tracking
