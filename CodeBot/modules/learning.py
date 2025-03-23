@@ -16,14 +16,17 @@ def analyze_library(library_file):
     Analyzes a Python library file and summarizes its contents (e.g., functions and classes).
     """
     try:
-        with open(library_file, "r") as f:
+        with open(library_file, "r", encoding="utf-8") as f:  # Use UTF-8 encoding
             lines = f.readlines()
-        
+
         functions = [line.strip() for line in lines if line.strip().startswith("def ")]
         classes = [line.strip() for line in lines if line.strip().startswith("class ")]
         print(f"Functions: {functions}")
         print(f"Classes: {classes}")
         return functions, classes
+    except UnicodeDecodeError as e:
+        print(f"Error reading {library_file}: {e}")
+        return [], []
     except FileNotFoundError:
         print(f"Error: File '{library_file}' not found.")
         return [], []

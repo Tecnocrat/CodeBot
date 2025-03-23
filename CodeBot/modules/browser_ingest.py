@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def ingest_browser_text(log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
     """
@@ -8,14 +9,12 @@ def ingest_browser_text(log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeB
     """
     try:
         # Set up the Edge WebDriver
-        driver = webdriver.Edge()  # Ensure msedgedriver.exe is in PATH
-        driver.get("https://your-copilot-browser-instance-url")  # Replace with actual URL
+        driver = webdriver.Edge()
+        driver.get("https://copilot.microsoft.com/chats/hdbdSkjsYJbBF38j6bnhG")  # Replace with your actual URL
 
-        # Wait for the page to load completely
-        time.sleep(5)
-
-        # Locate the conversation container
-        conversation_element = driver.find_element(By.CLASS_NAME, "conversation-container")  # Update the class name if needed
+        # Wait for the conversation container to load
+        wait = WebDriverWait(driver, 10)
+        conversation_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "conversation-container")))
         conversation_text = conversation_element.text
 
         # Append conversation to the log
