@@ -1,13 +1,17 @@
+# Imports
 import tkinter as tk
 from tkinter import scrolledtext
 from modules.dictionaries import word_recognition, suggest_word
+from modules.file_manager import scan_test_folder
 
+# UI Setup
 def launch_ui():
     """
     Launches the UI interface for CodeBot.
     """
     root.mainloop()  # Start the tkinter UI
 
+# Input Handling
 def handle_input(event=None):
     """
     Handles user input, processes CodeBot's response, and appends both to the chat history.
@@ -21,13 +25,17 @@ def handle_input(event=None):
     else:
         output_area.insert(tk.END, f"You: {user_text}\n")
 
-
     # Generate CodeBot's response
     if user_text in ["hello", "hi", "hey", "greetings"]:
         response = "CodeBot: Hello, I'm CodeBot!"
     elif user_text in ["quit"]:
         response = "CodeBot: Goodbye!"
         root.quit()  # Close the UI window
+    elif user_text.endswith("?"):
+        response = "CodeBot: That's an interesting question. Let me think about it!"
+    elif user_text == "list tools":
+        test_tools = scan_test_folder("C:\\dev\\test")
+        response = f"CodeBot: Here are the tools I found in the test folder: {', '.join(test_tools)}"
     else:
         recognized = word_recognition(user_text)
         if recognized:

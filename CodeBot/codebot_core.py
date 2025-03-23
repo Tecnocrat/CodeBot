@@ -16,17 +16,17 @@ if MODULES_DIR not in sys.path:
     sys.path.append(MODULES_DIR)
 
 # --- Import from modules ---
-from modules.file_manager import setup_project_structure
+from modules.file_manager import setup_project_structure, scan_test_folder
 from modules.compression import compress_libraries, decompress_library
-from modules.compression import compress_libraries, create_knowledge_archive
+from modules.knowledge_base import create_knowledge_archive
+from modules.ui_interface import launch_ui, handle_input
+from modules.dictionaries import save_wordlists
 from modules.summarization import summarize_runtime
 from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
-from modules.dictionaries import save_wordlists
-from modules.ui_interface import handle_input
-from modules.ui_interface import launch_ui
-from modules.compression import create_knowledge_archive
-from modules.file_manager import scan_test_folder
+from modules.learning import load_python_library, analyze_library
+from modules.learning import copy_core_for_testing
+
 
 # ------------------
 # CORE FUNCTIONS (processing functions)
@@ -320,5 +320,13 @@ if __name__ == "__main__":
     
     print("\nStep 9: Generating symbol library...")
     save_wordlists("C:\\dev\\adn_trash_code\\dictionaries")
+
+    print("\nStep 10: Teaching CodeBot Python...")
+    python_libs = load_python_library()
+    for lib in python_libs:
+        analyze_library(os.path.join("C:\\dev\\adn_trash_code\\python_libs", lib))
+
+    print("\nStep 11: Creating parallel testing environment...")
+    copy_core_for_testing()
 
     print("\nAll tasks completed successfully.")
