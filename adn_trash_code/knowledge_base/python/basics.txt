@@ -1,4 +1,3 @@
-Tecnocrat
 # Variables
 Variables are used to store data. Example: x = 5
 

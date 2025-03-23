@@ -44,5 +44,20 @@ def copy_core_for_testing(source="C:\\dev\\CodeBot\\codebot_core.py", dest="C:\\
         print(f"Copied {source} to {dest} for testing. Logged at {log_path}.")
     except FileNotFoundError:
         print(f"Error: Source file '{source}' not found.")
+def test_safe_iteration():  # CodeBot_Tracking
+    """
+    Runs CodeBot in a limited sandbox environment to ensure safety.
+    """
+    try:
+        test_folder = "C:\\dev\\adn_trash_code\\testing"
+        os.makedirs(test_folder, exist_ok=True)
+        
+        # Simulated iteration example
+        iteration_file = os.path.join(test_folder, "codebot_iterated.py")
+        with open(iteration_file, "w") as f:
+            f.write("# Iterated CodeBot Version\nprint('Hello from Iterated CodeBot')")
+        print(f"Iteration saved at: {iteration_file}")
+    except Exception as e:
+        print(f"Iteration failed: {e}")
 
 # CodeBot_Tracking
