@@ -28,3 +28,19 @@ def analyze_library(library_file):
     except FileNotFoundError:
         print(f"Error: File '{library_file}' not found.")
         return [], []
+    
+def copy_core_for_testing(source="C:\\dev\\CodeBot\\codebot_core.py", dest="C:\\dev\\adn_trash_code\\testing\\codebot_core_test.py"):
+    """
+    Copies the main codebot_core.py file to a testing environment for experimentation
+    and sets up a log for tracking modifications.
+    """
+    try:
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        with open(source, "r") as src, open(dest, "w") as dst:
+            dst.write(src.read())
+        log_path = os.path.join(os.path.dirname(dest), "modifications.log")
+        with open(log_path, "a") as log:
+            log.write(f"Created test copy of {source} at {dest}\n")
+        print(f"Copied {source} to {dest} for testing. Logged at {log_path}.")
+    except FileNotFoundError:
+        print(f"Error: Source file '{source}' not found.")
