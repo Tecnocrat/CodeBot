@@ -166,3 +166,27 @@ CodeBot: Goodbye!
 You: quit
 CodeBot: Goodbye!
 
+[2025-03-23 23:04:07]
+You: explain functions
+Functions are reusable blocks of code. Example:
+def greet(name):
+    return f"Hello, {name}!"
+
+
+
+[2025-03-23 23:04:09]
+You: hello
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-23 23:04:11]
+You: quit
+CodeBot: Goodbye!
+
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+[2025-03-23 23:04:13]
+You: quit
+CodeBot: Goodbye!
+
