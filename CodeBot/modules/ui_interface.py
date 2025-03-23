@@ -1,11 +1,15 @@
 # Imports
 import sys
-sys.path.append("C:\\dev\\test")  # Add the test folder to the module search path   # Add the test folder to the module search path
-from text_injector import inject_text
+sys.path.append("C:\\dev\\CodeBot")  # Add the CodeBot folder to the Python search path
 import tkinter as tk
 from tkinter import scrolledtext
 from modules.dictionaries import word_recognition, suggest_word
 from modules.file_manager import scan_test_folder
+from modules.knowledge_base import retrieve_python_concept, save_conversation_to_log
+from modules.text_injector import inject_text
+
+# Global Variables
+conversation_log_path = "C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"
 
 # UI Setup
 def launch_ui():
@@ -15,58 +19,41 @@ def launch_ui():
     root.mainloop()  # Start the tkinter UI
 
 # Input Handling
-conversation_log_path = "C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"
-
 def handle_input(event=None):
-    from modules.dictionaries import word_recognition
-
-    user_text = user_entry.get().strip().lower()
-    user_entry.delete(0, tk.END)
-    output_area.insert(tk.END, f"You: {user_text}\n")
-
-    if user_text in ["hello", "hi", "hey"]:
-        response = "CodeBot: Hello!"
-    else:
-        recognized = word_recognition(user_text)
-        response = f"CodeBot: Recognized words: {', '.join(recognized)}" if recognized else "CodeBot: No valid words recognized."
-
-    output_area.insert(tk.END, response + "\n")
-
-# UI Setup
     """
-    Handles user input, processes CodeBot's response, and appends both to the chat history.
+    Handles user input, processes CodeBot's response, appends both to the chat history,
+    and backs up interactions into the conversation log.
     """
-    from modules.knowledge_base import retrieve_python_concept
-    from modules.text_injector import inject_text
-
-
     user_text = user_entry.get().strip().lower()
     user_entry.delete(0, tk.END)  # Clear the input field
 
-    # Append user input to the chat history
-    output_area.insert(tk.END, f"You: {user_text}\n")
-
-    # Generate CodeBot's response
-    if user_text in ["hello", "hi", "hey", "greetings"]:
+    # Prevent empty input
+    if not user_text:
+        response = "CodeBot: Please enter a message."
+    elif user_text in ["hello", "hi", "hey", "greetings"]:
         response = "CodeBot: Hello, I'm CodeBot!"
     elif user_text in ["quit"]:
         response = "CodeBot: Goodbye!"
         root.quit()  # Close the UI window
     elif user_text.startswith("explain"):
+        # Retrieve a Python concept
         concept = user_text.replace("explain", "").strip()
         response = retrieve_python_concept(concept)
     elif user_text.startswith("inject knowledge"):
+        # Inject knowledge into a specified file
         parts = user_text.replace("inject knowledge", "").strip().split(";")
         file_path = parts[0].strip() if len(parts) > 0 else None
         text = parts[1].strip() if len(parts) > 1 else None
         if file_path and text:
             inject_text(file_path, text, "append")
-            response = f"Injected knowledge into {file_path}."
+            response = f"CodeBot: Injected knowledge into {file_path}."
         else:
             response = "CodeBot: Invalid injection command."
     elif user_text.endswith("?"):
+        # Respond to questions generically
         response = "CodeBot: That's an interesting question. Let me think about it!"
     else:
+        # Use word recognition
         recognized = word_recognition(user_text)
         if recognized:
             response = f"CodeBot: I recognized these words: {', '.join(recognized)}"
@@ -76,8 +63,12 @@ def handle_input(event=None):
         else:
             response = "CodeBot: I didn't recognize any valid words. Try again!"
 
-    # Append CodeBot's response to the chat history
-    output_area.insert(tk.END, response + "\n")
+    # Append user input and response to chat history
+    output_area.insert(tk.END, f"You: {user_text}\n{response}\n")
+
+    # Save conversation to log
+    conversation = f"You: {user_text}\n{response}\n"
+    save_conversation_to_log(conversation, log_path=conversation_log_path)
 
 # Create the main UI window
 root = tk.Tk()
@@ -97,6 +88,6 @@ send_button = tk.Button(root, text="Send", command=handle_input, font=("Helvetic
 send_button.pack(pady=10)
 
 # Run the UI loop
-root.mainloop()
+launch_ui()
 
 # CodeBot_Tracking

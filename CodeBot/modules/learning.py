@@ -11,7 +11,6 @@ def load_python_library(library_path="C:\\dev\\adn_trash_code\\python_libs"):
     except FileNotFoundError:
         print("Error: Python library folder not found.")
         return []
-
 def analyze_library(library_file):
     """
     Analyzes a Python library file and summarizes its contents (e.g., functions and classes).
@@ -28,7 +27,6 @@ def analyze_library(library_file):
     except FileNotFoundError:
         print(f"Error: File '{library_file}' not found.")
         return [], []
-    
 def copy_core_for_testing(source="C:\\dev\\CodeBot\\codebot_core.py", dest="C:\\dev\\adn_trash_code\\testing\\codebot_core_test.py"):
     """
     Copies the main codebot_core.py file to a testing environment for experimentation
@@ -59,5 +57,26 @@ def test_safe_iteration():  # CodeBot_Tracking
         print(f"Iteration saved at: {iteration_file}")
     except Exception as e:
         print(f"Iteration failed: {e}")
+def auto_correct_module_errors(log_file="C:\\dev\\adn_trash_code\\error_log.txt"):
+    """
+    Automatically detects and corrects module errors based on a predefined set of rules.
+    """
+    try:
+        with open(log_file, "r", encoding="utf-8") as log:
+            errors = log.readlines()
+
+        corrections = {
+            "ModuleNotFoundError": "Check PYTHONPATH or package structure",
+            "FileNotFoundError": "Ensure file exists at specified path",
+            "SyntaxError": "Review code syntax in affected module",
+        }
+
+        for error in errors:
+            for key, suggestion in corrections.items():
+                if key in error:
+                    print(f"Error Detected: {error.strip()}")
+                    print(f"Suggested Correction: {suggestion}")
+    except FileNotFoundError:
+        print("Error log file not found.")
 
 # CodeBot_Tracking

@@ -7,15 +7,15 @@ def ingest_browser_text(log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeB
     Captures conversation text from the browser and appends it to the log file.
     """
     try:
-        # Set up the Edge WebDriver (Ensure msedgedriver.exe is in your PATH)
-        driver = webdriver.Edge()  # You must download the Edge WebDriver
-        driver.get("https://your-copilot-browser-instance-url")  # Update with the actual Copilot interface URL
+        # Set up the Edge WebDriver
+        driver = webdriver.Edge()  # Ensure msedgedriver.exe is in PATH
+        driver.get("https://your-copilot-browser-instance-url")  # Replace with actual URL
 
         # Wait for the page to load completely
         time.sleep(5)
 
-        # Locate the conversation container (update the class name as needed for your Copilot UI)
-        conversation_element = driver.find_element(By.CLASS_NAME, "conversation-container")
+        # Locate the conversation container
+        conversation_element = driver.find_element(By.CLASS_NAME, "conversation-container")  # Update the class name if needed
         conversation_text = conversation_element.text
 
         # Append conversation to the log

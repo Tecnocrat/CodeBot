@@ -52,13 +52,27 @@ def retrieve_conversation_log(keyword, log_path="C:\\dev\\adn_trash_code\\knowle
             return matches if matches else "No matches found in the conversation log."
     except FileNotFoundError:
         return "Conversation log file not found."
+from datetime import datetime
+
 def save_conversation_to_log(conversation, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
     """
     Saves the current conversation text to a log file for future reference.
+    Filters out legacy placeholders and timestamps new entries.
     """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     try:
-        with open(log_path, "a", encoding="utf-8") as log:
-            log.write(conversation + "\n")
+        with open(log_path, "a+", encoding="utf-8") as log:
+            # Check for placeholders and remove them
+            log.seek(0)
+            content = log.read()
+            if "Full Copilot conversation copied from Edge browser." in content:
+                content = content.replace("Full Copilot conversation copied from Edge browser.\nPaste everything here within triple quotes.\n\n", "")
+                log.seek(0)
+                log.truncate()
+                log.write(content)
+
+            # Add timestamped conversation
+            log.write(f"[{timestamp}]\n{conversation}\n")
         print(f"Conversation saved to {log_path}.")
     except Exception as e:
         print(f"Error saving conversation: {e}")
