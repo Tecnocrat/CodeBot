@@ -41,5 +41,36 @@ def retrieve_python_concept(concept, knowledge_dir="C:\\dev\\adn_trash_code\\kno
                 if concept.capitalize() in explanations:
                     return explanations[concept.capitalize()]
     return "Concept not found in knowledge base."
+def retrieve_conversation_log(keyword, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
+    """
+    Searches the conversation log for a specific keyword and retrieves matching lines.
+    """
+    try:
+        with open(log_path, "r", encoding="utf-8") as log:
+            lines = log.readlines()
+            matches = [line for line in lines if keyword.lower() in line.lower()]
+            return matches if matches else "No matches found in the conversation log."
+    except FileNotFoundError:
+        return "Conversation log file not found."
+def save_conversation_to_log(conversation, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
+    """
+    Saves the current conversation text to a log file for future reference.
+    """
+    try:
+        with open(log_path, "a", encoding="utf-8") as log:
+            log.write(conversation + "\n")
+        print(f"Conversation saved to {log_path}.")
+    except Exception as e:
+        print(f"Error saving conversation: {e}")
+def export_conversation_log(conversation_text, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
+    """
+    Exports conversation text into a log file for persistence.
+    """
+    try:
+        with open(log_path, "a", encoding="utf-8") as log_file:
+            log_file.write(conversation_text + "\n")
+        print(f"Conversation exported successfully to {log_path}.")
+    except Exception as e:
+        print(f"Failed to export conversation: {e}")
 
 # CodeBot_Tracking

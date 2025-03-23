@@ -1,3 +1,5 @@
+#KEYWORD: CodeBot_Tracking
+
 import os
 import sys
 import threading
@@ -26,6 +28,14 @@ from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
 from modules.learning import load_python_library, analyze_library
 from modules.learning import copy_core_for_testing
+
+# --- Global Variables ---
+conversation_text = """
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    """
+from modules.knowledge_base import export_conversation_log
+export_conversation_log(conversation_text)
 
 
 # ------------------

@@ -15,7 +15,39 @@ def launch_ui():
     root.mainloop()  # Start the tkinter UI
 
 # Input Handling
+conversation_log_path = "C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"
+
 def handle_input(event=None):
+    """
+    Handles user input, processes CodeBot's response, appends both to the chat history,
+    and dynamically backs up interactions into the conversation log.
+    """
+    from modules.knowledge_base import save_conversation_to_log, retrieve_python_concept
+
+    user_text = user_entry.get().strip().lower()
+    user_entry.delete(0, tk.END)  # Clear the input field
+    output_area.insert(tk.END, f"You: {user_text}\n")
+
+    # Generate response based on user input
+    if user_text in ["hello", "hi", "hey", "greetings"]:
+        response = "CodeBot: Hello, I'm CodeBot!"
+    elif user_text in ["quit"]:
+        response = "CodeBot: Goodbye!"
+        root.quit()
+    elif user_text.startswith("explain"):
+        concept = user_text.replace("explain", "").strip()
+        response = retrieve_python_concept(concept)
+    else:
+        response = "CodeBot: I didn't recognize your input."
+
+    # Append CodeBot's response to the chat history
+    output_area.insert(tk.END, response + "\n")
+
+    # Backup the interaction
+    conversation = f"You: {user_text}\n{response}\n"
+    save_conversation_to_log(conversation, log_path=conversation_log_path)
+
+# UI Setup
     """
     Handles user input, processes CodeBot's response, and appends both to the chat history.
     """
@@ -61,9 +93,6 @@ def handle_input(event=None):
 
     # Append CodeBot's response to the chat history
     output_area.insert(tk.END, response + "\n")
-
-
-
 
 # Create the main UI window
 root = tk.Tk()

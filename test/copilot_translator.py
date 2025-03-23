@@ -1,20 +1,29 @@
+import os
+from nltk.corpus import words, stopwords
 
-# CodeBot_Tracking
-def retrieve_python_concept(concept, knowledge_dir="C:\\dev\\adn_trash_code\\knowledge_base\\python"):
+def word_recognition(input_text, dictionary_path="C:\\dev\\adn_trash_code\\dictionaries\\english_words.txt"):
     """
-    Searches for a Python concept across multiple files in the knowledge directory.
+    Checks if the input contains valid English words from the dictionary.
     """
-    for file in os.listdir(knowledge_dir):
-        if file.endswith(".txt"):
-            file_path = os.path.join(knowledge_dir, file)
-            with open(file_path, "r", encoding="utf-8") as f:
-                lines = f.readlines()
-                explanations = {line[1:].strip(): "" for line in lines if line.startswith("#")}
-                for line in lines:
-                    if line.startswith("#"):
-                        current_key = line[1:].strip()
-                    elif current_key:
-                        explanations[current_key] += line
-                if concept.capitalize() in explanations:
-                    return explanations[concept.capitalize()]
-    return "Concept not found in knowledge base."
+    try:
+        with open(dictionary_path, "r", encoding="utf-8") as f:
+            word_list = set(f.read().splitlines())
+        input_words = set(input_text.lower().split())
+        recognized_words = input_words.intersection(word_list)
+        return recognized_words
+    except FileNotFoundError:
+        print("Error: Dictionary file not found.")
+        return set()
+
+def suggest_word(input_word, dictionary_path="C:\\dev\\adn_trash_code\\dictionaries\\english_words.txt"):
+    """
+    Suggests words from the dictionary that start with the same letters as the input word.
+    """
+    try:
+        with open(dictionary_path, "r", encoding="utf-8") as f:
+            word_list = [word.strip() for word in f.readlines()]
+        suggestions = [word for word in word_list if word.startswith(input_word.lower())]
+        return suggestions[:5]  # Return up to 5 suggestions
+    except FileNotFoundError:
+        print("Error: Dictionary file not found.")
+        return []
