@@ -1,15 +1,21 @@
 # Imports
 import sys
-sys.path.append("C:\\dev\\CodeBot")  # Add the CodeBot folder to the Python search path
+sys.path.append("C:\\dev\\CodeBot")  # Add CodeBot folder to Python search path
 import tkinter as tk
 from tkinter import scrolledtext
 from modules.dictionaries import word_recognition, suggest_word
 from modules.file_manager import scan_test_folder
-from modules.knowledge_base import retrieve_python_concept, save_conversation_to_log
-from modules.text_injector import inject_text
+from modules.knowledge_base import retrieve_python_concept, save_conversation_to_log, inject_text
+from modules.ai_engine import explain_python_code
+
+try:
+    from modules.resources import monitor_resources
+except ImportError:
+    monitor_resources = None  # If resources module is not defined, skip monitoring
 
 # Global Variables
 conversation_log_path = "C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"
+quit_flag = False  # Global flag to exit the app
 
 # UI Setup
 def launch_ui():
@@ -24,17 +30,27 @@ def handle_input(event=None):
     Handles user input, processes CodeBot's response, appends both to the chat history,
     and backs up interactions into the conversation log.
     """
+    global quit_flag
+
     user_text = user_entry.get().strip().lower()
     user_entry.delete(0, tk.END)  # Clear the input field
 
-    # Prevent empty input
+    if quit_flag:
+        root.quit()  # Exit application immediately
+
     if not user_text:
         response = "CodeBot: Please enter a message."
+    elif user_text in ["quit"]:
+        quit_flag = True
+        response = "CodeBot: Goodbye!"
+    elif monitor_resources and user_text in ["monitor"]:
+        response = monitor_resources()  # Perform resource monitoring if module exists
     elif user_text in ["hello", "hi", "hey", "greetings"]:
         response = "CodeBot: Hello, I'm CodeBot!"
-    elif user_text in ["quit"]:
-        response = "CodeBot: Goodbye!"
-        root.quit()  # Close the UI window
+    elif user_text.startswith("explain python"):
+        # Explain a Python code snippet
+        code_snippet = user_text.replace("explain python", "").strip()
+        response = explain_python_code(code_snippet)
     elif user_text.startswith("explain"):
         # Retrieve a Python concept
         concept = user_text.replace("explain", "").strip()
@@ -50,7 +66,7 @@ def handle_input(event=None):
         else:
             response = "CodeBot: Invalid injection command."
     elif user_text.endswith("?"):
-        # Respond to questions generically
+        # Respond to Python-related questions dynamically
         response = "CodeBot: That's an interesting question. Let me think about it!"
     else:
         # Use word recognition
@@ -67,8 +83,7 @@ def handle_input(event=None):
     output_area.insert(tk.END, f"You: {user_text}\n{response}\n")
 
     # Save conversation to log
-    conversation = f"You: {user_text}\n{response}\n"
-    save_conversation_to_log(conversation, log_path=conversation_log_path)
+    save_conversation_to_log(f"You: {user_text}\n{response}", log_path=conversation_log_path)
 
 # Create the main UI window
 root = tk.Tk()
@@ -89,5 +104,3 @@ send_button.pack(pady=10)
 
 # Run the UI loop
 launch_ui()
-
-# CodeBot_Tracking

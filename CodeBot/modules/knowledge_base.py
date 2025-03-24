@@ -22,7 +22,6 @@ def create_knowledge_archive(output_folder="../adn_trash_code"):
                 zipf.write(full_path, arcname)
 
         print(f"Knowledge archive created/updated at: {archive_path}")
-
 def retrieve_python_concept(concept, knowledge_dir="C:\\dev\\adn_trash_code\\knowledge_base\\python"):
     """
     Searches for a Python concept across multiple files in the knowledge directory.
@@ -41,7 +40,6 @@ def retrieve_python_concept(concept, knowledge_dir="C:\\dev\\adn_trash_code\\kno
                     elif current_key:
                         explanations[current_key] += line
     return explanations.get(concept.capitalize(), "Concept not found.")
-
 def retrieve_conversation_log(keyword, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
     """
     Searches the conversation log for a specific keyword and retrieves matching lines.
@@ -53,7 +51,6 @@ def retrieve_conversation_log(keyword, log_path="C:\\dev\\adn_trash_code\\knowle
             return matches if matches else "No matches found in the conversation log."
     except FileNotFoundError:
         return "Conversation log file not found."
-
 def save_conversation_to_log(conversation, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
     """
     Saves the current conversation text to a log file for future reference.
@@ -76,7 +73,6 @@ def save_conversation_to_log(conversation, log_path="C:\\dev\\adn_trash_code\\kn
         print(f"Conversation saved to {log_path}.")
     except Exception as e:
         print(f"Error saving conversation: {e}")
-
 def export_conversation_log(conversation_text, log_path="C:\\dev\\adn_trash_code\\knowledge_base\\CodeBot_conversation_log.txt"):
     """
     Exports conversation text into a log file for persistence.
@@ -87,3 +83,13 @@ def export_conversation_log(conversation_text, log_path="C:\\dev\\adn_trash_code
         print(f"Conversation exported successfully to {log_path}.")
     except Exception as e:
         print(f"Failed to export conversation: {e}")
+def inject_text(file_path, text, mode="append"):
+    """
+    Injects specified text into the given file.
+    """
+    try:
+        with open(file_path, mode, encoding="utf-8") as f:
+            f.write(text + "\n")
+        return f"Text injected into {file_path}."
+    except Exception as e:
+        return f"Error injecting text: {e}"
