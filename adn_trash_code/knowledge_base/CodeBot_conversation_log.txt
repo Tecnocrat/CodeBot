@@ -282,3 +282,53 @@ CodeBot: Goodbye!
 You: quit
 CodeBot: Goodbye!
 
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+[2025-03-24 08:25:02]
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 08:25:04]
+You: good
+CodeBot: I recognized these words: good
+CodeBot: Here are some word suggestions: good, goodeniaceous, goodhearted, goodheartedly, goodheartedness
+
+[2025-03-24 08:25:05]
+You: quit
+CodeBot: Goodbye!
+
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+[2025-03-24 08:25:05]
+You: 
+CodeBot: Please enter a message.
+
+[2025-03-24 08:25:06]
+You: quit
+CodeBot: Goodbye!
+
+[2025-03-24 08:32:15]
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 08:32:17]
+You: good
+CodeBot: I recognized these words: good
+CodeBot: Here are some word suggestions: good, goodeniaceous, goodhearted, goodheartedly, goodheartedness
+
+[2025-03-24 08:32:18]
+You: quit
+CodeBot: Goodbye!
+
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+[2025-03-24 08:32:19]
+You: quit
+CodeBot: Goodbye!
+

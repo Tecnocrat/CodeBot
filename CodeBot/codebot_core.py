@@ -27,7 +27,8 @@ from modules.dictionaries import save_wordlists
 from modules.summarization import summarize_runtime
 from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
-from modules.learning import load_python_library, analyze_library
+from modules.learning import load_python_library
+from modules.learning import analyze_library
 from modules.learning import copy_core_for_testing
 
 # --- Global Variables ---
@@ -332,10 +333,15 @@ if __name__ == "__main__":
     print("\nStep 9: Generating symbol library...")
     save_wordlists("C:\\dev\\adn_trash_code\\dictionaries")
 
-    print("\nStep 10: Teaching CodeBot Python...")
+    # Load Python libraries and analyze them
     python_libs = load_python_library()
-    for lib in python_libs:
-        analyze_library(os.path.join("C:\\dev\\adn_trash_code\\python_libs", lib))
+    if python_libs:
+        print(f"Step 10: Teaching CodeBot Python...")
+        print(f"Loaded Python libraries.")  # Simplified message
+        for lib in python_libs:
+            analyze_library(os.path.join("C:\\dev\\adn_trash_code\\python_libs", lib), debug=False)
+    else:
+        print("Step 10: No Python libraries found.")
 
     print("\nStep 11: Creating parallel testing environment...")
     copy_core_for_testing()

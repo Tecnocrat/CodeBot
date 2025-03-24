@@ -1,41 +1,49 @@
 import os
 
-def load_python_library(library_path="C:\\dev\\adn_trash_code\\python_libs"):
+def load_language_libraries(language="python", library_path="C:\\dev\\adn_trash_code\\{language}_libs"):
     """
-    Loads Python libraries from the specified directory for CodeBot's learning.
+    Loads libraries for the specified language from the given path.
     """
+    library_path = library_path.format(language=language)
     try:
         libraries = [f for f in os.listdir(library_path) if f.endswith(".py")]
-        print(f"Loaded Python libraries: {', '.join(libraries)}")
+        print(f"Loaded {language.capitalize()} libraries.")
         return libraries
     except FileNotFoundError:
-        print("Error: Python library folder not found.")
+        print(f"Error: {language.capitalize()} library folder not found at {library_path}.")
         return []
-def analyze_library(library_file, log_path="C:\\dev\\adn_trash_code\\testing\\library_analysis.log", debug=True):
+def analyze_library(library_file, log_path="C:\\dev\\adn_trash_code\\testing\\library_analysis.log", debug=False):
     """
     Analyzes a Python library file and logs its contents (e.g., functions and classes) to a file.
+    Suppresses terminal output unless debugging is explicitly enabled.
     """
-    if not debug:
-        return [], []
     try:
+        if not debug:
+            return [], []  # Skip analysis if debugging is disabled
+
         with open(library_file, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
         functions = [line.strip() for line in lines if line.strip().startswith("def ")]
         classes = [line.strip() for line in lines if line.strip().startswith("class ")]
-        
+
+        # Log the analysis results to a file
         with open(log_path, "a", encoding="utf-8") as log_file:
             log_file.write(f"Analyzed {library_file}:\n")
             log_file.write(f"Classes: {classes}\n")
             log_file.write(f"Functions: {functions}\n\n")
+
+        if debug:
+            print(f"DEBUG: Analysis of {library_file} logged to {log_path}.")
         
-        print(f"Analysis of {library_file} logged to {log_path}.")
         return functions, classes
     except UnicodeDecodeError as e:
-        print(f"Error reading {library_file}: {e}")
+        if debug:
+            print(f"DEBUG: Error reading {library_file}: {e}")
         return [], []
     except FileNotFoundError:
-        print(f"Error: File '{library_file}' not found.")
+        if debug:
+            print(f"DEBUG: File '{library_file}' not found.")
         return [], []
 def copy_core_for_testing(source="C:\\dev\\CodeBot\\codebot_core.py", dest="C:\\dev\\adn_trash_code\\testing\\codebot_core_test.py"):
     """
