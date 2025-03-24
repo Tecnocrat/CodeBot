@@ -11,18 +11,25 @@ def load_python_library(library_path="C:\\dev\\adn_trash_code\\python_libs"):
     except FileNotFoundError:
         print("Error: Python library folder not found.")
         return []
-def analyze_library(library_file):
+def analyze_library(library_file, log_path="C:\\dev\\adn_trash_code\\testing\\library_analysis.log", debug=True):
     """
-    Analyzes a Python library file and summarizes its contents (e.g., functions and classes).
+    Analyzes a Python library file and logs its contents (e.g., functions and classes) to a file.
     """
+    if not debug:
+        return [], []
     try:
-        with open(library_file, "r", encoding="utf-8") as f:  # Use UTF-8 encoding
+        with open(library_file, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
         functions = [line.strip() for line in lines if line.strip().startswith("def ")]
         classes = [line.strip() for line in lines if line.strip().startswith("class ")]
-        print(f"Functions: {functions}")
-        print(f"Classes: {classes}")
+        
+        with open(log_path, "a", encoding="utf-8") as log_file:
+            log_file.write(f"Analyzed {library_file}:\n")
+            log_file.write(f"Classes: {classes}\n")
+            log_file.write(f"Functions: {functions}\n\n")
+        
+        print(f"Analysis of {library_file} logged to {log_path}.")
         return functions, classes
     except UnicodeDecodeError as e:
         print(f"Error reading {library_file}: {e}")
