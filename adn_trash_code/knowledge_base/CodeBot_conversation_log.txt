@@ -332,3 +332,102 @@ CodeBot: Goodbye!
 You: quit
 CodeBot: Goodbye!
 
+[2025-03-24 14:49:36]
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 14:49:38]
+You: good
+CodeBot: I recognized these words: good
+CodeBot: Here are some word suggestions: good, goodeniaceous, goodhearted, goodheartedly, goodheartedness
+
+[2025-03-24 14:49:42]
+You: explain python
+Concept not found.
+
+[2025-03-24 14:49:45]
+You: explain loops
+Loops are used to repeat actions. Example:
+for i in range(5):
+    print(i)
+
+
+
+[2025-03-24 14:49:48]
+You: quit
+CodeBot: Goodbye!
+
+[2025-03-24 15:36:39]
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 15:36:44]
+You: good
+CodeBot: I recognized these words: good
+CodeBot: Here are some word suggestions: good, goodeniaceous, goodhearted, goodheartedly, goodheartedness
+
+[2025-03-24 15:36:48]
+You: quit
+CodeBot: Goodbye!
+
+[2025-03-24 19:45:58]
+You: hiç
+CodeBot: I didn't recognize any valid words. Try again!
+
+[2025-03-24 19:46:01]
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 19:46:09]
+You: explain loops
+Loops are used to repeat actions. Example:
+for i in range(5):
+    print(i)
+
+
+
+[2025-03-24 19:46:11]
+You: quit
+CodeBot: Goodbye!
+
+[2025-03-24 19:50:00]
+You: hi
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 19:50:02]
+You: good
+CodeBot: I recognized these words: good
+CodeBot: Here are some word suggestions: good, goodeniaceous, goodhearted, goodheartedly, goodheartedness
+
+[2025-03-24 19:50:04]
+You: quit
+CodeBot: Goodbye!
+
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+[2025-03-24 19:50:12]
+You: quit
+CodeBot: Goodbye!
+
+[2025-03-24 19:56:01]
+You: hello
+CodeBot: Hello, I'm CodeBot!
+
+[2025-03-24 19:56:06]
+You: what about python?
+CodeBot: That's an interesting question. Let me think about it!
+
+[2025-03-24 19:56:09]
+You: quit
+CodeBot: Goodbye!
+
+
+    Full Copilot conversation copied from Edge browser.
+    Paste everything here within triple quotes.
+    
+[2025-03-24 19:56:13]
+You: quit
+CodeBot: Goodbye!
+

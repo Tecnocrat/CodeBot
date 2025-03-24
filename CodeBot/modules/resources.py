@@ -1,18 +1,20 @@
 import psutil
 import time
 
-def monitor_resources(interval=10, cpu_limit=80, memory_limit=80):
+def monitor_resources():
     """
-    Monitors CPU and memory usage periodically. Pauses if usage exceeds specified thresholds.
+    Monitors system resource usage and logs warnings if usage exceeds thresholds.
     """
-    while True:
-        cpu_usage = psutil.cpu_percent()
-        memory_info = psutil.virtual_memory()
-        print(f"CPU: {cpu_usage}% | Memory: {memory_info.percent}%")
-        if cpu_usage > cpu_limit or memory_info.percent > memory_limit:
-            print("High resource usage detected. Pausing...")
-            time.sleep(5)
-        else:
-            time.sleep(interval)
+    cpu_usage = psutil.cpu_percent(interval=1)
+    memory_info = psutil.virtual_memory()
+    memory_usage = memory_info.percent
+
+    print(f"CPU Usage: {cpu_usage}%")
+    print(f"Memory Usage: {memory_usage}%")
+
+    if cpu_usage > 90:
+        print("Warning: High CPU usage detected!")
+    if memory_usage > 90:
+        print("Warning: High memory usage detected!")
 
 # CodeBot_Tracking

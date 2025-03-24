@@ -29,7 +29,10 @@ from modules.resources import monitor_resources
 from modules.functions import generate_symbol_library
 from modules.learning import load_python_library
 from modules.learning import analyze_library
+from modules.learning import load_language_libraries
 from modules.learning import copy_core_for_testing
+from modules.ai_engine import explain_python_code
+
 
 # --- Global Variables ---
 conversation_text = """
@@ -333,13 +336,28 @@ if __name__ == "__main__":
     print("\nStep 9: Generating symbol library...")
     save_wordlists("C:\\dev\\adn_trash_code\\dictionaries")
 
-    print("\nStep 10: Teaching CodeBot Python...")
-    python_libs = load_python_library()
-    for lib in python_libs:
-        analyze_library(os.path.join("C:\\dev\\adn_trash_code\\python_libs", lib), debug=False)
+    # Load libraries for Python
+    python_libs = load_language_libraries(language="python")
+    if python_libs:
+        print(f"Step 10: Teaching CodeBot Python...")
+        for lib in python_libs:
+            analyze_library(os.path.join("C:\\dev\\adn_trash_code\\python_libs", lib), debug=False)
+
+    # Placeholder for additional languages (e.g., JavaScript, C++)
+    # js_libs = load_language_libraries(language="javascript")
+    # cpp_libs = load_language_libraries(language="cpp")
+
 
     print("\nStep 11: Creating parallel testing environment...")
     copy_core_for_testing()
+
+    code_snippet = """
+    def greet(name):
+      return f'Hello, {name}!'
+    """
+    explanation = explain_python_code(code_snippet)
+    print(f"AI Explanation:\n{explanation}")
+
 
     print("\nAll tasks completed successfully.")
 

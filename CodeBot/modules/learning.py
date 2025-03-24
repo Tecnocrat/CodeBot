@@ -96,5 +96,16 @@ def auto_correct_module_errors(log_file="C:\\dev\\adn_trash_code\\error_log.txt"
                     print(f"Suggested Correction: {suggestion}")
     except FileNotFoundError:
         print("Error log file not found.")
+def load_python_library(library_path="C:\\dev\\adn_trash_code\\python_libs"):
+    """
+    Loads Python libraries from the specified directory for CodeBot's learning.
+    """
+    try:
+        libraries = [f for f in os.listdir(library_path) if f.endswith(".py")]
+        print(f"Loaded Python libraries: {', '.join(libraries)}")
+        return libraries
+    except FileNotFoundError:
+        print("Error: Python library folder not found.")
+        return []
 
 # CodeBot_Tracking
