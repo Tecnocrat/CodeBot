@@ -1,0 +1,366 @@
+{
+    "codebot_core.py": {
+        "imports": [
+            "os",
+            "sys",
+            "logging",
+            "shutil",
+            "openai",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "modules.file_manager"
+        ]
+    },
+    "__init__.py": {
+        "imports": []
+    },
+    "backup\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\knowledge_base\\codebase\\venv\\Lib\\site-packages\\torch\\_dynamo\\bytecode_analysis.py": {
+        "imports": [
+            "bisect",
+            "dataclasses",
+            "dis",
+            "sys",
+            "typing"
+        ]
+    },
+    "backup\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\replicated_CodeBot\\adn_trash_code\\knowledge_base\\codebot.codebase\\venv\\Lib\\site-packages\\torch\\_tensor_str.py": {
+        "imports": [
+            "contextlib",
+            "dataclasses",
+            "math",
+            "textwrap",
+            "typing",
+            "torch",
+            "torch"
+        ]
+    },
+    "core\\ai_engine.py": {
+        "imports": [
+            "transformers",
+            "typing"
+        ]
+    },
+    "core\\analyze_structure.py": {
+        "imports": [
+            "os",
+            "json",
+            "re"
+        ]
+    },
+    "core\\self_improvement.py": {
+        "imports": [
+            "os",
+            "ast",
+            "autopep8",
+            "random",
+            "shutil",
+            "hashlib",
+            "subprocess",
+            "time",
+            "venv",
+            "requests",
+            "core.ai_engine",
+            "sys",
+            "os",
+            "genetic.genetic_optimizer"
+        ]
+    },
+    "core\\__init__.py": {
+        "imports": []
+    },
+    "genetic\\genetic_algorithm.py": {
+        "imports": [
+            "os",
+            "random",
+            "math",
+            "logging",
+            "numpy",
+            "shutil",
+            "genetic.genetic_population"
+        ]
+    },
+    "genetic\\genetic_iteration.py": {
+        "imports": [
+            "os",
+            "shutil",
+            "logging",
+            "sys",
+            "genetic_optimizer"
+        ]
+    },
+    "genetic\\genetic_optimizer.py": {
+        "imports": [
+            "ast",
+            "autopep8",
+            "random",
+            "shutil",
+            "os",
+            "requests",
+            "hashlib",
+            "subprocess",
+            "time",
+            "venv",
+            "logging",
+            "sys",
+            "os",
+            "logging",
+            "genetic.genetic_population"
+        ]
+    },
+    "genetic\\genetic_population.py": {
+        "imports": [
+            "os",
+            "random",
+            "shutil",
+            "logging",
+            "hashlib",
+            "autopep8",
+            "ast",
+            "requests"
+        ]
+    },
+    "genetic\\genetic_structure.py": {
+        "imports": [
+            "sys",
+            "os",
+            "shutil",
+            "logging",
+            "genetic.genetic_population"
+        ]
+    },
+    "genetic\\__init__.py": {
+        "imports": []
+    },
+    "genetic_population\\child_0.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_1.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_2.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_3.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_4.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_5.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_6.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_7.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_8.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\child_9.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\individual_0.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\individual_1.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\individual_2.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\individual_3.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\individual_4.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "genetic_population\\__init__.py": {
+        "imports": []
+    },
+    "knowledge_base\\__init__.py": {
+        "imports": []
+    },
+    "logs\\__init__.py": {
+        "imports": []
+    },
+    "modules\\browser_ingest.py": {
+        "imports": [
+            "selenium",
+            "selenium.webdriver.common.by",
+            "selenium.webdriver.support.ui",
+            "selenium.webdriver.support"
+        ]
+    },
+    "modules\\chatbot.py": {
+        "imports": []
+    },
+    "modules\\compression.py": {
+        "imports": [
+            "os",
+            "zipfile"
+        ]
+    },
+    "modules\\dictionaries.py": {
+        "imports": [
+            "os",
+            "nltk",
+            "nltk.corpus"
+        ]
+    },
+    "modules\\file_manager.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "modules\\functions.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "modules\\knowledge_base.py": {
+        "imports": [
+            "os",
+            "zipfile",
+            "shutil",
+            "datetime",
+            "modules.file_manager"
+        ]
+    },
+    "modules\\learning.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "modules\\resources.py": {
+        "imports": [
+            "psutil",
+            "time",
+            "json",
+            "os",
+            "datetime"
+        ]
+    },
+    "modules\\self_audit.py": {
+        "imports": [
+            "metadata_extractor"
+        ]
+    },
+    "modules\\summarization.py": {
+        "imports": [
+            "time",
+            "os",
+            "shutil",
+            "modules.compression",
+            "os",
+            "shutil"
+        ]
+    },
+    "modules\\text_injector.py": {
+        "imports": [
+            "modules.file_manager"
+        ]
+    },
+    "modules\\ui_interface.py": {
+        "imports": [
+            "sys",
+            "tkinter",
+            "tkinter",
+            "modules.dictionaries",
+            "modules.file_manager",
+            "modules.knowledge_base",
+            "core.ai_engine",
+            "modules.chatbot"
+        ]
+    },
+    "modules\\__init__.py": {
+        "imports": []
+    },
+    "storage\\__init__.py": {
+        "imports": []
+    },
+    "tests\\example_usage.py": {
+        "imports": []
+    },
+    "tests\\test_ai_engine.py": {
+        "imports": []
+    },
+    "tests\\test_codebot_core.py": {
+        "imports": [
+            "pytest"
+        ]
+    },
+    "tests\\test_pipeline.py": {
+        "imports": [
+            "sys",
+            "os",
+            "pytest",
+            "genetic.genetic_algorithm",
+            "utils.pipeline",
+            "genetic.genetic_algorithm"
+        ]
+    },
+    "tests\\__init__.py": {
+        "imports": []
+    },
+    "utils\\cleanup.py": {
+        "imports": [
+            "os",
+            "shutil"
+        ]
+    },
+    "utils\\logging.py": {
+        "imports": [
+            "os",
+            "random",
+            "logging"
+        ]
+    },
+    "utils\\pipeline.py": {
+        "imports": [
+            "core.analyze_structure",
+            "optimize_structure",
+            "genetic.genetic_optimizer"
+        ]
+    },
+    "utils\\__init__.py": {
+        "imports": []
+    }
+}

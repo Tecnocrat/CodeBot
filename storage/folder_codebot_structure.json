@@ -1,0 +1,161 @@
+{
+    "adn_trash_code": {
+        "replicated_CodeBot": {
+            "adn_trash_code": {
+                "replicated_CodeBot": {
+                    "adn_trash_code": {
+                        "replicated_CodeBot": {
+                            "adn_trash_code": {
+                                "replicated_CodeBot": {
+                                    "adn_trash_code": {
+                                        "replicated_CodeBot": {
+                                            "adn_trash_code": {
+                                                "error": "Max depth exceeded"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "backup": {
+        "adn_trash_code": {
+            "replicated_CodeBot": {
+                "adn_trash_code": {
+                    "replicated_CodeBot": {
+                        "adn_trash_code": {
+                            "replicated_CodeBot": {
+                                "adn_trash_code": {
+                                    "replicated_CodeBot": {
+                                        "adn_trash_code": {
+                                            "replicated_CodeBot": {
+                                                "error": "Max depth exceeded"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "codebot_core.py": "file",
+    "core": {
+        "ai_engine.py": "file",
+        "analyze_structure.py": "file",
+        "self_improvement.py": "file",
+        "__init__.py": "file",
+        "__pycache__": {
+            "ai_engine.cpython-313.pyc": "file",
+            "analyze_structure.cpython-313.pyc": "file",
+            "self_improvement.cpython-313.pyc": "file",
+            "__init__.cpython-313.pyc": "file"
+        }
+    },
+    "genetic": {
+        "genetic_algorithm.py": "file",
+        "genetic_iteration.py": "file",
+        "genetic_optimizer.py": "file",
+        "genetic_population.py": "file",
+        "genetic_structure.py": "file",
+        "__init__.py": "file",
+        "__pycache__": {
+            "genetic_iteration.cpython-313.pyc": "file",
+            "genetic_optimizer.cpython-313.pyc": "file",
+            "__init__.cpython-313.pyc": "file"
+        }
+    },
+    "genetic_population": {
+        "child_0.py": "file",
+        "child_1.py": "file",
+        "child_2.py": "file",
+        "child_3.py": "file",
+        "child_4.py": "file",
+        "child_5.py": "file",
+        "child_6.py": "file",
+        "child_7.py": "file",
+        "child_8.py": "file",
+        "child_9.py": "file",
+        "individual_0.py": "file",
+        "individual_1.py": "file",
+        "individual_2.py": "file",
+        "individual_3.py": "file",
+        "individual_4.py": "file",
+        "__init__.py": "file"
+    },
+    "knowledge_base": {
+        "CodeBot_conversation_log.txt": "file",
+        "images": {},
+        "knowledge_base.json": "file",
+        "__init__.py": "file"
+    },
+    "knowledge_base.json": "file",
+    "logs": {
+        "codebot_genetic.log": "file",
+        "requirements.txt": "file",
+        "runtime_exec.log": "file",
+        "__init__.py": "file"
+    },
+    "modules": {
+        "browser_ingest.py": "file",
+        "chatbot.py": "file",
+        "compression.py": "file",
+        "dictionaries.py": "file",
+        "file_manager.py": "file",
+        "functions.py": "file",
+        "knowledge_base.py": "file",
+        "learning.py": "file",
+        "resources.py": "file",
+        "self_audit.py": "file",
+        "summarization.py": "file",
+        "text_injector.py": "file",
+        "ui_interface.py": "file",
+        "__init__.py": "file",
+        "__pycache__": {
+            "file_manager.cpython-313.pyc": "file",
+            "__init__.cpython-313.pyc": "file"
+        }
+    },
+    "optimized_code": {},
+    "pyrightconfig.json": "file",
+    "README.md": "file",
+    "runtime_exec.log": "file",
+    "storage": {
+        "folder_codebot_structure.json": "file",
+        "folder_dev_structure.json": "file",
+        "folder__structure.json": "file",
+        "__init__.py": "file",
+        "__pycache__": {
+            "file_manager.cpython-313.pyc": "file",
+            "__init__.cpython-313.pyc": "file"
+        }
+    },
+    "tests": {
+        "example_usage.py": "file",
+        "test_ai_engine.py": "file",
+        "test_codebot_core.py": "file",
+        "test_pipeline.py": "file",
+        "test_pipeline_codebot.py  # Renamed to avoid conflict": "file",
+        "__init__.py": "file",
+        "__pycache__": {
+            "test_codebot_core.cpython-313-pytest-8.3.5.pyc": "file",
+            "test_pipeline.cpython-313-pytest-8.3.5.pyc": "file"
+        }
+    },
+    "utils": {
+        "cleanup.py": "file",
+        "logging.py": "file",
+        "pipeline.py": "file",
+        "__init__.py": "file",
+        "__pycache__": {
+            "pipeline.cpython-313.pyc": "file"
+        }
+    },
+    "__init__.py": "file"
+}

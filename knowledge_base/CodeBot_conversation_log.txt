@@ -1,0 +1,27 @@
+[2025-03-27 22:04:31]
+You: hi
+CodeBot: I didn't understand that command.
+[2025-03-27 22:04:35]
+You: command
+CodeBot: I didn't understand that command.
+[2025-03-27 22:04:40]
+You: init
+CodeBot: I didn't understand that command.
+[2025-03-27 22:04:41]
+You: a
+CodeBot: I didn't understand that command.
+[2025-03-27 22:04:42]
+You: a
+CodeBot: I didn't understand that command.
+[2025-03-27 22:04:44]
+You: quit
+CodeBot: Goodbye!
+[2025-03-28 20:48:25]
+You: hi
+CodeBot: I didn't understand that command.
+[2025-03-28 20:48:28]
+You: good
+CodeBot: I didn't understand that command.
+[2025-03-28 20:48:30]
+You: quit
+CodeBot: Goodbye!

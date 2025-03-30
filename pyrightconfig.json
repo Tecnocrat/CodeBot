@@ -1,0 +1,19 @@
+{
+  "include": [
+    "OS",
+    "CodeBot"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "**/adn_trash_code",
+    "**/logs",
+    "**/storage",
+    "**/test",
+    "**/genetic_population",
+    "**/knowledge_base",
+    "**/modules"
+  ],
+  "reportMissingTypeStubs": true,
+  "pythonVersion": "3.9",
+  "typeCheckingMode": "strict"
+}

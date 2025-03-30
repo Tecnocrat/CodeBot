@@ -1,0 +1,4 @@
+INFO: Starting genetic algorithm...
+WARNING: Population size is too small.
+ERROR: Failed to execute child script.
+INFO: Genetic algorithm completed successfully.
