@@ -4,10 +4,10 @@ import math
 import logging
 import numpy as np
 import shutil
-from genetic.genetic_population import request_population
+from genetic.genetic_population import request_population, generate_population
 from core.ai_engine import parse_codebase
-from core.self_improvement import fitness_function
 from genetic.genetic_population import evaluate_population
+from genetic.genetic_optimizer import fitness_function
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 

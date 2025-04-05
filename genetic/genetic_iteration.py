@@ -3,7 +3,7 @@ import os
 import shutil
 import logging
 import sys
-from genetic_optimizer import generate_population  # Import generate_population
+from genetic.genetic_population import generate_population  # Import generate_population
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\modules"))
 
 # Base directory for all operations
@@ -33,17 +33,6 @@ def replicate_and_learn(source_dir, target_dir):
                 file_path = os.path.join(root, file)
                 logger.debug(f"Improved file: {file_path}")  # Detailed logs saved to file
     logger.info("Self-improvement process completed.")
-
-def run_genetic_algorithm(source_file, generations, initial_population_size, output_dir):
-    """
-    Runs the genetic algorithm on the given source file.
-    """
-    logging.info("Starting genetic algorithm...")
-    population = generate_population(source_file, initial_population_size, output_dir)
-    for generation in range(generations):
-        logging.info(f"Generation {generation + 1}: Population size = {len(population)}")
-        # Existing logic...
-    logging.info("Genetic algorithm completed.")
 
 def manage_iterations():
     """

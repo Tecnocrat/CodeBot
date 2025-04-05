@@ -6,9 +6,9 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from core.self_improvement import run_genetic_algorithm, analyze_logs
-from core.ai_engine import explain_python_code, analyze_code, parse_codebase, preload_model
+from core.ai_engine import explain_python_code, parse_codebase, preload_model
 from genetic.genetic_iteration import manage_iterations
-from genetic.genetic_optimizer import sanitize_input, get_valid_file_path
+from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
 
@@ -49,14 +49,7 @@ def generate_metadata(base_dir, output_file):
         output_file (str): Path to save the metadata JSON file.
     """
     logging.info("Generating metadata about the codebase...")
-    folder_structure = analyze_folder_structure(base_dir)
-    generate_knowledge_base(base_dir, output_file)
-    metadata = {
-        "folder_structure": folder_structure,
-        "knowledge_base": output_file
-    }
-    with open(output_file, "w") as f:
-        json.dump(metadata, f, indent=4)
+    metadata = parse_codebase(base_dir, output_file)
     logging.info(f"Metadata saved to {output_file}")
 
 def handle_errors(func):
@@ -77,6 +70,15 @@ def handle_errors(func):
             return f"An error occurred: {e}"
     return wrapper
 
+def generate_metadata_command():
+    """
+    Command to generate metadata about the codebase.
+    """
+    output_file = os.path.join(BASE_DIR, "storage", "codebot_metadata.json")
+    from core.analyze_structure import generate_metadata
+    generate_metadata(BASE_DIR, output_file)
+    return f"Metadata generated and saved to {output_file}"
+
 # ------------------
 # EXCHANGE LAYER
 # ------------------
@@ -93,23 +95,10 @@ def exchange_layer(command):
     """
     command = sanitize_input(command, context="general")
 
-    if command == "initialize":
-        initialize_codebot()
-        return "CodeBot initialized successfully."
+    if command == "generate metadata":
+        return generate_metadata_command()
 
-    elif command == "generate metadata":
-        output_file = os.path.join(BASE_DIR, "storage", "codebot_metadata.json")
-        generate_metadata(BASE_DIR, output_file)
-        return f"Metadata generated and saved to {output_file}"
-
-    elif command.startswith("explain python"):
-        code_snippet = command.replace("explain python", "").strip()
-        if not code_snippet:
-            return "Please provide a Python code snippet to explain."
-        return explain_python_code(code_snippet)
-
-    else:
-        return "Unknown command. Type 'help' for a list of commands."
+    # Other commands...
 
 # ------------------
 # MAIN EXECUTION

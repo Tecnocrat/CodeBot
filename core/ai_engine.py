@@ -1,10 +1,11 @@
-from transformers import pipeline
-from typing import Generator
+
 import os
 import json
 from genetic.genetic_algorithm import evaluate_population
 from core.analyze_structure import parse_codebase
 from config import KNOWLEDGE_BASE_DIR
+from transformers import pipeline
+from typing import Generator
 
 # Global variable for the text-generation model
 generator = None
