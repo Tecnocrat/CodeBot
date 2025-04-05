@@ -1,4 +1,4 @@
-# filepath: c:\dev\CodeBot\self_improvement.py
+# filepath: c:\dev\CodeBot\core\self_improvement.py
 import ast
 import autopep8
 import random
@@ -11,8 +11,9 @@ import time
 import venv
 import logging
 import sys
-import os
-import logging
+
+# Import from genetic_population
+from genetic.genetic_population import generate_population
 
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\core"))
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\genetic"))
@@ -181,7 +182,7 @@ def run_genetic_algorithm(source_file, generations, population_size, dimensions,
     Runs the genetic algorithm with a requested population.
     """
     logging.info("Starting genetic algorithm...")
-    population = request_population(source_file, population_size, dimensions, bounds, output_dir)
+    population = generate_population(source_file, population_size, output_dir)
 
     for generation in range(generations):
         logging.info(f"Generation {generation + 1}: Population size = {len(population)}")

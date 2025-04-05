@@ -10,7 +10,7 @@ print(f"BASE_DIR is set to: {BASE_DIR}")
 STORAGE_DIR = os.path.join(BASE_DIR, "storage")
 
 # Knowledge base and genetic population directories
-KNOWLEDGE_BASE_DIR = os.path.join(BASE_DIR, "knowledge_base")
+KNOWLEDGE_BASE_DIR = os.path.join(STORAGE_DIR, "knowledge_base")
 GENETIC_POPULATION_DIR = os.path.join(STORAGE_DIR, "genetic_population")
 
 # Ensure the directories exist

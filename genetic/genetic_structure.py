@@ -5,6 +5,7 @@ import shutil
 import logging
 from genetic.genetic_population import request_population
 from config import KNOWLEDGE_BASE_DIR
+from genetic.genetic_optimizer import generate_population
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 

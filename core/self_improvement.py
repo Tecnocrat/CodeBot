@@ -1,4 +1,3 @@
-# filepath: c:\dev\CodeBot\self_improvement.py
 import os
 import time
 import shutil
@@ -6,8 +5,9 @@ import subprocess
 import venv
 import autopep8
 import logging
-from config import KNOWLEDGE_BASE_DIR
+from config import KNOWLEDGE_BASE_DIR, GENETIC_POPULATION_DIR
 from genetic.genetic_optimizer import fitness_function
+from genetic.genetic_population import generate_population  # Import from genetic_population
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -133,49 +133,11 @@ def run_genetic_algorithm(source_file, generations, initial_population_size, out
     """
     Runs the genetic algorithm with optimized population management and logging.
     """
-    start_time = time.time()
-    try:
-        output_dir = os.path.join(BASE_DIR, output_dir)  # Ensure output_dir is within BASE_DIR
-        os.makedirs(output_dir, exist_ok=True)
-        logging.info("Starting genetic algorithm...")
-        population = generate_population(source_file, initial_population_size, output_dir)
-
-        for generation in range(generations):
-            logging.info(f"Generation {generation + 1} started.")
-            parents = select_parents(population)
-            new_population = []
-
-            # Exponential growth: Each individual produces two children
-            for i in range(len(population)):
-                child_path = os.path.join(output_dir, f"child_{generation}_{i}.py")
-                crossover(parents[0], parents[1], child_path)
-                mutate(child_path)
-                new_population.append(child_path)
-
-            # Execute and evaluate new population
-            for child in new_population:
-                env_dir = os.path.join(output_dir, f"env_{generation}_{i}")
-                create_virtual_environment(env_dir)
-                execute_in_virtual_environment(child, env_dir)
-
-            population = new_population
-
-        logging.info("Genetic algorithm completed.")
-    except Exception as e:
-        logging.error(f"An error occurred during the genetic algorithm: {e}")
-    finally:
-        execution_time = time.time() - start_time
-        logging.info(f"Genetic algorithm finished in {execution_time:.2f} seconds.")
-
-
-def generate_population(source_file, population_size, output_dir):
-    """
-    Generates the initial population by copying the source file.
-    """
-    population = []
-    for i in range(population_size):
-        individual_path = os.path.join(output_dir, f"individual_{i}.py")
-        shutil.copy(source_file, individual_path)
-        population.append(individual_path)
-    logging.info(f"Generated initial population of size {population_size}")
-    return population
+    logging.info("Starting genetic algorithm...")
+    os.makedirs(output_dir, exist_ok=True)
+    population = generate_population(source_file, initial_population_size, output_dir)
+    for generation in range(generations):
+        logging.info(f"Generation {generation + 1}: Population size = {len(population)}")
+        # Add logic for crossover, mutation, and selection
+        # ...
+    logging.info("Genetic algorithm completed.")
