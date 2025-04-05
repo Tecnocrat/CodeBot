@@ -1,4 +1,3 @@
-# filepath: c:\dev\CodeBot\self_improvement.py
 import os
 import random
 import shutil
@@ -11,8 +10,11 @@ import json
 import time  # Fix: Import `time` for execution timing
 import subprocess  # Fix: Import `subprocess` for running scripts
 import venv  # Fix: Import `venv` for virtual environment creation
-from core.analyze_structure import analyze_folder_structure, save_structure_to_json
-from core.self_improvement import fitness_function
+
+# Add the parent directory to sys.path
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from config import KNOWLEDGE_BASE_DIR
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -91,18 +93,6 @@ def auto_format_code(file_path):
         file.write(formatted_code)
     return "Code formatted successfully."
 
-def fitness_function(file_path):
-    try:
-        with open(file_path, 'r') as file:
-            code = file.read()
-        ast.parse(code)  # Check if the code is syntactically valid
-        fitness = len(code)  # Example: shorter code is better (adjust as needed)
-        log_to_os("codebot", "info", f"Evaluated fitness for {file_path}: {fitness}")
-        return fitness
-    except Exception as e:
-        log_to_os("codebot", "error", f"Error evaluating fitness for {file_path}: {e}")
-        return float('inf')  # Invalid code gets the worst score
-
 def analyze_adn_trash_code():
     """
     Recursively analyzes the contents of adn_trash_code and returns insights.
@@ -132,19 +122,37 @@ def ingest_knowledge(file_path):
 def generate_population(source_file, population_size, output_dir):
     """
     Generates the initial population by copying the source file.
+
+    Args:
+        source_file (str): Path to the source file.
+        population_size (int): Number of individuals in the population.
+        output_dir (str): Directory to store the generated population.
+
+    Returns:
+        list: A list of paths to the generated individuals.
     """
-    output_dir = os.path.join(ADN_TRASH_CODE_DIR, output_dir)
     os.makedirs(output_dir, exist_ok=True)
     population = []
-    insights = analyze_adn_trash_code()  # Use insights to guide randomization
+
     for i in range(population_size):
         individual_path = os.path.join(output_dir, f"individual_{i}.py")
         shutil.copy(source_file, individual_path)
-        # Apply guided randomization based on insights
-        if insights:
-            with open(individual_path, 'a') as f:
-                f.write(f"# Insight-based mutation: {random.choice(insights)}\n")
+
+        # Apply mutations
+        with open(individual_path, 'a') as f:
+            mutation = random.uniform(-1, 1)  # Example mutation
+            f.write(f"# Mutation: {mutation}\n")
+
+        # Auto-format the individual for consistency
+        with open(individual_path, 'r') as f:
+            code = f.read()
+        formatted_code = autopep8.fix_code(code)
+        with open(individual_path, 'w') as f:
+            f.write(formatted_code)
+
         population.append(individual_path)
+
+    logging.info(f"Generated population of size {population_size} in {output_dir}")
     return population
 
 def deduplicate_population(output_dir):
@@ -163,9 +171,16 @@ def deduplicate_population(output_dir):
             else:
                 file_hashes[file_hash] = file_path
 
-def select_parents(population):
+def select_parents(population, fitness_function):
     """
     Selects the top two individuals from the population based on fitness.
+
+    Args:
+        population (list): List of file paths representing the population.
+        fitness_function (callable): Function to evaluate the fitness of an individual.
+
+    Returns:
+        list: The top two individuals.
     """
     population.sort(key=fitness_function)  # Sort by fitness (lower is better)
     return population[:2]  # Select top 2 individuals

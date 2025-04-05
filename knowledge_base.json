@@ -1,0 +1,148 @@
+{
+    "codebot_core.py": {
+        "imports": [
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ]
+    },
+    "config.py": {
+        "imports": [
+            "os"
+        ]
+    },
+    "__init__.py": {
+        "imports": []
+    },
+    "core\\ai_engine.py": {
+        "imports": [
+            "os",
+            "json",
+            "genetic.genetic_algorithm",
+            "core.analyze_structure",
+            "config",
+            "transformers",
+            "typing"
+        ]
+    },
+    "core\\analyze_structure.py": {
+        "imports": [
+            "os",
+            "json",
+            "re",
+            "ast",
+            "logging",
+            "sys",
+            "config"
+        ]
+    },
+    "core\\self_audit.py": {
+        "imports": [
+            "sys",
+            "os",
+            "core.analyze_structure"
+        ]
+    },
+    "core\\self_improvement.py": {
+        "imports": [
+            "os",
+            "time",
+            "shutil",
+            "subprocess",
+            "venv",
+            "autopep8",
+            "logging",
+            "config",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population"
+        ]
+    },
+    "core\\__init__.py": {
+        "imports": []
+    },
+    "genetic\\genetic_algorithm.py": {
+        "imports": [
+            "os",
+            "random",
+            "math",
+            "logging",
+            "numpy",
+            "shutil",
+            "genetic.genetic_population",
+            "core.ai_engine",
+            "genetic.genetic_population",
+            "genetic.genetic_optimizer"
+        ]
+    },
+    "genetic\\genetic_iteration.py": {
+        "imports": [
+            "os",
+            "shutil",
+            "logging",
+            "sys",
+            "genetic.genetic_population"
+        ]
+    },
+    "genetic\\genetic_optimizer.py": {
+        "imports": [
+            "ast",
+            "autopep8",
+            "random",
+            "shutil",
+            "os",
+            "requests",
+            "hashlib",
+            "subprocess",
+            "time",
+            "venv",
+            "logging",
+            "sys",
+            "genetic_population",
+            "config",
+            "genetic.genetic_population",
+            "genetic.genetic_population"
+        ]
+    },
+    "genetic\\genetic_population.py": {
+        "imports": [
+            "os",
+            "random",
+            "shutil",
+            "logging",
+            "hashlib",
+            "autopep8",
+            "ast",
+            "requests",
+            "json",
+            "time",
+            "subprocess",
+            "venv",
+            "sys",
+            "config"
+        ]
+    },
+    "genetic\\genetic_structure.py": {
+        "imports": [
+            "sys",
+            "os",
+            "shutil",
+            "logging",
+            "genetic.genetic_population",
+            "config",
+            "genetic.genetic_optimizer"
+        ]
+    },
+    "genetic\\__init__.py": {
+        "imports": []
+    }
+}

@@ -7,7 +7,7 @@ import autopep8
 import logging
 from config import KNOWLEDGE_BASE_DIR, GENETIC_POPULATION_DIR
 from genetic.genetic_optimizer import fitness_function
-from genetic.genetic_population import generate_population  # Import from genetic_population
+from genetic.genetic_population import generate_population
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -127,17 +127,3 @@ def analyze_logs(log_file_path):
         return summary
     except Exception as e:
         return f"An error occurred during log analysis: {e}"
-
-
-def run_genetic_algorithm(source_file, generations, initial_population_size, output_dir):
-    """
-    Runs the genetic algorithm with optimized population management and logging.
-    """
-    logging.info("Starting genetic algorithm...")
-    os.makedirs(output_dir, exist_ok=True)
-    population = generate_population(source_file, initial_population_size, output_dir)
-    for generation in range(generations):
-        logging.info(f"Generation {generation + 1}: Population size = {len(population)}")
-        # Add logic for crossover, mutation, and selection
-        # ...
-    logging.info("Genetic algorithm completed.")

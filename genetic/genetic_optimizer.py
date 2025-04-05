@@ -13,11 +13,12 @@ import logging
 import sys
 
 # Import from genetic_population
-from genetic.genetic_population import generate_population
+from genetic_population import generate_population
 
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\core"))
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\genetic"))
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\modules"))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -58,15 +59,24 @@ def auto_format_code(file_path):
     return "Code formatted successfully."
 
 def fitness_function(file_path):
+    """
+    Evaluates the fitness of a Python file based on its length and syntax validity.
+
+    Args:
+        file_path (str): Path to the Python file.
+
+    Returns:
+        float: Fitness score (lower is better).
+    """
     try:
         with open(file_path, 'r') as file:
             code = file.read()
         ast.parse(code)  # Check if the code is syntactically valid
-        fitness = len(code)  # Example: shorter code is better (adjust as needed)
-        log_to_os("codebot", "info", f"Evaluated fitness for {file_path}: {fitness}")
+        fitness = len(code)  # Example: shorter code is better
+        logging.info(f"Evaluated fitness for {file_path}: {fitness}")
         return fitness
     except Exception as e:
-        log_to_os("codebot", "error", f"Error evaluating fitness for {file_path}: {e}")
+        logging.error(f"Error evaluating fitness for {file_path}: {e}")
         return float('inf')  # Invalid code gets the worst score
 
 def analyze_adn_trash_code():
@@ -96,24 +106,6 @@ def ingest_knowledge(file_path):
     target_path = os.path.join(KNOWLEDGE_BASE_DIR, os.path.basename(file_path))
     shutil.copy(file_path, target_path)
     print(f"Ingested knowledge from {file_path} to {target_path}")
-
-def generate_population(source_file, population_size, output_dir):
-    """
-    Generates the initial population by copying the source file.
-    """
-    output_dir = os.path.join(ADN_TRASH_CODE_DIR, output_dir)
-    os.makedirs(output_dir, exist_ok=True)
-    population = []
-    insights = analyze_adn_trash_code()  # Use insights to guide randomization
-    for i in range(population_size):
-        individual_path = os.path.join(output_dir, f"individual_{i}.py")
-        shutil.copy(source_file, individual_path)
-        # Apply guided randomization based on insights
-        if insights:
-            with open(individual_path, 'a') as f:
-                f.write(f"# Insight-based mutation: {random.choice(insights)}\n")
-        population.append(individual_path)
-    return population
 
 def deduplicate_population(output_dir):
     """
@@ -176,20 +168,7 @@ def execute_in_virtual_environment(script_path, env_dir):
         log_to_os("codebot", "error", f"Failed to execute {script_path}: {e}")
 
 from genetic.genetic_population import request_population
-
-def run_genetic_algorithm(source_file, generations, population_size, dimensions, bounds, output_dir):
-    """
-    Runs the genetic algorithm with a requested population.
-    """
-    logging.info("Starting genetic algorithm...")
-    population = generate_population(source_file, population_size, output_dir)
-
-    for generation in range(generations):
-        logging.info(f"Generation {generation + 1}: Population size = {len(population)}")
-        # Add logic for crossover, mutation, and selection
-        # ...
-
-    logging.info("Genetic algorithm completed.")
+from genetic.genetic_population import generate_population
 
 def handle_exception(logger, error_message, exception):
     """
