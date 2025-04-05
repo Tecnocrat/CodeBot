@@ -86,12 +86,13 @@ def analyze_adn_trash_code():
                     print(f"Error analyzing {file_path}: {e}")
     return insights
 
+from config import KNOWLEDGE_BASE_DIR
+
 def ingest_knowledge(file_path):
     """
     Ingests external knowledge into the knowledge_base.
     """
     target_path = os.path.join(KNOWLEDGE_BASE_DIR, os.path.basename(file_path))
-    os.makedirs(KNOWLEDGE_BASE_DIR, exist_ok=True)
     shutil.copy(file_path, target_path)
     print(f"Ingested knowledge from {file_path} to {target_path}")
 

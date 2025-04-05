@@ -6,6 +6,8 @@ import numpy as np
 import shutil
 from genetic.genetic_population import request_population
 from core.ai_engine import parse_codebase
+from core.self_improvement import fitness_function
+from genetic.genetic_population import evaluate_population
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -176,6 +178,34 @@ def fractal_genetic_algorithm_with_parsing(base_dir, dimensions, generations, po
     logging.info(f"Best individual: {best_individual}")
     return best_individual
 
+def evaluate_population(population_dir):
+    """
+    Evaluates the fitness of a population of individuals.
+
+    Args:
+        population_dir (str): Path to the directory containing the population.
+
+    Returns:
+        list[dict]: A list of dictionaries containing the individual and its fitness score.
+    """
+    if not os.path.exists(population_dir):
+        raise FileNotFoundError(f"Population directory not found: {population_dir}")
+
+    population = []
+    for file_name in os.listdir(population_dir):
+        file_path = os.path.join(population_dir, file_name)
+        if os.path.isfile(file_path):
+            try:
+                fitness = fitness_function(file_path)
+                population.append({"individual": file_name, "fitness": fitness})
+                logging.info(f"Evaluated {file_name}: Fitness = {fitness}")
+            except Exception as e:
+                logging.error(f"Error evaluating {file_name}: {e}")
+
+    # Sort the population by fitness (lower is better)
+    population.sort(key=lambda x: x["fitness"])
+    return population
+
 if __name__ == "__main__":
     base_dir = "c:\\dev\\CodeBot\\adn_trash_code\\replicated_CodeBot"
     target_dir = "c:\\dev\\CodeBot\\optimized_code"
@@ -191,3 +221,10 @@ if __name__ == "__main__":
 
     best_solution = fractal_genetic_algorithm(dimensions, generations, population_size, bounds, fractal_depth)
     print(f"Best solution found: {best_solution}")
+
+    # Example usage for evaluate_population
+    population_dir = "c:\\dev\\CodeBot\\genetic_population"
+    results = evaluate_population(population_dir)
+    print("Evaluated Population:")
+    for result in results:
+        print(result)

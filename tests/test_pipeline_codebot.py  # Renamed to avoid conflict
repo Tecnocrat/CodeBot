@@ -1,7 +1,0 @@
-import pytest
-
-def test_pipeline_functionality():
-    assert True  # Replace with actual test logic
-
-if __name__ == "__main__":
-    pytest.main()

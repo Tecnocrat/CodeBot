@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\modules"))
 import shutil
 import logging
 from genetic.genetic_population import request_population
+from config import KNOWLEDGE_BASE_DIR
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -52,6 +53,14 @@ def run_genetic_algorithm_with_population(source_file, generations, population_s
         # ...
 
     logging.info("Genetic algorithm completed.")
+
+def manage_knowledge_base(file_path):
+    """
+    Example function to demonstrate usage of KNOWLEDGE_BASE_DIR.
+    """
+    target_path = os.path.join(KNOWLEDGE_BASE_DIR, os.path.basename(file_path))
+    shutil.copy(file_path, target_path)
+    print(f"File copied to knowledge base: {target_path}")
 
 if __name__ == "__main__":
     base_dir = "c:\\dev\\CodeBot\\adn_trash_code\\replicated_CodeBot"

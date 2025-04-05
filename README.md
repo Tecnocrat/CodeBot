@@ -1,23 +1,26 @@
 # CodeBot Project (AI-Oriented Documentation)
 
 ## **Overview**
-CodeBot is an AI-driven tool designed to automate code analysis, mutation, and optimization. It uses genetic algorithms and external AI engines to iteratively improve its own codebase.
+CodeBot is an AI-driven tool designed to automate code analysis, mutation, and optimization. It uses genetic algorithms, recursive chaos generation, and external AI engines to iteratively improve its own codebase. The system is designed to evolve through self-improvement, leveraging both controlled knowledge bases and emergent behaviors from experimental code.
 
 ---
 
 ## **Core Features**
 1. **Genetic Algorithms**:
    - Handles population generation, mutation, crossover, and selection.
-   - Evaluates code quality using fitness functions.
+   - Evaluates code quality using fitness functions, including fractal-inspired fitness functions for complex optimization landscapes.
 
 2. **AI Integration**:
-   - Leverages external AI tools for advanced code analysis and mutation guidance.
+   - Leverages external AI tools (e.g., Hugging Face Transformers) for advanced code analysis and mutation guidance.
+   - Provides natural language explanations and suggestions for Python code.
 
 3. **Self-Improvement**:
    - Iteratively rewrites its own codebase to improve functionality and performance.
+   - Interfaces with the AI engine to analyze genetic outputs and runtime logs.
 
 4. **Logging and Debugging**:
    - Maintains detailed runtime logs for debugging and performance monitoring.
+   - Centralized logging via `log_to_os` for inter-process communication.
 
 5. **Human-AI Collaboration**:
    - Provides a chatbot interface for natural language interaction.
@@ -26,6 +29,14 @@ CodeBot is an AI-driven tool designed to automate code analysis, mutation, and o
 6. **Folder Management**:
    - Manages and flattens recursive folder structures in `adn_trash_code`.
    - Generates and processes JSON files for folder structures.
+
+7. **Recursive Chaos Generation**:
+   - Processes the `adn_trash_code` folder for recursive chaos generation and knowledge extraction.
+   - Mutates files from `adn_trash_code` to introduce randomness into genetic algorithms.
+
+8. **Knowledge Base Integration**:
+   - Combines controlled knowledge bases with emergent behaviors from experimental code.
+   - Extracts metadata from files and generates a snapshot of the CodeBot structure.
 
 ---
 
@@ -127,6 +138,22 @@ def get_valid_file_path(prompt="Enter file path: "):
 ### **6. Updated `analyze_structure.py`**
 - Added functionality to generate JSON files for folder structures.
 - Improved JSON output readability.
+
+### **New Function: `evaluate_population`**
+- **Location**: `genetic/genetic_algorithm.py`
+- **Purpose**:
+  - Evaluates the fitness of a population of individuals (e.g., Python scripts).
+  - Uses the `fitness_function` to calculate fitness scores.
+  - Logs results and returns a sorted list of individuals by fitness.
+
+- **Usage**:
+  ```python
+  from genetic.genetic_algorithm import evaluate_population
+
+  population_dir = "c:\\dev\\CodeBot\\genetic_population"
+  results = evaluate_population(population_dir)
+  print("Evaluated Population:", results)
+  ```
 
 ---
 
