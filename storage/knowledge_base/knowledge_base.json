@@ -1,1 +1,8 @@
-{}
+{
+    "__init__.py": {
+        "description": "Module located at __init__.py",
+        "imports": [],
+        "functions": [],
+        "classes": []
+    }
+}

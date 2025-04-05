@@ -1,5 +1,5 @@
 {
-    "c:\\codebot": {
+    ".\\": {
         "files": [
             "codebot_core.py",
             "config.py",
@@ -15,7 +15,7 @@
             "storage"
         ]
     },
-    "c:\\codebot\\core": {
+    ".\\core": {
         "files": [
             "ai_engine.py",
             "analyze_structure.py",
@@ -25,7 +25,7 @@
         ],
         "subfolders": []
     },
-    "c:\\codebot\\genetic": {
+    ".\\genetic": {
         "files": [
             "genetic_algorithm.py",
             "genetic_iteration.py",
@@ -36,23 +36,22 @@
         ],
         "subfolders": []
     },
-    "c:\\codebot\\storage": {
+    ".\\storage": {
         "files": [
-            "folder_codebot_structure.json",
-            "folder__structure.json"
+            "__init__.py"
         ],
         "subfolders": [
             "genetic_population",
             "knowledge_base"
         ]
     },
-    "c:\\codebot\\storage\\genetic_population": {
+    ".\\storage\\genetic_population": {
         "files": [],
         "subfolders": []
     },
-    "c:\\codebot\\storage\\knowledge_base": {
+    ".\\storage\\knowledge_base": {
         "files": [
-            "knowledge_base.json"
+            "__init__.py"
         ],
         "subfolders": []
     }

@@ -42,6 +42,12 @@ def save_structure_to_json(base_dir, output_dir):
 def extract_imports(file_path):
     """
     Extracts import statements from a Python file.
+
+    Args:
+        file_path (str): Path to the Python file.
+
+    Returns:
+        list: A list of imported modules.
     """
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
@@ -51,24 +57,38 @@ def extract_imports(file_path):
 def generate_knowledge_base(base_dir, output_file):
     """
     Generates a JSON file that tracks all Python files and their imports, functions, and dependencies.
+
+    Args:
+        base_dir (str): The root directory of the CodeBot project.
+        output_file (str): Path to save the knowledge base JSON file.
     """
+    logging.info("Starting knowledge base generation...")
     knowledge_base = {}
+
     for root, _, files in os.walk(base_dir):
         for file in files:
             if file.endswith(".py"):
                 file_path = os.path.join(root, file)
                 try:
+                    # Extract imports, functions, and classes
+                    logging.debug(f"Processing file: {file_path}")
                     imports = extract_imports(file_path)
                     definitions = extract_functions_and_classes(file_path)
                     relative_path = os.path.relpath(file_path, base_dir)
+
+                    # Add detailed descriptions
                     knowledge_base[relative_path] = {
                         "description": f"Module located at {relative_path}",
                         "imports": imports,
                         "functions": definitions["functions"],
                         "classes": definitions["classes"]
                     }
+                    logging.debug(f"Added data for {file_path}: {knowledge_base[relative_path]}")
                 except Exception as e:
                     logging.error(f"Error processing file {file_path}: {e}")
+
+    # Save the knowledge base to a JSON file
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(knowledge_base, f, indent=4)
     logging.info(f"Knowledge base saved to {output_file}")
@@ -97,6 +117,12 @@ def update_imports(base_dir, knowledge_base_file):
 def extract_functions_and_classes(file_path):
     """
     Extracts functions and classes from a Python file.
+
+    Args:
+        file_path (str): Path to the Python file.
+
+    Returns:
+        dict: A dictionary with lists of functions and classes.
     """
     with open(file_path, "r", encoding="utf-8") as f:
         tree = ast.parse(f.read())
