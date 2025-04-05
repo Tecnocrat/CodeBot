@@ -3,6 +3,11 @@
         "description": "Module located at __init__.py",
         "imports": [],
         "functions": [],
-        "classes": []
+        "classes": [],
+        "metadata": {
+            "character_length": 0,
+            "average_indentation": 0,
+            "loop_count": 0
+        }
     }
 }

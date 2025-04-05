@@ -1,34 +1,42 @@
 # CodeBot Project (AI-Oriented Documentation)
 
 ## **Overview**
-CodeBot is an AI-driven tool designed to automate code analysis, mutation, and optimization. It uses genetic algorithms, recursive chaos generation, and external AI engines to iteratively improve its own codebase. The system is designed to evolve through self-improvement, leveraging both controlled knowledge bases and emergent behaviors from experimental code.
+CodeBot is an AI-driven tool designed to automate code analysis, mutation, and optimization. It leverages genetic algorithms, recursive chaos generation, and external AI engines to iteratively improve its own codebase. The system evolves through self-improvement, combining controlled knowledge bases with emergent behaviors from experimental code.
 
 ---
 
 ## **Core Features**
-1. **Genetic Algorithms**:
-   - Handles population generation, mutation, crossover, and selection.
-   - Evaluates code quality using fitness functions, including fractal-inspired fitness functions for complex optimization landscapes.
 
-2. **AI Integration**:
-   - Leverages external AI tools (e.g., Hugging Face Transformers) for advanced code analysis and mutation guidance.
-   - Provides natural language explanations and suggestions for Python code.
+### 1. **Genetic Algorithms**
+- Handles population generation, mutation, crossover, and selection.
+- Evaluates code quality using fitness functions, including fractal-inspired fitness functions for complex optimization landscapes.
+- Manages genetic populations with deduplication, parent selection, and mutation.
 
-3. **Self-Improvement**:
-   - Iteratively rewrites its own codebase to improve functionality and performance.
-   - Interfaces with the AI engine to analyze genetic outputs and runtime logs.
+### 2. **AI Integration**
+- Leverages external AI tools (e.g., Hugging Face Transformers) for advanced code analysis and mutation guidance.
+- Provides natural language explanations and suggestions for Python code.
+- Uses AI to analyze and optimize genetic algorithm outputs.
 
-4. **Logging and Debugging**:
-   - Maintains detailed runtime logs for debugging and performance monitoring.
-   - Centralized logging via `log_to_os` for inter-process communication.
+### 3. **Self-Improvement**
+- Iteratively rewrites its own codebase to improve functionality and performance.
+- Interfaces with the AI engine to analyze genetic outputs and runtime logs.
+- Applies intelligent behavior to replicated code for self-improvement.
 
-5. **Folder Management**:
-   - Manages and flattens recursive folder structures in `adn_trash_code`.
-   - Generates and processes JSON files for folder structures.
+### 4. **Knowledge Base Integration**
+- Extracts metadata from all `.py` files in the project, including:
+  - Function definitions and their parameters.
+  - Class definitions.
+  - Imports and dependencies.
+  - File-level metadata (e.g., character length, indentation, loop logic).
+- Generates a `knowledge_base.json` file for centralized metadata storage.
 
-6. **Knowledge Base Integration**:
-   - Combines controlled knowledge bases with emergent behaviors from experimental code.
-   - Extracts metadata from files and generates a snapshot of the CodeBot structure.
+### 5. **Logging and Debugging**
+- Maintains detailed runtime logs for debugging and performance monitoring.
+- Centralized logging via `log_to_os` for inter-process communication.
+
+### 6. **Folder Management**
+- Manages and flattens recursive folder structures in `adn_trash_code`.
+- Generates and processes JSON files for folder structures.
 
 ---
 
@@ -97,25 +105,36 @@ python ui_server.py
   - Added JSON validation logic.
   - Improved error handling for invalid inputs.
 
+### Knowledge Base Generation
+The `generate_knowledge_base` function extracts detailed metadata from all `.py` files, including:
+- Function definitions and their parameters.
+- Character length of the file.
+- Average indentation levels.
+- Loop logic (e.g., `for` and `while` loops).
+
 ---
 
 ## **Command Reference**
 
-### **Chatbot Commands**
 1. **Generate Metadata**:
    - Command: `generate metadata`
    - Description: Generates JSON metadata for the codebase.
 
-2. **Run Genetic Algorithm**:
-   - Command: `run genetic algorithm`
-   - Description: Executes the genetic algorithm to optimize the codebase.
-
-3. **Explain Python Code**:
+2. **Explain Python Code**:
    - Command: `explain python <code_snippet>`
    - Example:
      ```bash
      explain python def add(a, b): return a + b
      ```
+   - Description: Uses the AI engine to explain a Python code snippet.
+
+3. **Help**:
+   - Command: `help`
+   - Description: Displays a list of available commands.
+
+4. **Exit**:
+   - Command: [exit](http://_vscodecontentref_/10)
+   - Description: Gracefully exits CodeBot.
 
 ---
 

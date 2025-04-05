@@ -74,9 +74,9 @@ def generate_metadata_command():
     """
     Command to generate metadata about the codebase.
     """
-    output_file = os.path.join(BASE_DIR, "storage", "codebot_metadata.json")
-    from core.analyze_structure import generate_metadata
-    generate_metadata(BASE_DIR, output_file)
+    output_file = os.path.join(BASE_DIR, "storage", "knowledge_base.json")
+    from core.analyze_structure import generate_knowledge_base
+    generate_knowledge_base(BASE_DIR, output_file)
     return f"Metadata generated and saved to {output_file}"
 
 # ------------------
@@ -89,12 +89,26 @@ def exchange_layer(command):
     """
     logging.debug(f"Received command: {command}")
     command = sanitize_input(command, context="general")
+
     if command == "exit":
         logging.info("Exiting CodeBot...")
         return "Exiting CodeBot..."
     elif command == "generate metadata":
         logging.info("Generating metadata...")
         return generate_metadata_command()
+    elif command == "help":
+        return (
+            "Available commands:\n"
+            "- generate metadata: Generate JSON metadata for the codebase.\n"
+            "- explain python <code_snippet>: Explain a Python code snippet.\n"
+            "- exit: Exit CodeBot."
+        )
+    elif command.startswith("explain python"):
+        code_snippet = command[len("explain python "):].strip()
+        if not code_snippet:
+            return "Please provide a Python code snippet to explain."
+        logging.info("Explaining Python code...")
+        return explain_python_code(code_snippet)
     else:
         logging.warning(f"Unknown command: {command}")
         return f"Unknown command: {command}"

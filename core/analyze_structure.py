@@ -27,7 +27,6 @@ def analyze_folder_structure(base_dir):
             "subfolders": dirs
         }
     return structure
-
 def save_structure_to_json(base_dir, output_dir):
     """
     Saves the folder structure to a JSON file.
@@ -38,7 +37,6 @@ def save_structure_to_json(base_dir, output_dir):
     with open(output_file, "w") as f:
         json.dump(structure, f, indent=4)
     print(f"Folder structure saved to {output_file}")
-
 def extract_imports(file_path):
     """
     Extracts import statements from a Python file.
@@ -53,7 +51,35 @@ def extract_imports(file_path):
         content = f.read()
     imports = re.findall(r"^import (\S+)|^from (\S+) import", content, re.MULTILINE)
     return [imp[0] or imp[1] for imp in imports]
+def extract_file_metadata(file_path):
+    """
+    Extracts additional metadata from a Python file.
 
+    Args:
+        file_path (str): Path to the Python file.
+
+    Returns:
+        dict: Metadata about the file, including character length, indentation, and loop logic.
+    """
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Calculate character length
+    char_length = len(content)
+
+    # Calculate average indentation level
+    lines = content.splitlines()
+    indent_levels = [len(line) - len(line.lstrip()) for line in lines if line.strip()]
+    avg_indent = sum(indent_levels) / len(indent_levels) if indent_levels else 0
+
+    # Detect loops
+    loop_count = len(re.findall(r"\b(for|while)\b", content))
+
+    return {
+        "character_length": char_length,
+        "average_indentation": avg_indent,
+        "loop_count": loop_count,
+    }
 def generate_knowledge_base(base_dir, output_file):
     """
     Generates a JSON file that tracks all Python files and their imports, functions, and dependencies.
@@ -70,18 +96,18 @@ def generate_knowledge_base(base_dir, output_file):
             if file.endswith(".py"):
                 file_path = os.path.join(root, file)
                 try:
-                    # Extract imports, functions, and classes
-                    logging.debug(f"Processing file: {file_path}")
+                    # Extract imports, functions, classes, and additional metadata
                     imports = extract_imports(file_path)
                     definitions = extract_functions_and_classes(file_path)
-                    relative_path = os.path.relpath(file_path, base_dir)
+                    file_metadata = extract_file_metadata(file_path)
 
-                    # Add detailed descriptions
+                    relative_path = os.path.relpath(file_path, base_dir)
                     knowledge_base[relative_path] = {
                         "description": f"Module located at {relative_path}",
                         "imports": imports,
                         "functions": definitions["functions"],
-                        "classes": definitions["classes"]
+                        "classes": definitions["classes"],
+                        "metadata": file_metadata,
                     }
                     logging.debug(f"Added data for {file_path}: {knowledge_base[relative_path]}")
                 except Exception as e:
@@ -92,7 +118,6 @@ def generate_knowledge_base(base_dir, output_file):
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(knowledge_base, f, indent=4)
     logging.info(f"Knowledge base saved to {output_file}")
-
 def update_imports(base_dir, knowledge_base_file):
     """
     Updates imports in all Python files based on the knowledge base.
@@ -113,7 +138,6 @@ def update_imports(base_dir, knowledge_base_file):
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(content)
     print("Imports updated successfully.")
-
 def extract_functions_and_classes(file_path):
     """
     Extracts functions and classes from a Python file.
@@ -122,14 +146,20 @@ def extract_functions_and_classes(file_path):
         file_path (str): Path to the Python file.
 
     Returns:
-        dict: A dictionary with lists of functions and classes.
+        dict: A dictionary with lists of functions and classes, including their parameters.
     """
     with open(file_path, "r", encoding="utf-8") as f:
         tree = ast.parse(f.read())
-    functions = [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
-    classes = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
-    return {"functions": functions, "classes": classes}
 
+    functions = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            params = [arg.arg for arg in node.args.args]
+            functions.append({"name": node.name, "parameters": params})
+
+    classes = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
+
+    return {"functions": functions, "classes": classes}
 def parse_codebase(base_dir, output_file="c:\\dev\\CodeBot\\storage\\codebot_parsed_structure.json"):
     """
     Analyzes the folder structure and parses high-level behaviors of genetic modules.
@@ -163,7 +193,6 @@ def parse_codebase(base_dir, output_file="c:\\dev\\CodeBot\\storage\\codebot_par
     print(f"Codebase structure saved to {output_file}")
 
     return code_structure
-
 def detect_ai_behaviors(folder, files):
     """
     Identifies AI-related logic or behaviors based on file patterns.
@@ -195,7 +224,6 @@ def detect_ai_behaviors(folder, files):
             except Exception as e:
                 print(f"Error reading {file_path}: {e}")
     return behaviors
-
 def generate_metadata(base_dir, output_file):
     """
     Generates JSON metadata about the codebase, including folder structure, imports, and module definitions.
@@ -233,7 +261,6 @@ def generate_metadata(base_dir, output_file):
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(metadata, f, indent=4)
     logging.info(f"Metadata saved to {output_file}")
-
 if __name__ == "__main__":
     base_dir = input("Enter the folder to analyze (e.g., C:\\codebot): ").strip()
     if not os.path.isdir(base_dir):

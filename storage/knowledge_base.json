@@ -1,0 +1,817 @@
+{
+    "codebot_core.py": {
+        "description": "Module located at codebot_core.py",
+        "imports": [
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 3928,
+            "average_indentation": 3.5728155339805827,
+            "loop_count": 1
+        }
+    },
+    "config.py": {
+        "description": "Module located at config.py",
+        "imports": [
+            "os"
+        ],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 634,
+            "average_indentation": 0.0,
+            "loop_count": 1
+        }
+    },
+    "test.py": {
+        "description": "Module located at test.py",
+        "imports": [
+            "warnings",
+            "core.ai_engine"
+        ],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 302,
+            "average_indentation": 0.0,
+            "loop_count": 0
+        }
+    },
+    "ui_server.py": {
+        "description": "Module located at ui_server.py",
+        "imports": [
+            "flask",
+            "codebot_core"
+        ],
+        "functions": [
+            {
+                "name": "handle_command",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 384,
+            "average_indentation": 1.4545454545454546,
+            "loop_count": 0
+        }
+    },
+    "__init__.py": {
+        "description": "Module located at __init__.py",
+        "imports": [],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 0,
+            "average_indentation": 0,
+            "loop_count": 0
+        }
+    },
+    "core\\ai_engine.py": {
+        "description": "Module located at core\\ai_engine.py",
+        "imports": [
+            "os",
+            "json",
+            "transformers",
+            "core.analyze_structure",
+            "config",
+            "typing"
+        ],
+        "functions": [
+            {
+                "name": "preload_model",
+                "parameters": []
+            },
+            {
+                "name": "explain_python_code",
+                "parameters": [
+                    "code_snippet"
+                ]
+            },
+            {
+                "name": "suggest_code_improvements",
+                "parameters": [
+                    "code_snippet"
+                ]
+            },
+            {
+                "name": "analyze_file",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "parse_codebase_and_evaluate",
+                "parameters": [
+                    "base_dir"
+                ]
+            },
+            {
+                "name": "save_parsed_structure_to_json",
+                "parameters": [
+                    "parsed_structure",
+                    "output_file"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 3338,
+            "average_indentation": 3.9518072289156625,
+            "loop_count": 7
+        }
+    },
+    "core\\analyze_structure.py": {
+        "description": "Module located at core\\analyze_structure.py",
+        "imports": [
+            "os",
+            "json",
+            "re",
+            "ast",
+            "logging",
+            "sys",
+            "config"
+        ],
+        "functions": [
+            {
+                "name": "analyze_folder_structure",
+                "parameters": [
+                    "base_dir"
+                ]
+            },
+            {
+                "name": "save_structure_to_json",
+                "parameters": [
+                    "base_dir",
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "extract_imports",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "extract_file_metadata",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "generate_knowledge_base",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "update_imports",
+                "parameters": [
+                    "base_dir",
+                    "knowledge_base_file"
+                ]
+            },
+            {
+                "name": "extract_functions_and_classes",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "parse_codebase",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "detect_ai_behaviors",
+                "parameters": [
+                    "folder",
+                    "files"
+                ]
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 10504,
+            "average_indentation": 7.7012448132780085,
+            "loop_count": 21
+        }
+    },
+    "core\\self_audit.py": {
+        "description": "Module located at core\\self_audit.py",
+        "imports": [
+            "sys",
+            "os",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "self_audit",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 526,
+            "average_indentation": 2.0,
+            "loop_count": 0
+        }
+    },
+    "core\\self_improvement.py": {
+        "description": "Module located at core\\self_improvement.py",
+        "imports": [
+            "os",
+            "time",
+            "shutil",
+            "subprocess",
+            "venv",
+            "autopep8",
+            "logging",
+            "config",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population"
+        ],
+        "functions": [
+            {
+                "name": "deduplicate_population",
+                "parameters": [
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "select_parents",
+                "parameters": [
+                    "population"
+                ]
+            },
+            {
+                "name": "crossover",
+                "parameters": [
+                    "parent1",
+                    "parent2",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "mutate",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "create_virtual_environment",
+                "parameters": [
+                    "env_dir"
+                ]
+            },
+            {
+                "name": "execute_in_virtual_environment",
+                "parameters": [
+                    "script_path",
+                    "env_dir"
+                ]
+            },
+            {
+                "name": "analyze_logs",
+                "parameters": [
+                    "log_file_path"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 4352,
+            "average_indentation": 5.518518518518518,
+            "loop_count": 5
+        }
+    },
+    "core\\__init__.py": {
+        "description": "Module located at core\\__init__.py",
+        "imports": [],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 0,
+            "average_indentation": 0,
+            "loop_count": 0
+        }
+    },
+    "genetic\\genetic_algorithm.py": {
+        "description": "Module located at genetic\\genetic_algorithm.py",
+        "imports": [
+            "os",
+            "random",
+            "math",
+            "logging",
+            "numpy",
+            "shutil",
+            "genetic.genetic_population",
+            "genetic.genetic_optimizer",
+            "multiprocessing"
+        ],
+        "functions": [
+            {
+                "name": "flatten_directory",
+                "parameters": [
+                    "base_dir",
+                    "target_dir"
+                ]
+            },
+            {
+                "name": "fractal_fitness_function",
+                "parameters": [
+                    "position",
+                    "depth"
+                ]
+            },
+            {
+                "name": "initialize_population",
+                "parameters": [
+                    "size",
+                    "dimensions",
+                    "bounds"
+                ]
+            },
+            {
+                "name": "mutate",
+                "parameters": [
+                    "individual",
+                    "mutation_rate",
+                    "bounds"
+                ]
+            },
+            {
+                "name": "crossover",
+                "parameters": [
+                    "parent1",
+                    "parent2"
+                ]
+            },
+            {
+                "name": "fractal_genetic_algorithm",
+                "parameters": [
+                    "dimensions",
+                    "generations",
+                    "population_size",
+                    "bounds",
+                    "fractal_depth"
+                ]
+            },
+            {
+                "name": "fractal_genetic_algorithm_with_population",
+                "parameters": [
+                    "source_file",
+                    "generations",
+                    "population_size",
+                    "dimensions",
+                    "bounds",
+                    "fractal_depth",
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "fractal_genetic_algorithm_with_parsing",
+                "parameters": [
+                    "base_dir",
+                    "dimensions",
+                    "generations",
+                    "population_size",
+                    "bounds",
+                    "fractal_depth"
+                ]
+            },
+            {
+                "name": "evaluate_population",
+                "parameters": [
+                    "population_dir"
+                ]
+            },
+            {
+                "name": "evaluate_population_parallel",
+                "parameters": [
+                    "population"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 9097,
+            "average_indentation": 5.526881720430108,
+            "loop_count": 23
+        }
+    },
+    "genetic\\genetic_iteration.py": {
+        "description": "Module located at genetic\\genetic_iteration.py",
+        "imports": [
+            "os",
+            "shutil",
+            "logging",
+            "sys",
+            "genetic.genetic_population"
+        ],
+        "functions": [
+            {
+                "name": "replicate_and_learn",
+                "parameters": [
+                    "source_dir",
+                    "target_dir"
+                ]
+            },
+            {
+                "name": "manage_iterations",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 2215,
+            "average_indentation": 3.2653061224489797,
+            "loop_count": 3
+        }
+    },
+    "genetic\\genetic_optimizer.py": {
+        "description": "Module located at genetic\\genetic_optimizer.py",
+        "imports": [
+            "ast",
+            "autopep8",
+            "random",
+            "shutil",
+            "os",
+            "requests",
+            "hashlib",
+            "subprocess",
+            "time",
+            "venv",
+            "logging",
+            "sys",
+            "genetic.genetic_population",
+            "config",
+            "genetic.genetic_population",
+            "genetic.genetic_population"
+        ],
+        "functions": [
+            {
+                "name": "log_to_os",
+                "parameters": [
+                    "namespace",
+                    "level",
+                    "message"
+                ]
+            },
+            {
+                "name": "analyze_code",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "auto_format_code",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "fitness_function",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "analyze_adn_trash_code",
+                "parameters": []
+            },
+            {
+                "name": "ingest_knowledge",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "deduplicate_population",
+                "parameters": [
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "select_parents",
+                "parameters": [
+                    "population"
+                ]
+            },
+            {
+                "name": "crossover",
+                "parameters": [
+                    "parent1",
+                    "parent2",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "mutate",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "create_virtual_environment",
+                "parameters": [
+                    "env_dir"
+                ]
+            },
+            {
+                "name": "execute_in_virtual_environment",
+                "parameters": [
+                    "script_path",
+                    "env_dir"
+                ]
+            },
+            {
+                "name": "handle_exception",
+                "parameters": [
+                    "logger",
+                    "error_message",
+                    "exception"
+                ]
+            },
+            {
+                "name": "sanitize_input",
+                "parameters": [
+                    "user_input",
+                    "context"
+                ]
+            },
+            {
+                "name": "get_valid_file_path",
+                "parameters": [
+                    "prompt"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 9622,
+            "average_indentation": 5.425339366515837,
+            "loop_count": 13
+        }
+    },
+    "genetic\\genetic_population.py": {
+        "description": "Module located at genetic\\genetic_population.py",
+        "imports": [
+            "os",
+            "random",
+            "shutil",
+            "logging",
+            "hashlib",
+            "autopep8",
+            "ast",
+            "requests",
+            "json",
+            "time",
+            "subprocess",
+            "venv",
+            "sys",
+            "config"
+        ],
+        "functions": [
+            {
+                "name": "request_population",
+                "parameters": [
+                    "source_file",
+                    "population_size",
+                    "dimensions",
+                    "bounds",
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "log_to_os",
+                "parameters": [
+                    "namespace",
+                    "level",
+                    "message"
+                ]
+            },
+            {
+                "name": "auto_format_code",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "analyze_adn_trash_code",
+                "parameters": []
+            },
+            {
+                "name": "ingest_knowledge",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "generate_population",
+                "parameters": [
+                    "source_file",
+                    "population_size",
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "deduplicate_population",
+                "parameters": [
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "select_parents",
+                "parameters": [
+                    "population",
+                    "fitness_function"
+                ]
+            },
+            {
+                "name": "crossover",
+                "parameters": [
+                    "parent1",
+                    "parent2",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "mutate",
+                "parameters": [
+                    "file_path"
+                ]
+            },
+            {
+                "name": "create_virtual_environment",
+                "parameters": [
+                    "env_dir"
+                ]
+            },
+            {
+                "name": "execute_in_virtual_environment",
+                "parameters": [
+                    "script_path",
+                    "env_dir"
+                ]
+            },
+            {
+                "name": "run_genetic_algorithm",
+                "parameters": [
+                    "source_file",
+                    "generations",
+                    "initial_population_size",
+                    "output_dir"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 9581,
+            "average_indentation": 6.100456621004566,
+            "loop_count": 17
+        }
+    },
+    "genetic\\genetic_structure.py": {
+        "description": "Module located at genetic\\genetic_structure.py",
+        "imports": [
+            "sys",
+            "os",
+            "shutil",
+            "logging",
+            "genetic.genetic_population",
+            "config",
+            "genetic.genetic_optimizer"
+        ],
+        "functions": [
+            {
+                "name": "flatten_directory",
+                "parameters": [
+                    "base_dir",
+                    "target_dir"
+                ]
+            },
+            {
+                "name": "run_genetic_algorithm",
+                "parameters": [
+                    "source_file",
+                    "generations",
+                    "initial_population_size",
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "run_genetic_algorithm_with_population",
+                "parameters": [
+                    "source_file",
+                    "generations",
+                    "population_size",
+                    "dimensions",
+                    "bounds",
+                    "output_dir"
+                ]
+            },
+            {
+                "name": "manage_knowledge_base",
+                "parameters": [
+                    "file_path"
+                ]
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 2867,
+            "average_indentation": 4.866666666666666,
+            "loop_count": 7
+        }
+    },
+    "genetic\\__init__.py": {
+        "description": "Module located at genetic\\__init__.py",
+        "imports": [],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 0,
+            "average_indentation": 0,
+            "loop_count": 0
+        }
+    },
+    "storage\\__init__.py": {
+        "description": "Module located at storage\\__init__.py",
+        "imports": [],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 0,
+            "average_indentation": 0,
+            "loop_count": 0
+        }
+    },
+    "storage\\knowledge_base\\__init__.py": {
+        "description": "Module located at storage\\knowledge_base\\__init__.py",
+        "imports": [],
+        "functions": [],
+        "classes": [],
+        "metadata": {
+            "character_length": 0,
+            "average_indentation": 0,
+            "loop_count": 0
+        }
+    }
+}

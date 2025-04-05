@@ -38,6 +38,7 @@
     },
     ".\\storage": {
         "files": [
+            "folder__structure.json",
             "__init__.py"
         ],
         "subfolders": [
@@ -51,6 +52,7 @@
     },
     ".\\storage\\knowledge_base": {
         "files": [
+            "knowledge_base.json",
             "__init__.py"
         ],
         "subfolders": []
