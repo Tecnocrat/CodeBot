@@ -5,11 +5,11 @@ import json
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
-from core.self_improvement import run_genetic_algorithm, analyze_logs
+from core.self_improvement import analyze_logs
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
 from genetic.genetic_iteration import manage_iterations
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
-from genetic.genetic_population import request_population
+from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
 
 # Add the `CodeBot` directory to the Python path
@@ -22,7 +22,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(LOG_FILE, mode="w"),
+        logging.FileHandler(LOG_FILE, mode="a"),  # Append mode to ensure logs are written
         logging.StreamHandler(sys.stdout)
     ]
 )
@@ -86,19 +86,18 @@ def generate_metadata_command():
 def exchange_layer(command):
     """
     Routes commands to the appropriate functions and returns the response.
-
-    Args:
-        command (str): The command to process.
-
-    Returns:
-        str: The response to the command.
     """
+    logging.debug(f"Received command: {command}")
     command = sanitize_input(command, context="general")
-
-    if command == "generate metadata":
+    if command == "exit":
+        logging.info("Exiting CodeBot...")
+        return "Exiting CodeBot..."
+    elif command == "generate metadata":
+        logging.info("Generating metadata...")
         return generate_metadata_command()
-
-    # Other commands...
+    else:
+        logging.warning(f"Unknown command: {command}")
+        return f"Unknown command: {command}"
 
 # ------------------
 # MAIN EXECUTION
@@ -113,3 +112,5 @@ if __name__ == "__main__":
         command = Prompt.ask("Enter a command")
         response = exchange_layer(command)
         console.print(Panel(response, title="Response"))
+        if command == "exit":
+            break

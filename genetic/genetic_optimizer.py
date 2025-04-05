@@ -12,13 +12,15 @@ import venv
 import logging
 import sys
 
-# Import from genetic_population
-from genetic_population import generate_population
+# Ensure the parent directory is in the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\core"))
-sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\genetic"))
-sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\modules"))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+from genetic.genetic_population import generate_population, run_genetic_algorithm
+
+sys.path.append(os.path.abspath("C:\\CodeBot\\core"))
+sys.path.append(os.path.abspath("C:\\CodeBot\\genetic"))
+sys.path.append(os.path.abspath("C:\\CodeBot\\modules"))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))  # Add parent directory to path
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -168,7 +170,7 @@ def execute_in_virtual_environment(script_path, env_dir):
         log_to_os("codebot", "error", f"Failed to execute {script_path}: {e}")
 
 from genetic.genetic_population import request_population
-from genetic.genetic_population import generate_population
+from genetic.genetic_population import generate_population  # Fix import path
 
 def handle_exception(logger, error_message, exception):
     """

@@ -69,6 +69,12 @@ c:\dev\CodeBot\
    python core/analyze_structure.py
    ```
 
+## Start the Web UI
+Run the following command:
+```bash
+python ui_server.py
+```
+
 ---
 
 ## **Recent Changes**

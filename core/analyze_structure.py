@@ -20,6 +20,8 @@ def analyze_folder_structure(base_dir):
     """
     structure = {}
     for root, dirs, files in os.walk(base_dir):
+        # Exclude .git and other irrelevant folders
+        dirs[:] = [d for d in dirs if d not in [".git", "__pycache__"]]
         structure[root] = {
             "files": files,
             "subfolders": dirs
@@ -48,22 +50,28 @@ def extract_imports(file_path):
 
 def generate_knowledge_base(base_dir, output_file):
     """
-    Generates a JSON file that tracks all Python files and their imports.
+    Generates a JSON file that tracks all Python files and their imports, functions, and dependencies.
     """
     knowledge_base = {}
     for root, _, files in os.walk(base_dir):
         for file in files:
             if file.endswith(".py"):
                 file_path = os.path.join(root, file)
-                with open(file_path, "r", encoding="utf-8") as f:
-                    content = f.read()
-                imports = re.findall(r"^import (\S+)|^from (\S+) import", content, re.MULTILINE)
-                imports = [imp[0] or imp[1] for imp in imports]
-                relative_path = os.path.relpath(file_path, base_dir)
-                knowledge_base[relative_path] = {"imports": imports}
+                try:
+                    imports = extract_imports(file_path)
+                    definitions = extract_functions_and_classes(file_path)
+                    relative_path = os.path.relpath(file_path, base_dir)
+                    knowledge_base[relative_path] = {
+                        "description": f"Module located at {relative_path}",
+                        "imports": imports,
+                        "functions": definitions["functions"],
+                        "classes": definitions["classes"]
+                    }
+                except Exception as e:
+                    logging.error(f"Error processing file {file_path}: {e}")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(knowledge_base, f, indent=4)
-    print(f"Knowledge base saved to {output_file}")
+    logging.info(f"Knowledge base saved to {output_file}")
 
 def update_imports(base_dir, knowledge_base_file):
     """
@@ -201,15 +209,15 @@ def generate_metadata(base_dir, output_file):
     logging.info(f"Metadata saved to {output_file}")
 
 if __name__ == "__main__":
-    base_dir = input("Enter the folder to analyze (e.g., C:\\dev): ").strip()
+    base_dir = input("Enter the folder to analyze (e.g., C:\\codebot): ").strip()
     if not os.path.isdir(base_dir):
         print(f"Error: '{base_dir}' is not a valid directory.")
         sys.exit(1)
-    output_dir = os.path.join("c:\\dev\\CodeBot", "storage")
+    output_dir = os.path.join("c:\\CodeBot", "storage")
     os.makedirs(output_dir, exist_ok=True)
     save_structure_to_json(base_dir, output_dir)
 
-    base_dir = "c:\\dev\\CodeBot"
+    base_dir = r"c:\CodeBot\storage\knowledge_base"  # Use raw string to avoid invalid escape sequence
     knowledge_base_file = os.path.join(base_dir, "knowledge_base.json")
     generate_knowledge_base(base_dir, knowledge_base_file)
     update_imports(base_dir, knowledge_base_file)

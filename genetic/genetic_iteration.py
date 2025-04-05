@@ -3,7 +3,7 @@ import os
 import shutil
 import logging
 import sys
-from genetic.genetic_population import generate_population  # Import generate_population
+from genetic.genetic_population import generate_population, run_genetic_algorithm
 sys.path.append(os.path.abspath("C:\\dev\\CodeBot\\modules"))
 
 # Base directory for all operations

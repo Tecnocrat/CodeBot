@@ -1,10 +1,8 @@
-
 import os
 import json
-from genetic.genetic_algorithm import evaluate_population
+from transformers import pipeline
 from core.analyze_structure import parse_codebase
 from config import KNOWLEDGE_BASE_DIR
-from transformers import pipeline
 from typing import Generator
 
 # Global variable for the text-generation model
@@ -49,16 +47,26 @@ def suggest_code_improvements(code_snippet: str) -> str:
     response = generator(prompt, max_length=100, num_return_sequences=1)
     return response[0]["generated_text"]
 
+def analyze_file(file_path: str) -> str:
+    """
+    Analyzes a Python file and provides suggestions for improvement.
+
+    Args:
+        file_path (str): Path to the Python file.
+
+    Returns:
+        str: Suggestions for improvement.
+    """
+    with open(file_path, "r") as f:
+        code = f.read()
+    return suggest_code_improvements(code)
+
 def parse_codebase_and_evaluate(base_dir: str) -> dict:
     """
     Parses the codebase and evaluates genetic populations.
-
-    Args:
-        base_dir (str): The root directory of the CodeBot project.
-
-    Returns:
-        dict: The parsed structure of the codebase and evaluation results.
     """
+    from genetic.genetic_algorithm import evaluate_population  # Lazy import to avoid circular dependency
+
     # Parse the codebase
     parsed_structure = parse_codebase(base_dir)
 
