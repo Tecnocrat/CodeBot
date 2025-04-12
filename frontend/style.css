@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* Light text */
     margin: 0;
     padding: 0;
 }
@@ -9,45 +10,42 @@ body {
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background: #ffffff;
+    background: #1e1e1e; /* Slightly lighter dark background */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 h1 {
     text-align: center;
-    color: #333333;
+    color: #ffffff; /* Light text */
 }
 
 .command-section {
     margin-bottom: 20px;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
-input[type="text"] {
-    width: calc(100% - 100px);
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-}
-
-button {
+.command-button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
+    background-color: #333333; /* Dark button background */
+    color: #ffffff; /* Light button text */
+    border: 1px solid #555555; /* Subtle border */
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
+.command-button:hover {
+    background-color: #555555; /* Lighter dark background on hover */
+    color: #ffffff; /* Keep text light */
 }
 
 .response-section {
@@ -55,10 +53,33 @@ button:hover {
 }
 
 pre {
-    background: #f8f9fa;
+    background: #1e1e1e; /* Dark background for response box */
+    color: #ffffff; /* Light text for response */
     padding: 15px;
-    border: 1px solid #dddddd;
+    border: 1px solid #333333; /* Subtle border */
     border-radius: 4px;
     white-space: pre-wrap;
     word-wrap: break-word;
+}
+
+.exit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d; /* Red button */
+    color: #ffffff; /* Light text */
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    transition: background-color 0.3s;
+}
+
+.exit-button:hover {
+    background-color: #cc0000; /* Darker red on hover */
 }

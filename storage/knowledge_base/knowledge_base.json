@@ -90,9 +90,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 15796,
-            "average_indentation": 6.293948126801153,
-            "loop_count": 18
+            "character_length": 16724,
+            "average_indentation": 6.369565217391305,
+            "loop_count": 20
         }
     },
     "config.py": {
