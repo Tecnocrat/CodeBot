@@ -60,6 +60,18 @@ def initialize_codebot():
         json.dump(folder_structure, f, indent=4)
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
+def launch_web_ui():
+    """
+    Launches the Flask server for the web UI.
+    """
+    try:
+        logging.info("Starting the Web UI...")
+        subprocess.run(["python", "ui_server.py"], check=True)
+    except KeyboardInterrupt:
+        logging.info("Web UI stopped by user.")
+    except Exception as e:
+        logging.error(f"Error launching Web UI: {e}")
+
 # Generate metadata about the codebase
 def generate_metadata(base_dir, output_file):
     """
@@ -321,48 +333,10 @@ def display_main_menu():
 
 def main_menu():
     """
-    Displays the main menu and handles user input.
+    Removed terminal UI logic. Web UI is now the primary interface.
     """
-    console.print("[bold cyan]Main Menu:[/bold cyan]")
-    console.print("1. Terminal UI")
-    console.print("2. Web UI")
-    console.print("0. Exit")
-
-    choice = Prompt.ask("Select an option (1/2/0)", default="1")
-    if choice == "1":
-        terminal_ui()
-    elif choice == "2":
-        launch_web_ui()
-    elif choice == "0":
-        console.print("[bold green]Exiting CodeBot...[/bold green]")
-        sys.exit(0)
-    else:
-        console.print("[bold red]Invalid choice. Please try again.[/bold red]")
-        main_menu()
-
-def terminal_ui():
-    """
-    Starts the terminal-based UI.
-    """
-    while True:
-        display_main_menu()
-        command = Prompt.ask("Enter a command (number)", default="0")
-        response = exchange_layer(command)
-        console.print(Panel(response, title="Response"))
-        if command == "0":  # Exit
-            break
-
-def launch_web_ui():
-    """
-    Launches the web UI by starting the Flask server.
-    """
-    console.print("[bold green]Starting Web UI...[/bold green]")
-    try:
-        subprocess.run(["python", "ui_server.py"], check=True)
-    except KeyboardInterrupt:
-        console.print("[bold yellow]Web UI stopped by user.[/bold yellow]")
-    except Exception as e:
-        console.print(f"[bold red]Error launching Web UI: {e}[/bold red]")
+    console.print("[bold red]Terminal UI has been removed. Please use the Web UI.[/bold red]")
+    sys.exit(0)
 
 # ------------------
 # EXCHANGE LAYER
@@ -422,4 +396,5 @@ if __name__ == "__main__":
     logger.info("CodeBot Core started.")
     initialize_codebot()  # Initialize AI engine and logging
     console.print("[bold green]CodeBot Core is running![/bold green]")
-    main_menu()
+    console.print("[bold cyan]Please start the Web UI by running 'ui_server.py'.[/bold cyan]")
+    launch_web_ui()  # Launch the Web UI

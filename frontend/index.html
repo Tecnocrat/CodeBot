@@ -11,13 +11,15 @@
         <button id="exit-button" class="exit-button">X</button>
         <h1>CodeBot Command Interface</h1>
         <div class="command-section">
-            <h2>Available Commands:</h2>
-            <div class="button-group">
-                <button class="command-button" data-command="init population">Init Population</button>
-                <button class="command-button" data-command="evaluate population">Evaluate Population</button>
-                <button class="command-button" data-command="evaluate results">Evaluate Results</button>
-                <button class="command-button" data-command="create subpopulation">Create Subpopulation</button>
-            </div>
+            <label for="command-input">Enter Command:</label>
+            <input type="text" id="command-input" placeholder="e.g., help">
+            <button id="send-command">Send</button>
+        </div>
+        <div class="button-group">
+            <button class="command-button" data-command="init population">Init Population</button>
+            <button class="command-button" data-command="evaluate population">Evaluate Population</button>
+            <button class="command-button" data-command="evaluate results">Evaluate Results</button>
+            <button class="command-button" data-command="create subpopulation">Create Subpopulation</button>
         </div>
         <div class="response-section">
             <h2>Response:</h2>

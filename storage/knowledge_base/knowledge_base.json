@@ -25,6 +25,10 @@
                 "parameters": []
             },
             {
+                "name": "launch_web_ui",
+                "parameters": []
+            },
+            {
                 "name": "generate_metadata",
                 "parameters": [
                     "base_dir",
@@ -70,14 +74,6 @@
                 "parameters": []
             },
             {
-                "name": "terminal_ui",
-                "parameters": []
-            },
-            {
-                "name": "launch_web_ui",
-                "parameters": []
-            },
-            {
                 "name": "exchange_layer",
                 "parameters": [
                     "command"
@@ -90,8 +86,8 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 16724,
-            "average_indentation": 6.369565217391305,
+            "character_length": 16028,
+            "average_indentation": 6.4,
             "loop_count": 20
         }
     },
@@ -137,8 +133,8 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 467,
-            "average_indentation": 1.2307692307692308,
+            "character_length": 557,
+            "average_indentation": 1.8823529411764706,
             "loop_count": 1
         }
     },

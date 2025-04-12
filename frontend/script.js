@@ -1,36 +1,42 @@
 // Ensure DOM is fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("send-command").addEventListener("click", () => {
-        const commandInput = document.getElementById("command-input");
-        const command = commandInput.value.trim().toLowerCase();
-        const responseOutput = document.getElementById("response-output");
+    // Handle "Send" button click
+    const sendCommandButton = document.getElementById("send-command");
+    if (sendCommandButton) {
+        sendCommandButton.addEventListener("click", () => {
+            const commandInput = document.getElementById("command-input");
+            const command = commandInput ? commandInput.value.trim().toLowerCase() : "";
+            const responseOutput = document.getElementById("response-output");
 
-        if (!command) {
-            responseOutput.textContent = "Please enter a command.";
-            return;
-        }
+            if (!command) {
+                responseOutput.textContent = "Please enter a command.";
+                return;
+            }
 
-        // Send the command to the Flask server
-        fetch("http://127.0.0.1:5000/command", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ command })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
+            // Send the command to the Flask server
+            fetch("http://127.0.0.1:5000/command", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ command })
             })
-            .then(data => {
-                responseOutput.textContent = data.response;
-            })
-            .catch(error => {
-                responseOutput.textContent = `Error: ${error.message}`;
-            });
-    });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    responseOutput.textContent = data.response;
+                })
+                .catch(error => {
+                    responseOutput.textContent = `Error: ${error.message}`;
+                });
+        });
+    } else {
+        console.error('Send command button not found in the DOM.');
+    }
 
     // Handle command button clicks
     document.querySelectorAll(".command-button").forEach(button => {
@@ -66,7 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (exitButton) {
         exitButton.addEventListener("click", () => {
             if (confirm("Are you sure you want to exit?")) {
-                window.close(); // Attempt to close the window
+                // Redirect to a goodbye page or display a message
+                document.body.innerHTML = `
+                    <div style="text-align: center; margin-top: 50px;">
+                        <h1>Goodbye!</h1>
+                        <p>Thank you for using CodeBot. You can close this tab now.</p>
+                    </div>
+                `;
             }
         });
     } else {

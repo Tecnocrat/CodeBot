@@ -1,7 +1,7 @@
-# **CodeBot Project**
+# CodeBot
 
-## **Overview**
-CodeBot is an AI-driven system designed to automate code analysis, mutation, and optimization. By leveraging genetic algorithms, recursive chaos generation, and external AI engines, CodeBot iteratively improves its own codebase. The system evolves through self-improvement, combining structured knowledge bases with emergent behaviors from experimental code.
+## Overview
+CodeBot is now fully web-based. The terminal UI has been removed, and all interactions are handled through the web UI.
 
 ---
 
@@ -162,22 +162,11 @@ c:\CodeBot\
 
 ---
 
-## **How to Run**
-
-### **1. Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-### **2. Run CodeBot**
-```bash
-python codebot_core.py
-```
-
-### **3. Start the Web UI**
-```bash
-python ui_server.py
-```
+## **How to Use**
+1. Start the Flask server:
+   ```bash
+   python ui_server.py
+   ```
 
 ---
 
