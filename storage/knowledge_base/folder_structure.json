@@ -1,0 +1,353 @@
+{
+    ".": {
+        "files": [
+            "codebot_core.py",
+            "config.py",
+            "README.md",
+            "requirements.txt",
+            "runtime_exec.log",
+            "test.py",
+            "ui_server.py",
+            "__init__.py"
+        ],
+        "subfolders": [
+            ".vs",
+            "core",
+            "frontend",
+            "genetic",
+            "storage",
+            "__pycache__"
+        ]
+    },
+    ".vs": {
+        "files": [
+            "slnx.sqlite",
+            "VSWorkspaceState.json"
+        ],
+        "subfolders": [
+            "CodeBot"
+        ]
+    },
+    ".vs\\CodeBot": {
+        "files": [],
+        "subfolders": [
+            "copilot-chat",
+            "CopilotIndices",
+            "FileContentIndex",
+            "v17"
+        ]
+    },
+    ".vs\\CodeBot\\copilot-chat": {
+        "files": [],
+        "subfolders": [
+            "33dd74cd"
+        ]
+    },
+    ".vs\\CodeBot\\copilot-chat\\33dd74cd": {
+        "files": [],
+        "subfolders": [
+            "sessions"
+        ]
+    },
+    ".vs\\CodeBot\\copilot-chat\\33dd74cd\\sessions": {
+        "files": [],
+        "subfolders": []
+    },
+    ".vs\\CodeBot\\CopilotIndices": {
+        "files": [],
+        "subfolders": [
+            "17.13.441.19478"
+        ]
+    },
+    ".vs\\CodeBot\\CopilotIndices\\17.13.441.19478": {
+        "files": [
+            "CodeChunks.db",
+            "SemanticSymbols.db"
+        ],
+        "subfolders": []
+    },
+    ".vs\\CodeBot\\FileContentIndex": {
+        "files": [
+            "c7f9f262-99c0-4386-afd5-794d8a8ad759.vsidx"
+        ],
+        "subfolders": []
+    },
+    ".vs\\CodeBot\\v17": {
+        "files": [
+            ".wsuo",
+            "DocumentLayout.backup.json",
+            "DocumentLayout.json"
+        ],
+        "subfolders": []
+    },
+    "core": {
+        "files": [
+            "ai_engine.py",
+            "analyze_structure.py",
+            "self_audit.py",
+            "self_improvement.py",
+            "__init__.py"
+        ],
+        "subfolders": [
+            "__pycache__"
+        ]
+    },
+    "core\\__pycache__": {
+        "files": [
+            "ai_engine.cpython-313.pyc",
+            "analyze_structure.cpython-313.pyc",
+            "self_improvement.cpython-313.pyc",
+            "__init__.cpython-313.pyc"
+        ],
+        "subfolders": []
+    },
+    "frontend": {
+        "files": [
+            "index.html",
+            "script.js",
+            "style.css"
+        ],
+        "subfolders": []
+    },
+    "genetic": {
+        "files": [
+            "genetic_algorithm.py",
+            "genetic_iteration.py",
+            "genetic_optimizer.py",
+            "genetic_population.py",
+            "genetic_structure.py",
+            "__init__.py"
+        ],
+        "subfolders": [
+            "__pycache__"
+        ]
+    },
+    "genetic\\__pycache__": {
+        "files": [
+            "genetic_algorithm.cpython-313.pyc",
+            "genetic_iteration.cpython-313.pyc",
+            "genetic_optimizer.cpython-313.pyc",
+            "genetic_population.cpython-313.pyc",
+            "__init__.cpython-313.pyc"
+        ],
+        "subfolders": []
+    },
+    "storage": {
+        "files": [
+            "__init__.py"
+        ],
+        "subfolders": [
+            "genetic_population",
+            "knowledge_base"
+        ]
+    },
+    "storage\\genetic_population": {
+        "files": [
+            "individual_0.py",
+            "individual_0.py_exec.log",
+            "individual_1.py",
+            "individual_1.py_exec.log",
+            "individual_10.py",
+            "individual_10.py_exec.log",
+            "individual_11.py",
+            "individual_11.py_exec.log",
+            "individual_12.py",
+            "individual_12.py_exec.log",
+            "individual_13.py",
+            "individual_13.py_exec.log",
+            "individual_14.py",
+            "individual_14.py_exec.log",
+            "individual_15.py",
+            "individual_15.py_exec.log",
+            "individual_16.py",
+            "individual_16.py_exec.log",
+            "individual_17.py",
+            "individual_17.py_exec.log",
+            "individual_18.py",
+            "individual_18.py_exec.log",
+            "individual_19.py",
+            "individual_19.py_exec.log",
+            "individual_2.py",
+            "individual_2.py_exec.log",
+            "individual_20.py",
+            "individual_20.py_exec.log",
+            "individual_21.py",
+            "individual_21.py_exec.log",
+            "individual_22.py",
+            "individual_22.py_exec.log",
+            "individual_23.py",
+            "individual_23.py_exec.log",
+            "individual_24.py",
+            "individual_24.py_exec.log",
+            "individual_25.py",
+            "individual_25.py_exec.log",
+            "individual_26.py",
+            "individual_26.py_exec.log",
+            "individual_27.py",
+            "individual_27.py_exec.log",
+            "individual_28.py",
+            "individual_28.py_exec.log",
+            "individual_29.py",
+            "individual_29.py_exec.log",
+            "individual_3.py",
+            "individual_3.py_exec.log",
+            "individual_30.py",
+            "individual_30.py_exec.log",
+            "individual_31.py",
+            "individual_31.py_exec.log",
+            "individual_32.py",
+            "individual_32.py_exec.log",
+            "individual_33.py",
+            "individual_33.py_exec.log",
+            "individual_34.py",
+            "individual_34.py_exec.log",
+            "individual_35.py",
+            "individual_35.py_exec.log",
+            "individual_36.py",
+            "individual_36.py_exec.log",
+            "individual_37.py",
+            "individual_37.py_exec.log",
+            "individual_38.py",
+            "individual_38.py_exec.log",
+            "individual_39.py",
+            "individual_39.py_exec.log",
+            "individual_4.py",
+            "individual_4.py_exec.log",
+            "individual_40.py",
+            "individual_40.py_exec.log",
+            "individual_41.py",
+            "individual_41.py_exec.log",
+            "individual_42.py",
+            "individual_42.py_exec.log",
+            "individual_43.py",
+            "individual_43.py_exec.log",
+            "individual_44.py",
+            "individual_44.py_exec.log",
+            "individual_45.py",
+            "individual_45.py_exec.log",
+            "individual_46.py",
+            "individual_46.py_exec.log",
+            "individual_47.py",
+            "individual_47.py_exec.log",
+            "individual_48.py",
+            "individual_48.py_exec.log",
+            "individual_49.py",
+            "individual_49.py_exec.log",
+            "individual_5.py",
+            "individual_5.py_exec.log",
+            "individual_50.py",
+            "individual_50.py_exec.log",
+            "individual_51.py",
+            "individual_51.py_exec.log",
+            "individual_52.py",
+            "individual_52.py_exec.log",
+            "individual_53.py",
+            "individual_53.py_exec.log",
+            "individual_54.py",
+            "individual_54.py_exec.log",
+            "individual_55.py",
+            "individual_55.py_exec.log",
+            "individual_56.py",
+            "individual_56.py_exec.log",
+            "individual_57.py",
+            "individual_57.py_exec.log",
+            "individual_58.py",
+            "individual_58.py_exec.log",
+            "individual_59.py",
+            "individual_59.py_exec.log",
+            "individual_6.py",
+            "individual_6.py_exec.log",
+            "individual_60.py",
+            "individual_60.py_exec.log",
+            "individual_61.py",
+            "individual_61.py_exec.log",
+            "individual_62.py",
+            "individual_62.py_exec.log",
+            "individual_63.py",
+            "individual_63.py_exec.log",
+            "individual_64.py",
+            "individual_64.py_exec.log",
+            "individual_65.py",
+            "individual_65.py_exec.log",
+            "individual_66.py",
+            "individual_66.py_exec.log",
+            "individual_67.py",
+            "individual_67.py_exec.log",
+            "individual_68.py",
+            "individual_68.py_exec.log",
+            "individual_69.py",
+            "individual_69.py_exec.log",
+            "individual_7.py",
+            "individual_7.py_exec.log",
+            "individual_70.py",
+            "individual_70.py_exec.log",
+            "individual_71.py",
+            "individual_71.py_exec.log",
+            "individual_72.py",
+            "individual_72.py_exec.log",
+            "individual_73.py",
+            "individual_73.py_exec.log",
+            "individual_74.py",
+            "individual_74.py_exec.log",
+            "individual_75.py",
+            "individual_75.py_exec.log",
+            "individual_76.py",
+            "individual_76.py_exec.log",
+            "individual_77.py",
+            "individual_77.py_exec.log",
+            "individual_78.py",
+            "individual_78.py_exec.log",
+            "individual_79.py",
+            "individual_79.py_exec.log",
+            "individual_8.py",
+            "individual_8.py_exec.log",
+            "individual_80.py",
+            "individual_80.py_exec.log",
+            "individual_81.py",
+            "individual_81.py_exec.log",
+            "individual_82.py",
+            "individual_82.py_exec.log",
+            "individual_83.py",
+            "individual_83.py_exec.log",
+            "individual_84.py",
+            "individual_84.py_exec.log",
+            "individual_85.py",
+            "individual_85.py_exec.log",
+            "individual_86.py",
+            "individual_86.py_exec.log",
+            "individual_9.py",
+            "individual_9.py_exec.log",
+            "__init__.py"
+        ],
+        "subfolders": [
+            "evaluation_results"
+        ]
+    },
+    "storage\\genetic_population\\evaluation_results": {
+        "files": [
+            "individual_0.py_exec.log",
+            "individual_0.py_README.md"
+        ],
+        "subfolders": [
+            "evaluation_results"
+        ]
+    },
+    "storage\\genetic_population\\evaluation_results\\evaluation_results": {
+        "files": [],
+        "subfolders": []
+    },
+    "storage\\knowledge_base": {
+        "files": [
+            "folder_structure.json",
+            "knowledge_base.json"
+        ],
+        "subfolders": []
+    },
+    "__pycache__": {
+        "files": [
+            "codebot_core.cpython-313.pyc",
+            "config.cpython-313.pyc"
+        ],
+        "subfolders": []
+    }
+}

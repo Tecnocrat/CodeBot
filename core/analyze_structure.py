@@ -14,18 +14,24 @@ from config import KNOWLEDGE_BASE_DIR
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-def analyze_folder_structure(base_dir):
+def analyze_folder_structure(base_dir, ignore_git=True):
     """
     Analyzes the folder structure of the given directory.
 
     Args:
         base_dir (str): The root directory to analyze.
+        ignore_git (bool): Whether to ignore Git metadata files and folders.
 
     Returns:
         dict: A dictionary representing the folder structure.
     """
     folder_structure = {}
     for root, dirs, files in os.walk(base_dir):
+        # Filter out Git metadata if ignore_git is True
+        if ignore_git:
+            dirs[:] = [d for d in dirs if d != ".git"]
+            files = [f for f in files if not f.startswith(".git")]
+
         relative_root = os.path.relpath(root, base_dir)
         folder_structure[relative_root] = {
             "files": files,

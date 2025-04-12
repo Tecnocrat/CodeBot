@@ -4,6 +4,7 @@ import os
 import sys
 import logging
 import json
+import subprocess  # Add this import for launching the web UI
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
@@ -41,16 +42,20 @@ def initialize_codebot():
     preload_model()  # Load the AI engine
     logging.info("AI engine initialized successfully.")
 
+    # Ensure the knowledge_base directory exists
+    knowledge_base_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
+    os.makedirs(knowledge_base_dir, exist_ok=True)
+
     # Generate metadata for knowledge_base.json
-    output_file = os.path.join(BASE_DIR, "storage", "knowledge_base.json")
+    knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
     from core.analyze_structure import generate_knowledge_base
-    generate_knowledge_base(BASE_DIR, output_file)
-    logging.info(f"Knowledge base generated and saved to {output_file}")
+    generate_knowledge_base(BASE_DIR, knowledge_base_file)
+    logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
     # Generate folder structure for folder_structure.json
-    folder_structure_file = os.path.join(BASE_DIR, "storage", "folder_structure.json")
+    folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
     from core.analyze_structure import analyze_folder_structure
-    folder_structure = analyze_folder_structure(BASE_DIR)
+    folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
     with open(folder_structure_file, "w", encoding="utf-8") as f:
         json.dump(folder_structure, f, indent=4)
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
@@ -90,10 +95,34 @@ def generate_metadata_command():
     """
     Command to generate metadata about the codebase.
     """
-    output_file = os.path.join(BASE_DIR, "storage", "knowledge_base.json")
+    output_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
+    os.makedirs(output_dir, exist_ok=True)  # Ensure the directory exists
+    output_file = os.path.join(output_dir, "knowledge_base.json")
+
     from core.analyze_structure import generate_knowledge_base
     generate_knowledge_base(BASE_DIR, output_file)
     return f"Metadata generated and saved to {output_file}"
+
+def generate_folder_structure_command():
+    """
+    Command to generate the folder structure and save it to folder_structure.json.
+
+    Returns:
+        str: A message indicating the result of the operation.
+    """
+    try:
+        output_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
+        os.makedirs(output_dir, exist_ok=True)  # Ensure the directory exists
+        output_file = os.path.join(output_dir, "folder_structure.json")
+
+        from core.analyze_structure import analyze_folder_structure
+        folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(folder_structure, f, indent=4)
+        return f"Folder structure generated and saved to {output_file}"
+    except Exception as e:
+        logging.error(f"Error generating folder structure: {e}")
+        return f"An error occurred: {e}"
 
 def init_population_command():
     """
@@ -290,6 +319,51 @@ def display_main_menu():
     console.print("4. Create Subpopulation")
     console.print("0. Exit")
 
+def main_menu():
+    """
+    Displays the main menu and handles user input.
+    """
+    console.print("[bold cyan]Main Menu:[/bold cyan]")
+    console.print("1. Terminal UI")
+    console.print("2. Web UI")
+    console.print("0. Exit")
+
+    choice = Prompt.ask("Select an option (1/2/0)", default="1")
+    if choice == "1":
+        terminal_ui()
+    elif choice == "2":
+        launch_web_ui()
+    elif choice == "0":
+        console.print("[bold green]Exiting CodeBot...[/bold green]")
+        sys.exit(0)
+    else:
+        console.print("[bold red]Invalid choice. Please try again.[/bold red]")
+        main_menu()
+
+def terminal_ui():
+    """
+    Starts the terminal-based UI.
+    """
+    while True:
+        display_main_menu()
+        command = Prompt.ask("Enter a command (number)", default="0")
+        response = exchange_layer(command)
+        console.print(Panel(response, title="Response"))
+        if command == "0":  # Exit
+            break
+
+def launch_web_ui():
+    """
+    Launches the web UI by starting the Flask server.
+    """
+    console.print("[bold green]Starting Web UI...[/bold green]")
+    try:
+        subprocess.run(["python", "ui_server.py"], check=True)
+    except KeyboardInterrupt:
+        console.print("[bold yellow]Web UI stopped by user.[/bold yellow]")
+    except Exception as e:
+        console.print(f"[bold red]Error launching Web UI: {e}[/bold red]")
+
 # ------------------
 # EXCHANGE LAYER
 # ------------------
@@ -299,8 +373,9 @@ def exchange_layer(command):
     Routes commands to the appropriate functions and returns the response.
     """
     logging.debug(f"Received command: {command}")
-    command = sanitize_input(command, context="general")
+    command = sanitize_input(command, context="general").lower()
 
+    # Handle numeric commands (for terminal UI)
     if command == "1":  # Init population
         logging.info("Initializing population...")
         return init_population_command()
@@ -316,6 +391,27 @@ def exchange_layer(command):
     elif command == "0":  # Exit
         logging.info("Exiting CodeBot...")
         return "Exiting CodeBot..."
+
+    # Handle text-based commands (for web UI)
+    elif command == "help":
+        return (
+            "Available commands:\n"
+            "- init population: Initialize a genetic population.\n"
+            "- evaluate population: Evaluate a genetic population.\n"
+            "- evaluate results: Review evaluation results.\n"
+            "- create subpopulation: Create a new subpopulation from a chosen individual.\n"
+            "- exit: Exit CodeBot."
+        )
+    elif command == "init population":
+        return init_population_command()
+    elif command == "evaluate population":
+        return evaluate_population_command()
+    elif command == "evaluate results":
+        return evaluate_results_command()
+    elif command == "create subpopulation":
+        return create_subpopulation_command()
+    elif command == "exit":
+        return "Exiting CodeBot..."
     else:
         return "Invalid command. Please enter a valid option."
 
@@ -326,11 +422,4 @@ if __name__ == "__main__":
     logger.info("CodeBot Core started.")
     initialize_codebot()  # Initialize AI engine and logging
     console.print("[bold green]CodeBot Core is running![/bold green]")
-    
-    while True:
-        display_main_menu()  # Show the main menu
-        command = Prompt.ask("Enter a command (number)", default="0")
-        response = exchange_layer(command)
-        console.print(Panel(response, title="Response"))
-        if command == "0":  # Exit
-            break
+    main_menu()

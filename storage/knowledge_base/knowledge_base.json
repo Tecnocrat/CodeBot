@@ -8,6 +8,7 @@
             "sys",
             "logging",
             "json",
+            "subprocess",
             "rich.console",
             "rich.panel",
             "rich.prompt",
@@ -41,6 +42,10 @@
                 "parameters": []
             },
             {
+                "name": "generate_folder_structure_command",
+                "parameters": []
+            },
+            {
                 "name": "init_population_command",
                 "parameters": []
             },
@@ -61,6 +66,18 @@
                 "parameters": []
             },
             {
+                "name": "main_menu",
+                "parameters": []
+            },
+            {
+                "name": "terminal_ui",
+                "parameters": []
+            },
+            {
+                "name": "launch_web_ui",
+                "parameters": []
+            },
+            {
                 "name": "exchange_layer",
                 "parameters": [
                     "command"
@@ -73,9 +90,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 13353,
-            "average_indentation": 6.541666666666667,
-            "loop_count": 17
+            "character_length": 15796,
+            "average_indentation": 6.293948126801153,
+            "loop_count": 18
         }
     },
     "config.py": {
@@ -109,6 +126,7 @@
         "description": "Module located at ui_server.py",
         "imports": [
             "flask",
+            "flask_cors",
             "codebot_core"
         ],
         "functions": [
@@ -119,9 +137,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 384,
-            "average_indentation": 1.4545454545454546,
-            "loop_count": 0
+            "character_length": 467,
+            "average_indentation": 1.2307692307692308,
+            "loop_count": 1
         }
     },
     "__init__.py": {
@@ -210,7 +228,8 @@
             {
                 "name": "analyze_folder_structure",
                 "parameters": [
-                    "base_dir"
+                    "base_dir",
+                    "ignore_git"
                 ]
             },
             {
@@ -276,9 +295,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 10597,
-            "average_indentation": 7.672131147540983,
-            "loop_count": 20
+            "character_length": 10893,
+            "average_indentation": 7.710843373493976,
+            "loop_count": 22
         }
     },
     "core\\self_audit.py": {
