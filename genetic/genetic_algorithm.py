@@ -135,16 +135,50 @@ def fractal_genetic_algorithm(dimensions, generations, population_size, bounds, 
 def fractal_genetic_algorithm_with_population(source_file, generations, population_size, dimensions, bounds, fractal_depth, output_dir):
     """
     Runs a fractal-based genetic algorithm using a requested population.
+
+    Args:
+        source_file (str): Path to the source file to replicate.
+        generations (int): Number of generations to run the algorithm.
+        population_size (int): Size of the population.
+        dimensions (int): Number of dimensions for the population's parameter space.
+        bounds (tuple[float, float]): Bounds for each dimension.
+        fractal_depth (int): Depth of fractal complexity for the fitness function.
+        output_dir (str): Directory to save the generated population.
+
+    Returns:
+        list[float]: The best individual found by the algorithm.
     """
     logging.info("Requesting initial population...")
     population = request_population(source_file, population_size, dimensions, bounds, output_dir)
 
     for generation in range(generations):
         logging.info(f"Generation {generation + 1}: Population size = {len(population)}")
-        # Add fractal-based logic
-        # ...
 
-    logging.info("Fractal genetic algorithm completed.")
+        # Evaluate fitness
+        fitness_scores = [fractal_fitness_function(ind, fractal_depth) for ind in population]
+        logging.info(f"Fitness scores: {fitness_scores}")
+
+        # Select the top individuals (elitism)
+        sorted_population = [x for _, x in sorted(zip(fitness_scores, population), reverse=True)]
+        population = sorted_population[:population_size // 2]
+
+        # Generate offspring through crossover
+        offspring = []
+        while len(offspring) < population_size // 2:
+            parent1, parent2 = random.sample(population, 2)
+            child = crossover(parent1, parent2)
+            offspring.append(child)
+
+        # Mutate offspring
+        offspring = [mutate(child, mutation_rate=0.2, bounds=bounds) for child in offspring]
+
+        # Combine parents and offspring to form the new population
+        population += offspring
+
+    # Return the best individual
+    best_individual = max(population, key=lambda ind: fractal_fitness_function(ind, fractal_depth))
+    logging.info(f"Best individual: {best_individual}")
+    return best_individual
 
 def fractal_genetic_algorithm_with_parsing(base_dir, dimensions, generations, population_size, bounds, fractal_depth=3):
     """

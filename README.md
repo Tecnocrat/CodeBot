@@ -120,20 +120,20 @@ The `generate_knowledge_base` function extracts detailed metadata from all `.py`
    - Command: `generate metadata`
    - Description: Generates JSON metadata for the codebase.
 
-2. **Explain Python Code**:
+2. **Initialize Population**:
+   - Command: `init population`
+   - Description: Initializes a genetic population by replicating and mutating a source file.
+
+3. **Explain Python Code**:
    - Command: `explain python <code_snippet>`
-   - Example:
-     ```bash
-     explain python def add(a, b): return a + b
-     ```
    - Description: Uses the AI engine to explain a Python code snippet.
 
-3. **Help**:
+4. **Help**:
    - Command: `help`
    - Description: Displays a list of available commands.
 
-4. **Exit**:
-   - Command: [exit](http://_vscodecontentref_/10)
+5. **Exit**:
+   - Command: `exit`
    - Description: Gracefully exits CodeBot.
 
 ---

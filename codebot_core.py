@@ -1,3 +1,5 @@
+import random  # Add this import statement
+import shutil  # Add this import statement
 import os
 import sys
 import logging
@@ -34,10 +36,24 @@ console = Console()
 # Initialize AI engine and logging
 def initialize_codebot():
     """
-    Initializes CodeBot by preloading the AI engine and setting up logging.
+    Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
     """
     preload_model()  # Load the AI engine
     logging.info("AI engine initialized successfully.")
+
+    # Generate metadata for knowledge_base.json
+    output_file = os.path.join(BASE_DIR, "storage", "knowledge_base.json")
+    from core.analyze_structure import generate_knowledge_base
+    generate_knowledge_base(BASE_DIR, output_file)
+    logging.info(f"Knowledge base generated and saved to {output_file}")
+
+    # Generate folder structure for folder_structure.json
+    folder_structure_file = os.path.join(BASE_DIR, "storage", "folder_structure.json")
+    from core.analyze_structure import analyze_folder_structure
+    folder_structure = analyze_folder_structure(BASE_DIR)
+    with open(folder_structure_file, "w", encoding="utf-8") as f:
+        json.dump(folder_structure, f, indent=4)
+    logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
 # Generate metadata about the codebase
 def generate_metadata(base_dir, output_file):
@@ -79,6 +95,201 @@ def generate_metadata_command():
     generate_knowledge_base(BASE_DIR, output_file)
     return f"Metadata generated and saved to {output_file}"
 
+def init_population_command():
+    """
+    Command to initialize a genetic population with codebot_core.py as the source file.
+
+    Returns:
+        str: A message indicating the result of the operation.
+    """
+    try:
+        # Display warning and require confirmation
+        console.print("[bold yellow]WARNING: Initializing a new population may lead to exponential growth of base populations.[/bold yellow]")
+        confirmation = Prompt.ask("Do you want to proceed? (yes/no)", default="no")
+        if confirmation.lower() != "yes":
+            return "Population initialization canceled."
+
+        # Set the source file to codebot_core.py
+        source_file = os.path.join(BASE_DIR, "codebot_core.py")
+
+        # Randomize parameters using fractal fitness algorithm
+        from genetic.genetic_algorithm import fractal_fitness_function
+        population_size = int(fractal_fitness_function([random.random() for _ in range(5)], depth=3) * 100) + 10
+        dimensions = int(fractal_fitness_function([random.random() for _ in range(3)], depth=2) * 10) + 5
+        bounds = (
+            float(fractal_fitness_function([random.random()], depth=1) * -50),
+            float(fractal_fitness_function([random.random()], depth=1) * 50)
+        )
+
+        # Fixed output directory
+        output_dir = os.path.join(BASE_DIR, "storage", "genetic_population")
+
+        # Generate the population
+        from genetic.genetic_population import request_population
+        request_population(source_file, population_size, dimensions, bounds, output_dir)
+
+        return (
+            f"Population of size {population_size} created in {output_dir}.\n"
+            f"Dimensions: {dimensions}, Bounds: {bounds}"
+        )
+    except Exception as e:
+        logging.error(f"Error initializing population: {e}")
+        return f"An error occurred: {e}"
+
+def evaluate_population_command():
+    """
+    Command to evaluate a genetic population or individual with pagination.
+
+    Returns:
+        str: A message indicating the result of the evaluation.
+    """
+    try:
+        # Fixed population directory
+        population_dir = os.path.join(BASE_DIR, "storage", "genetic_population")
+        populations = [p for p in os.listdir(population_dir) if os.path.isdir(os.path.join(population_dir, p))]
+
+        if not populations:
+            return "No populations available for evaluation."
+
+        # Pagination variables
+        page_size = 10
+        current_page = 0
+        total_pages = (len(populations) + page_size - 1) // page_size
+
+        while True:
+            # Display populations for the current page
+            console.print(f"[bold cyan]Available Populations (Page {current_page + 1}/{total_pages}):[/bold cyan]")
+            start_index = current_page * page_size
+            end_index = min(start_index + page_size, len(populations))
+            for idx, population in enumerate(populations[start_index:end_index], start=1):
+                console.print(f"{idx}. {population}")
+
+            # Display navigation options
+            console.print("[bold yellow]Options:[/bold yellow]")
+            console.print("1-10: Select a population")
+            console.print("'.': Next page")
+            console.print("',': Previous page")
+            console.print("'0': Cancel")
+
+            # Get user input
+            choice = Prompt.ask("Enter your choice")
+
+            if choice == "0":
+                return "Evaluation canceled."
+            elif choice == ".":
+                if current_page < total_pages - 1:
+                    current_page += 1
+                else:
+                    console.print("[bold red]You are already on the last page.[/bold red]")
+            elif choice == ",":
+                if current_page > 0:
+                    current_page -= 1
+                else:
+                    console.print("[bold red]You are already on the first page.[/bold red]")
+            elif choice.isdigit() and 1 <= int(choice) <= (end_index - start_index):
+                selected_population = populations[start_index + int(choice) - 1]
+                break
+            else:
+                console.print("[bold red]Invalid choice. Please try again.[/bold red]")
+
+        # Evaluate the selected population
+        from genetic.genetic_population import evaluate_population
+        from core.ai_engine import analyze_execution_logs
+        fitness_scores = evaluate_population(
+            os.path.join(population_dir, selected_population),
+            analyze_execution_logs,
+            evaluation_mode="single"
+        )
+
+        # Log and return the results
+        results = "\n".join([f"{ind}: {score}" for ind, score in fitness_scores.items()])
+        logging.info(f"Population evaluation completed:\n{results}")
+        return f"Population evaluation completed for {selected_population}:\n{results}"
+    except Exception as e:
+        logging.error(f"Error evaluating population: {e}")
+        return f"An error occurred: {e}"
+
+def evaluate_results_command():
+    """
+    Command to review the content of the evaluation_results folder.
+
+    Returns:
+        str: A message listing the evaluation results.
+    """
+    try:
+        evaluation_dir = os.path.join(BASE_DIR, "storage", "genetic_population", "evaluation_results")
+        if not os.path.exists(evaluation_dir):
+            return "No evaluation results found."
+
+        results = []
+        for file in os.listdir(evaluation_dir):
+            results.append(file)
+
+        if not results:
+            return "The evaluation_results folder is empty."
+
+        return "Evaluation Results:\n" + "\n".join(results)
+    except Exception as e:
+        logging.error(f"Error reviewing evaluation results: {e}")
+        return f"An error occurred: {e}"
+
+def create_subpopulation_command():
+    """
+    Command to create a new subpopulation from a chosen individual.
+
+    Returns:
+        str: A message indicating the result of the operation.
+    """
+    try:
+        # Prompt user for the individual to use as the base
+        evaluation_dir = os.path.join(BASE_DIR, "storage", "genetic_population", "evaluation_results")
+        if not os.path.exists(evaluation_dir):
+            return "No evaluation results found. Please evaluate a population first."
+
+        console.print("[bold cyan]Available Individuals:[/bold cyan]")
+        individuals = [file for file in os.listdir(evaluation_dir) if file.endswith(".py")]
+        if not individuals:
+            return "No individuals available in evaluation results."
+
+        for idx, individual in enumerate(individuals, start=1):
+            console.print(f"{idx}. {individual}")
+
+        choice = Prompt.ask("Select an individual by number", default="1")
+        try:
+            chosen_individual = individuals[int(choice) - 1]
+        except (IndexError, ValueError):
+            return "Invalid selection."
+
+        # Create a new subpopulation folder
+        subpopulation_dir = os.path.join(BASE_DIR, "storage", "genetic_population", f"subpopulation_{chosen_individual}")
+        os.makedirs(subpopulation_dir, exist_ok=True)
+
+        # Copy the chosen individual into the subpopulation folder
+        source_path = os.path.join(evaluation_dir, chosen_individual)
+        for i in range(5):  # Create 5 mutated copies
+            target_path = os.path.join(subpopulation_dir, f"{chosen_individual}_variant_{i}.py")
+            shutil.copy(source_path, target_path)
+
+            # Apply mutations to the copied file
+            from genetic.genetic_population import mutate_file
+            mutate_file(target_path, dimensions=5, bounds=(-10, 10))
+
+        return f"Subpopulation created in {subpopulation_dir}."
+    except Exception as e:
+        logging.error(f"Error creating subpopulation: {e}")
+        return f"An error occurred: {e}"
+
+def display_main_menu():
+    """
+    Displays the main menu options.
+    """
+    console.print("[bold cyan]Main Menu:[/bold cyan]")
+    console.print("1. Init Population")
+    console.print("2. Evaluate Population")
+    console.print("3. Evaluate Results")
+    console.print("4. Create Subpopulation")
+    console.print("0. Exit")
+
 # ------------------
 # EXCHANGE LAYER
 # ------------------
@@ -90,28 +301,23 @@ def exchange_layer(command):
     logging.debug(f"Received command: {command}")
     command = sanitize_input(command, context="general")
 
-    if command == "exit":
+    if command == "1":  # Init population
+        logging.info("Initializing population...")
+        return init_population_command()
+    elif command == "2":  # Evaluate population
+        logging.info("Evaluating population...")
+        return evaluate_population_command()
+    elif command == "3":  # Evaluate results
+        logging.info("Reviewing evaluation results...")
+        return evaluate_results_command()
+    elif command == "4":  # Create subpopulation
+        logging.info("Creating subpopulation...")
+        return create_subpopulation_command()
+    elif command == "0":  # Exit
         logging.info("Exiting CodeBot...")
         return "Exiting CodeBot..."
-    elif command == "generate metadata":
-        logging.info("Generating metadata...")
-        return generate_metadata_command()
-    elif command == "help":
-        return (
-            "Available commands:\n"
-            "- generate metadata: Generate JSON metadata for the codebase.\n"
-            "- explain python <code_snippet>: Explain a Python code snippet.\n"
-            "- exit: Exit CodeBot."
-        )
-    elif command.startswith("explain python"):
-        code_snippet = command[len("explain python "):].strip()
-        if not code_snippet:
-            return "Please provide a Python code snippet to explain."
-        logging.info("Explaining Python code...")
-        return explain_python_code(code_snippet)
     else:
-        logging.warning(f"Unknown command: {command}")
-        return f"Unknown command: {command}"
+        return "Invalid command. Please enter a valid option."
 
 # ------------------
 # MAIN EXECUTION
@@ -122,9 +328,9 @@ if __name__ == "__main__":
     console.print("[bold green]CodeBot Core is running![/bold green]")
     
     while True:
-        console.print("[bold cyan]CodeBot Command Panel[/bold cyan]")
-        command = Prompt.ask("Enter a command")
+        display_main_menu()  # Show the main menu
+        command = Prompt.ask("Enter a command (number)", default="0")
         response = exchange_layer(command)
         console.print(Panel(response, title="Response"))
-        if command == "exit":
+        if command == "0":  # Exit
             break

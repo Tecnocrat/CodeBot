@@ -2,6 +2,8 @@
     "codebot_core.py": {
         "description": "Module located at codebot_core.py",
         "imports": [
+            "random",
+            "shutil",
             "os",
             "sys",
             "logging",
@@ -39,6 +41,26 @@
                 "parameters": []
             },
             {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "evaluate_population_command",
+                "parameters": []
+            },
+            {
+                "name": "evaluate_results_command",
+                "parameters": []
+            },
+            {
+                "name": "create_subpopulation_command",
+                "parameters": []
+            },
+            {
+                "name": "display_main_menu",
+                "parameters": []
+            },
+            {
                 "name": "exchange_layer",
                 "parameters": [
                     "command"
@@ -51,9 +73,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 3928,
-            "average_indentation": 3.5728155339805827,
-            "loop_count": 1
+            "character_length": 13353,
+            "average_indentation": 6.541666666666667,
+            "loop_count": 17
         }
     },
     "config.py": {
@@ -158,13 +180,19 @@
                     "parsed_structure",
                     "output_file"
                 ]
+            },
+            {
+                "name": "analyze_execution_logs",
+                "parameters": [
+                    "log_content"
+                ]
             }
         ],
         "classes": [],
         "metadata": {
-            "character_length": 3338,
-            "average_indentation": 3.9518072289156625,
-            "loop_count": 7
+            "character_length": 3898,
+            "average_indentation": 4.122448979591836,
+            "loop_count": 8
         }
     },
     "core\\analyze_structure.py": {
@@ -248,9 +276,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 10504,
-            "average_indentation": 7.7012448132780085,
-            "loop_count": 21
+            "character_length": 10597,
+            "average_indentation": 7.672131147540983,
+            "loop_count": 20
         }
     },
     "core\\self_audit.py": {
@@ -451,9 +479,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 9097,
-            "average_indentation": 5.526881720430108,
-            "loop_count": 23
+            "character_length": 10669,
+            "average_indentation": 5.802816901408451,
+            "loop_count": 30
         }
     },
     "genetic\\genetic_iteration.py": {
@@ -668,6 +696,8 @@
                 "parameters": [
                     "source_file",
                     "population_size",
+                    "dimensions",
+                    "bounds",
                     "output_dir"
                 ]
             },
@@ -699,6 +729,14 @@
                 ]
             },
             {
+                "name": "mutate_file",
+                "parameters": [
+                    "file_path",
+                    "dimensions",
+                    "bounds"
+                ]
+            },
+            {
                 "name": "create_virtual_environment",
                 "parameters": [
                     "env_dir"
@@ -719,13 +757,30 @@
                     "initial_population_size",
                     "output_dir"
                 ]
+            },
+            {
+                "name": "evaluate_population",
+                "parameters": [
+                    "population_dir",
+                    "ai_engine",
+                    "evaluation_mode",
+                    "target_population"
+                ]
+            },
+            {
+                "name": "_evaluate_individual",
+                "parameters": [
+                    "individual_path",
+                    "evaluation_subfolder",
+                    "ai_engine"
+                ]
             }
         ],
         "classes": [],
         "metadata": {
-            "character_length": 9581,
-            "average_indentation": 6.100456621004566,
-            "loop_count": 17
+            "character_length": 14312,
+            "average_indentation": 6.336633663366337,
+            "loop_count": 30
         }
     },
     "genetic\\genetic_structure.py": {
@@ -803,8 +858,5402 @@
             "loop_count": 0
         }
     },
-    "storage\\knowledge_base\\__init__.py": {
-        "description": "Module located at storage\\knowledge_base\\__init__.py",
+    "storage\\genetic_population\\individual_0.py": {
+        "description": "Module located at storage\\genetic_population\\individual_0.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6906,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_1.py": {
+        "description": "Module located at storage\\genetic_population\\individual_1.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7221,
+            "average_indentation": 4.182857142857143,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_10.py": {
+        "description": "Module located at storage\\genetic_population\\individual_10.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6978,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_11.py": {
+        "description": "Module located at storage\\genetic_population\\individual_11.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6979,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_12.py": {
+        "description": "Module located at storage\\genetic_population\\individual_12.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7067,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_13.py": {
+        "description": "Module located at storage\\genetic_population\\individual_13.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6977,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_14.py": {
+        "description": "Module located at storage\\genetic_population\\individual_14.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7023,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_15.py": {
+        "description": "Module located at storage\\genetic_population\\individual_15.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6788,
+            "average_indentation": 4.463414634146342,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_16.py": {
+        "description": "Module located at storage\\genetic_population\\individual_16.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6821,
+            "average_indentation": 4.4363636363636365,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_17.py": {
+        "description": "Module located at storage\\genetic_population\\individual_17.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6944,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_18.py": {
+        "description": "Module located at storage\\genetic_population\\individual_18.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6945,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_19.py": {
+        "description": "Module located at storage\\genetic_population\\individual_19.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7021,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_2.py": {
+        "description": "Module located at storage\\genetic_population\\individual_2.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7065,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_20.py": {
+        "description": "Module located at storage\\genetic_population\\individual_20.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6991,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_21.py": {
+        "description": "Module located at storage\\genetic_population\\individual_21.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6946,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_22.py": {
+        "description": "Module located at storage\\genetic_population\\individual_22.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7250,
+            "average_indentation": 4.159090909090909,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_23.py": {
+        "description": "Module located at storage\\genetic_population\\individual_23.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6895,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_24.py": {
+        "description": "Module located at storage\\genetic_population\\individual_24.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7023,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_25.py": {
+        "description": "Module located at storage\\genetic_population\\individual_25.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6978,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_26.py": {
+        "description": "Module located at storage\\genetic_population\\individual_26.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6977,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_27.py": {
+        "description": "Module located at storage\\genetic_population\\individual_27.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6985,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_28.py": {
+        "description": "Module located at storage\\genetic_population\\individual_28.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6665,
+            "average_indentation": 4.546583850931677,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_29.py": {
+        "description": "Module located at storage\\genetic_population\\individual_29.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6984,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_3.py": {
+        "description": "Module located at storage\\genetic_population\\individual_3.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7139,
+            "average_indentation": 4.23121387283237,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_30.py": {
+        "description": "Module located at storage\\genetic_population\\individual_30.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6943,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_31.py": {
+        "description": "Module located at storage\\genetic_population\\individual_31.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6827,
+            "average_indentation": 4.4363636363636365,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_32.py": {
+        "description": "Module located at storage\\genetic_population\\individual_32.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6705,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_33.py": {
+        "description": "Module located at storage\\genetic_population\\individual_33.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6902,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_34.py": {
+        "description": "Module located at storage\\genetic_population\\individual_34.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6863,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_35.py": {
+        "description": "Module located at storage\\genetic_population\\individual_35.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6829,
+            "average_indentation": 4.4363636363636365,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_36.py": {
+        "description": "Module located at storage\\genetic_population\\individual_36.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7058,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_37.py": {
+        "description": "Module located at storage\\genetic_population\\individual_37.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6860,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_38.py": {
+        "description": "Module located at storage\\genetic_population\\individual_38.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7102,
+            "average_indentation": 4.255813953488372,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_39.py": {
+        "description": "Module located at storage\\genetic_population\\individual_39.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6862,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_4.py": {
+        "description": "Module located at storage\\genetic_population\\individual_4.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7019,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_40.py": {
+        "description": "Module located at storage\\genetic_population\\individual_40.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7140,
+            "average_indentation": 4.23121387283237,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_41.py": {
+        "description": "Module located at storage\\genetic_population\\individual_41.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6707,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_42.py": {
+        "description": "Module located at storage\\genetic_population\\individual_42.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6710,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_43.py": {
+        "description": "Module located at storage\\genetic_population\\individual_43.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7064,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_44.py": {
+        "description": "Module located at storage\\genetic_population\\individual_44.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7324,
+            "average_indentation": 4.112359550561798,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_45.py": {
+        "description": "Module located at storage\\genetic_population\\individual_45.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7133,
+            "average_indentation": 4.23121387283237,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_46.py": {
+        "description": "Module located at storage\\genetic_population\\individual_46.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6897,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_47.py": {
+        "description": "Module located at storage\\genetic_population\\individual_47.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7102,
+            "average_indentation": 4.255813953488372,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_48.py": {
+        "description": "Module located at storage\\genetic_population\\individual_48.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6784,
+            "average_indentation": 4.463414634146342,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_49.py": {
+        "description": "Module located at storage\\genetic_population\\individual_49.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6707,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_5.py": {
+        "description": "Module located at storage\\genetic_population\\individual_5.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6905,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_50.py": {
+        "description": "Module located at storage\\genetic_population\\individual_50.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6904,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_51.py": {
+        "description": "Module located at storage\\genetic_population\\individual_51.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6863,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_52.py": {
+        "description": "Module located at storage\\genetic_population\\individual_52.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6936,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_53.py": {
+        "description": "Module located at storage\\genetic_population\\individual_53.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6906,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_54.py": {
+        "description": "Module located at storage\\genetic_population\\individual_54.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6790,
+            "average_indentation": 4.463414634146342,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_55.py": {
+        "description": "Module located at storage\\genetic_population\\individual_55.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6701,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_56.py": {
+        "description": "Module located at storage\\genetic_population\\individual_56.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6708,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_57.py": {
+        "description": "Module located at storage\\genetic_population\\individual_57.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7053,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_58.py": {
+        "description": "Module located at storage\\genetic_population\\individual_58.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6747,
+            "average_indentation": 4.49079754601227,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_59.py": {
+        "description": "Module located at storage\\genetic_population\\individual_59.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6625,
+            "average_indentation": 4.575,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_6.py": {
+        "description": "Module located at storage\\genetic_population\\individual_6.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6942,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_60.py": {
+        "description": "Module located at storage\\genetic_population\\individual_60.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7057,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_61.py": {
+        "description": "Module located at storage\\genetic_population\\individual_61.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6983,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_62.py": {
+        "description": "Module located at storage\\genetic_population\\individual_62.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6859,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_63.py": {
+        "description": "Module located at storage\\genetic_population\\individual_63.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7018,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_64.py": {
+        "description": "Module located at storage\\genetic_population\\individual_64.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7101,
+            "average_indentation": 4.255813953488372,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_65.py": {
+        "description": "Module located at storage\\genetic_population\\individual_65.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6984,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_66.py": {
+        "description": "Module located at storage\\genetic_population\\individual_66.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6709,
+            "average_indentation": 4.518518518518518,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_67.py": {
+        "description": "Module located at storage\\genetic_population\\individual_67.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7029,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_68.py": {
+        "description": "Module located at storage\\genetic_population\\individual_68.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7023,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_69.py": {
+        "description": "Module located at storage\\genetic_population\\individual_69.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6977,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_7.py": {
+        "description": "Module located at storage\\genetic_population\\individual_7.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7057,
+            "average_indentation": 4.280701754385965,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_70.py": {
+        "description": "Module located at storage\\genetic_population\\individual_70.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6905,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_71.py": {
+        "description": "Module located at storage\\genetic_population\\individual_71.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7097,
+            "average_indentation": 4.255813953488372,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_72.py": {
+        "description": "Module located at storage\\genetic_population\\individual_72.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6863,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_73.py": {
+        "description": "Module located at storage\\genetic_population\\individual_73.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7131,
+            "average_indentation": 4.23121387283237,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_74.py": {
+        "description": "Module located at storage\\genetic_population\\individual_74.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6785,
+            "average_indentation": 4.463414634146342,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_75.py": {
+        "description": "Module located at storage\\genetic_population\\individual_75.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6860,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_76.py": {
+        "description": "Module located at storage\\genetic_population\\individual_76.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7023,
+            "average_indentation": 4.305882352941176,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_77.py": {
+        "description": "Module located at storage\\genetic_population\\individual_77.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6862,
+            "average_indentation": 4.409638554216867,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_78.py": {
+        "description": "Module located at storage\\genetic_population\\individual_78.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6906,
+            "average_indentation": 4.383233532934132,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_79.py": {
+        "description": "Module located at storage\\genetic_population\\individual_79.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7220,
+            "average_indentation": 4.182857142857143,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_8.py": {
+        "description": "Module located at storage\\genetic_population\\individual_8.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6942,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_80.py": {
+        "description": "Module located at storage\\genetic_population\\individual_80.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6942,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_81.py": {
+        "description": "Module located at storage\\genetic_population\\individual_81.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6747,
+            "average_indentation": 4.49079754601227,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_82.py": {
+        "description": "Module located at storage\\genetic_population\\individual_82.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7255,
+            "average_indentation": 4.159090909090909,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_83.py": {
+        "description": "Module located at storage\\genetic_population\\individual_83.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6785,
+            "average_indentation": 4.463414634146342,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_84.py": {
+        "description": "Module located at storage\\genetic_population\\individual_84.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6826,
+            "average_indentation": 4.4363636363636365,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_85.py": {
+        "description": "Module located at storage\\genetic_population\\individual_85.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6948,
+            "average_indentation": 4.357142857142857,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_86.py": {
+        "description": "Module located at storage\\genetic_population\\individual_86.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 7101,
+            "average_indentation": 4.255813953488372,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\individual_9.py": {
+        "description": "Module located at storage\\genetic_population\\individual_9.py",
+        "imports": [
+            "random",
+            "os",
+            "sys",
+            "logging",
+            "json",
+            "rich.console",
+            "rich.panel",
+            "rich.prompt",
+            "core.self_improvement",
+            "core.ai_engine",
+            "genetic.genetic_iteration",
+            "genetic.genetic_optimizer",
+            "genetic.genetic_population",
+            "core.analyze_structure"
+        ],
+        "functions": [
+            {
+                "name": "initialize_codebot",
+                "parameters": []
+            },
+            {
+                "name": "generate_metadata",
+                "parameters": [
+                    "base_dir",
+                    "output_file"
+                ]
+            },
+            {
+                "name": "handle_errors",
+                "parameters": [
+                    "func"
+                ]
+            },
+            {
+                "name": "generate_metadata_command",
+                "parameters": []
+            },
+            {
+                "name": "init_population_command",
+                "parameters": []
+            },
+            {
+                "name": "exchange_layer",
+                "parameters": [
+                    "command"
+                ]
+            },
+            {
+                "name": "wrapper",
+                "parameters": []
+            }
+        ],
+        "classes": [],
+        "metadata": {
+            "character_length": 6983,
+            "average_indentation": 4.331360946745562,
+            "loop_count": 4
+        }
+    },
+    "storage\\genetic_population\\__init__.py": {
+        "description": "Module located at storage\\genetic_population\\__init__.py",
         "imports": [],
         "functions": [],
         "classes": [],

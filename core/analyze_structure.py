@@ -16,17 +16,23 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 def analyze_folder_structure(base_dir):
     """
-    Recursively analyzes the folder structure and generates metadata.
+    Analyzes the folder structure of the given directory.
+
+    Args:
+        base_dir (str): The root directory to analyze.
+
+    Returns:
+        dict: A dictionary representing the folder structure.
     """
-    structure = {}
+    folder_structure = {}
     for root, dirs, files in os.walk(base_dir):
-        # Exclude .git and other irrelevant folders
-        dirs[:] = [d for d in dirs if d not in [".git", "__pycache__"]]
-        structure[root] = {
+        relative_root = os.path.relpath(root, base_dir)
+        folder_structure[relative_root] = {
             "files": files,
             "subfolders": dirs
         }
-    return structure
+    return folder_structure
+
 def save_structure_to_json(base_dir, output_dir):
     """
     Saves the folder structure to a JSON file.

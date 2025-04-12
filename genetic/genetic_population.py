@@ -27,42 +27,20 @@ STORAGE_DIR = os.path.join(CODEBOT_DIR, "storage")
 
 def request_population(source_file, population_size, dimensions, bounds, output_dir):
     """
-    Generates a complex population based on the source file and various parameters.
+    Requests a population by generating individuals based on a source file.
 
     Args:
-        source_file (str): Path to the source file to replicate and mutate.
+        source_file (str): Path to the source file to replicate.
         population_size (int): Number of individuals in the population.
-        dimensions (int): Number of dimensions for each individual.
-        bounds (tuple): Bounds for each dimension (min, max).
-        output_dir (str): Directory to store the generated population.
+        dimensions (int): Number of dimensions for the population's parameter space.
+        bounds (tuple[float, float]): Bounds for each dimension.
+        output_dir (str): Directory to save the generated population.
 
     Returns:
-        list: A list of paths to the generated individuals.
+        list[str]: List of file paths for the generated population.
     """
-    os.makedirs(output_dir, exist_ok=True)
-    population = []
-
-    for i in range(population_size):
-        individual_path = os.path.join(output_dir, f"individual_{i}.py")
-        shutil.copy(source_file, individual_path)
-
-        # Apply mutations based on dimensions and bounds
-        with open(individual_path, 'a') as f:
-            for dim in range(dimensions):
-                mutation = random.uniform(bounds[0], bounds[1])
-                f.write(f"# Mutation {dim}: {mutation}\n")
-
-        # Auto-format the individual for consistency
-        with open(individual_path, 'r') as f:
-            code = f.read()
-        formatted_code = autopep8.fix_code(code)
-        with open(individual_path, 'w') as f:
-            f.write(formatted_code)
-
-        population.append(individual_path)
-
-    logging.info(f"Generated population of size {population_size} in {output_dir}")
-    return population
+    logging.info("Requesting population...")
+    return generate_population(source_file, population_size, dimensions, bounds, output_dir)
 
 def log_to_os(namespace, level, message):
     """
@@ -111,37 +89,30 @@ def ingest_knowledge(file_path):
     shutil.copy(file_path, target_path)
     print(f"Ingested knowledge from {file_path} to {target_path}")
 
-def generate_population(source_file, population_size, output_dir):
+def generate_population(source_file, population_size, dimensions, bounds, output_dir):
     """
-    Generates the initial population by copying the source file.
+    Generates a population of individuals by copying a source file and applying random mutations.
 
     Args:
-        source_file (str): Path to the source file.
+        source_file (str): Path to the source file to replicate.
         population_size (int): Number of individuals in the population.
-        output_dir (str): Directory to store the generated population.
+        dimensions (int): Number of dimensions for the population's parameter space.
+        bounds (tuple[float, float]): Bounds for each dimension.
+        output_dir (str): Directory to save the generated population.
 
     Returns:
-        list: A list of paths to the generated individuals.
+        list[str]: List of file paths for the generated population.
     """
-    os.makedirs(output_dir, exist_ok=True)
-    population = []
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
+    population = []
     for i in range(population_size):
         individual_path = os.path.join(output_dir, f"individual_{i}.py")
         shutil.copy(source_file, individual_path)
 
-        # Apply mutations
-        with open(individual_path, 'a') as f:
-            mutation = random.uniform(-1, 1)  # Example mutation
-            f.write(f"# Mutation: {mutation}\n")
-
-        # Auto-format the individual for consistency
-        with open(individual_path, 'r') as f:
-            code = f.read()
-        formatted_code = autopep8.fix_code(code)
-        with open(individual_path, 'w') as f:
-            f.write(formatted_code)
-
+        # Apply random mutations to the individual
+        mutate_file(individual_path, dimensions, bounds)
         population.append(individual_path)
 
     logging.info(f"Generated population of size {population_size} in {output_dir}")
@@ -201,6 +172,35 @@ def mutate(file_path):
         file.write(mutated_code)
     logging.info(f"Mutated file: {file_path}")
 
+def mutate_file(file_path, dimensions, bounds):
+    """
+    Applies random mutations to a Python file to create diversity in the population.
+
+    Args:
+        file_path (str): Path to the file to mutate.
+        dimensions (int): Number of dimensions for mutation parameters.
+        bounds (tuple[float, float]): Bounds for mutation values.
+    """
+    from genetic.genetic_algorithm import fractal_fitness_function
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    # Apply random mutations to the file content
+    mutated_lines = []
+    for line in lines:
+        if random.random() < 0.1:  # 10% chance to mutate a line
+            # Generate a random mutation value using the fractal fitness function
+            mutation_value = fractal_fitness_function([random.random() for _ in range(dimensions)], depth=3)
+            mutation_value = max(bounds[0], min(bounds[1], mutation_value))  # Clamp to bounds
+            mutated_lines.append(f"# Mutation applied: {mutation_value}\n")
+        mutated_lines.append(line)
+
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.writelines(mutated_lines)
+
+    logging.info(f"Mutated file: {file_path}")
+
 def create_virtual_environment(env_dir):
     """
     Creates a virtual environment in the specified directory.
@@ -250,3 +250,100 @@ def run_genetic_algorithm(source_file, generations, initial_population_size, out
             execute_in_virtual_environment(child, env_dir)
         population = new_population
     logging.info("Genetic algorithm completed.")
+
+def evaluate_population(population_dir, ai_engine, evaluation_mode="all", target_population=None):
+    """
+    Evaluates populations or individual files based on the selected mode.
+
+    Args:
+        population_dir (str): Directory containing the population files.
+        ai_engine (callable): AI engine function to analyze execution logs.
+        evaluation_mode (str): Mode of evaluation ("all", "single", "compare").
+        target_population (str or list): Target population(s) or file(s) for evaluation.
+
+    Returns:
+        dict: A dictionary mapping each individual to its fitness score.
+    """
+    fitness_scores = {}
+    evaluation_subfolder = os.path.join(population_dir, "evaluation_results")
+    os.makedirs(evaluation_subfolder, exist_ok=True)
+
+    # Determine what to evaluate
+    if evaluation_mode == "all":
+        populations = [os.path.join(population_dir, p) for p in os.listdir(population_dir) if os.path.isdir(os.path.join(population_dir, p))]
+    elif evaluation_mode == "single" and target_population:
+        target_path = os.path.join(population_dir, target_population)
+        if os.path.isfile(target_path):
+            populations = [target_path]  # Single file
+        elif os.path.isdir(target_path):
+            populations = [target_path]  # Single directory
+        else:
+            raise ValueError(f"Target population '{target_population}' does not exist.")
+    elif evaluation_mode == "compare" and target_population:
+        populations = [os.path.join(population_dir, p) for p in target_population]
+    else:
+        raise ValueError("Invalid evaluation mode or target population.")
+
+    for population in populations:
+        if os.path.isfile(population):  # Evaluate a single file
+            fitness_scores.update(_evaluate_individual(population, evaluation_subfolder, ai_engine))
+        elif os.path.isdir(population):  # Evaluate all individuals in a directory
+            for individual in os.listdir(population):
+                individual_path = os.path.join(population, individual)
+                if individual.endswith(".py"):
+                    fitness_scores.update(_evaluate_individual(individual_path, evaluation_subfolder, ai_engine))
+
+    return fitness_scores
+
+
+def _evaluate_individual(individual_path, evaluation_subfolder, ai_engine):
+    """
+    Evaluates a single individual by executing it and analyzing the logs.
+
+    Args:
+        individual_path (str): Path to the individual file.
+        evaluation_subfolder (str): Path to the evaluation results folder.
+        ai_engine (callable): AI engine function to analyze execution logs.
+
+    Returns:
+        dict: A dictionary mapping the individual to its fitness score.
+    """
+    fitness_scores = {}
+    individual_name = os.path.basename(individual_path)
+
+    # Create a log file for the individual's execution
+    log_file = os.path.join(evaluation_subfolder, f"{individual_name}_exec.log")
+    with open(log_file, "w") as log:
+        try:
+            # Execute the individual in a subprocess
+            subprocess.run(
+                ["python", individual_path],
+                stdout=log,
+                stderr=log,
+                check=True,
+                timeout=10  # Timeout to prevent infinite loops
+            )
+            logging.info(f"Executed {individual_name} successfully.")
+        except subprocess.TimeoutExpired:
+            logging.warning(f"Execution of {individual_name} timed out.")
+            log.write("Execution timed out.\n")
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Execution of {individual_name} failed: {e}")
+            log.write(f"Execution failed: {e}\n")
+
+    # Analyze the log file using the AI engine
+    with open(log_file, "r") as log:
+        log_content = log.read()
+        fitness_score = ai_engine(log_content)
+        fitness_scores[individual_name] = fitness_score
+        logging.info(f"Fitness score for {individual_name}: {fitness_score}")
+
+    # Generate README.md for AI ingestion
+    readme_path = os.path.join(evaluation_subfolder, f"{individual_name}_README.md")
+    with open(readme_path, "w") as readme:
+        readme.write(f"# Evaluation Report for {individual_name}\n\n")
+        readme.write(f"## Fitness Score: {fitness_score}\n\n")
+        readme.write("### Execution Log:\n")
+        readme.write(log_content)
+
+    return fitness_scores
