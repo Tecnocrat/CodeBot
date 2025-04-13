@@ -1,66 +1,37 @@
 // Ensure DOM is fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1; // Track the current page
+    let isDarkTheme = false; // Track the current theme
 
     const responseOutput = document.getElementById("response-output");
+    const logOutput = document.getElementById("log-output");
     const buttonGroup = document.querySelector(".button-group");
+    const themeToggle = document.getElementById("theme-toggle");
 
-    // Function to fetch and display individuals
-    function fetchIndividuals(page = 1) {
+    // Function to send commands to the backend
+    function sendCommand(command, args = {}) {
         fetch("http://127.0.0.1:5000/command", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ command: "evaluate population", page })
+            body: JSON.stringify({ command, args })
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                // Display the list of genetic individuals
-                const individuals = data.data;
-                let listHtml = `<h3>${data.response}</h3><ul>`;
-                individuals.forEach(individual => {
-                    listHtml += `<li>${individual.name}</li>`;
-                });
-                listHtml += "</ul>";
-
-                // Add pagination buttons
-                listHtml += `
-                    <div class="pagination-buttons">
-                        <button id="home-button" ${currentPage === 1 ? "disabled" : ""}>Home</button>
-                        <button id="prev-button" ${currentPage === 1 ? "disabled" : ""}>Previous</button>
-                        <button id="next-button" ${currentPage === data.total_pages ? "disabled" : ""}>Next</button>
-                    </div>
-                `;
-
-                responseOutput.innerHTML = listHtml;
-
-                // Add event listeners for pagination buttons
-                document.getElementById("home-button").addEventListener("click", () => {
-                    currentPage = 1;
-                    fetchIndividuals(currentPage);
-                });
-                document.getElementById("prev-button").addEventListener("click", () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        fetchIndividuals(currentPage);
-                    }
-                });
-                document.getElementById("next-button").addEventListener("click", () => {
-                    if (currentPage < data.total_pages) {
-                        currentPage++;
-                        fetchIndividuals(currentPage);
-                    }
-                });
+                responseOutput.textContent = data.response;
+                if (data.data) {
+                    logOutput.innerHTML += `<pre>${JSON.stringify(data.data, null, 2)}</pre>`;
+                }
             })
             .catch(error => {
                 responseOutput.textContent = `Error: ${error.message}`;
             });
+    }
+
+    // Function to fetch and display individuals
+    function fetchIndividuals(page = 1) {
+        sendCommand("evaluate population", { page });
     }
 
     // Add event listener for the "Evaluate Population" button
@@ -75,76 +46,23 @@ document.addEventListener('DOMContentLoaded', () => {
         sendCommandButton.addEventListener("click", () => {
             const commandInput = document.getElementById("command-input");
             const command = commandInput ? commandInput.value.trim().toLowerCase() : "";
-            const responseOutput = document.getElementById("response-output");
 
             if (!command) {
                 responseOutput.textContent = "Please enter a command.";
                 return;
             }
 
-            // Send the command to the Flask server
-            fetch("http://127.0.0.1:5000/command", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ command })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    responseOutput.textContent = data.response;
-                })
-                .catch(error => {
-                    responseOutput.textContent = `Error: ${error.message}`;
-                });
+            sendCommand(command);
         });
     } else {
         console.error('Send command button not found in the DOM.');
     }
 
-    // Handle command button clicks
+    // Add event listeners for command buttons
     document.querySelectorAll(".command-button").forEach(button => {
         button.addEventListener("click", () => {
             const command = button.getAttribute("data-command");
-            const responseOutput = document.getElementById("response-output");
-
-            // Send the command to the Flask server
-            fetch("http://127.0.0.1:5000/command", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ command })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (command === "evaluate population" && data.data) {
-                        // Display the list of genetic individuals
-                        const individuals = data.data;
-                        let listHtml = "<ul>";
-                        individuals.forEach(individual => {
-                            listHtml += `<li>${individual.name} (Fitness: ${individual.fitness})</li>`;
-                        });
-                        listHtml += "</ul>";
-                        responseOutput.innerHTML = listHtml;
-                    } else {
-                        // Display the response for other commands
-                        responseOutput.textContent = data.response;
-                    }
-                })
-                .catch(error => {
-                    responseOutput.textContent = `Error: ${error.message}`;
-                });
+            sendCommand(command);
         });
     });
 
@@ -165,4 +83,23 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Exit button not found in the DOM.');
     }
+
+    // Add event listener for the theme toggle
+    themeToggle.addEventListener("click", () => {
+        isDarkTheme = !isDarkTheme;
+        document.body.classList.toggle("dark-theme", isDarkTheme);
+
+        // Update the theme toggle appearance
+        if (isDarkTheme) {
+            themeToggle.style.backgroundColor = "#ffffff"; // Light color for dark mode
+            themeToggle.innerHTML = "&#x1F319;"; // Moon symbol
+        } else {
+            themeToggle.style.backgroundColor = "#121212"; // Dark color for light mode
+            themeToggle.innerHTML = "&#x2600;"; // Sun symbol
+        }
+    });
+
+    // Initialize the theme toggle appearance
+    themeToggle.style.backgroundColor = "#121212"; // Default to dark color
+    themeToggle.innerHTML = "&#x2600;"; // Default to sun symbol
 });

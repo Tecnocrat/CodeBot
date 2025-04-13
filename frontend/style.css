@@ -3,6 +3,12 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .container {
@@ -13,11 +19,21 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .container {
+    background: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 h1 {
     text-align: center;
     color: #333333;
+}
+
+body.dark-theme h1 {
+    color: #ffffff;
 }
 
 .command-section {
@@ -122,4 +138,65 @@ pre {
     background-color: #cccccc;
     cursor: not-allowed;
     box-shadow: none;
+}
+
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #121212; /* Default dark color */
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .theme-toggle {
+    background-color: #ffffff; /* Light color for dark mode */
+    color: #121212;
+}
+
+.clickable-individual {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.clickable-individual:hover {
+    color: #0056b3;
+}
+
+.log-section {
+    margin-top: 20px;
+    background: #1e1e1e;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.log-output pre {
+    margin: 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }

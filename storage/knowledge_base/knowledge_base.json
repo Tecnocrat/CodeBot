@@ -56,20 +56,6 @@
             "loop_count": 1
         }
     },
-    "test.py": {
-        "description": "Module located at test.py",
-        "imports": [
-            "warnings",
-            "core.ai_engine"
-        ],
-        "functions": [],
-        "classes": [],
-        "metadata": {
-            "character_length": 302,
-            "average_indentation": 0.0,
-            "loop_count": 0
-        }
-    },
     "ui_server.py": {
         "description": "Module located at ui_server.py",
         "imports": [

@@ -8,17 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <button id="exit-button" class="exit-button">X</button>
+        <button id="exit-button" class="exit-button" title="Exit the application">X</button>
         <h1>CodeBot Command Interface</h1>
         <div class="button-group">
-            <button class="command-button" data-command="init population">Init Population</button>
-            <button class="command-button" data-command="evaluate population">Evaluate Population</button>
-            <button class="command-button" data-command="evaluate results">Evaluate Results</button>
-            <button class="command-button" data-command="create subpopulation">Create Subpopulation</button>
+            <button class="command-button" data-command="init population" title="Initialize a genetic population">Init Population</button>
+            <button class="command-button" data-command="list population" title="List the genetic population">List Population</button>
+            <button class="command-button" data-command="evaluate population" title="Evaluate the genetic population">Evaluate Population</button>
+            <button class="command-button" data-command="deduplicate population" title="Deduplicate the genetic population">Deduplicate Population</button>
         </div>
         <div class="response-section">
             <h2>Response:</h2>
             <div id="response-output">No response yet.</div>
+        </div>
+        <div class="log-section">
+            <h2>Logs:</h2>
+            <div id="log-output" class="log-output"></div>
         </div>
     </div>
     <script src="script.js"></script>

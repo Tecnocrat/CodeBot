@@ -6,12 +6,12 @@
             "README.md",
             "requirements.txt",
             "runtime_exec.log",
-            "test.py",
             "ui_server.py",
             "__init__.py"
         ],
         "subfolders": [
             ".vs",
+            ".vscode",
             "core",
             "frontend",
             "genetic",
@@ -77,6 +77,12 @@
             ".wsuo",
             "DocumentLayout.backup.json",
             "DocumentLayout.json"
+        ],
+        "subfolders": []
+    },
+    ".vscode": {
+        "files": [
+            "launch.json"
         ],
         "subfolders": []
     },
