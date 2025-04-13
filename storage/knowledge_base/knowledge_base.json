@@ -75,7 +75,7 @@
         "imports": [
             "flask",
             "flask_cors",
-            "codebot_core",
+            "genetic.genetic_population",
             "os"
         ],
         "functions": [
@@ -94,9 +94,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 1500,
-            "average_indentation": 3.7948717948717947,
-            "loop_count": 3
+            "character_length": 2431,
+            "average_indentation": 5.448275862068965,
+            "loop_count": 5
         }
     },
     "__init__.py": {
@@ -750,13 +750,19 @@
                     "evaluation_subfolder",
                     "ai_engine"
                 ]
+            },
+            {
+                "name": "list_population",
+                "parameters": [
+                    "population_dir"
+                ]
             }
         ],
         "classes": [],
         "metadata": {
-            "character_length": 14312,
-            "average_indentation": 6.336633663366337,
-            "loop_count": 30
+            "character_length": 15266,
+            "average_indentation": 6.390092879256966,
+            "loop_count": 32
         }
     },
     "genetic\\genetic_structure.py": {

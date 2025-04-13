@@ -347,3 +347,27 @@ def _evaluate_individual(individual_path, evaluation_subfolder, ai_engine):
         readme.write(log_content)
 
     return fitness_scores
+
+def list_population(population_dir):
+    """
+    Lists all individuals in the genetic population directory.
+
+    Args:
+        population_dir (str): Directory containing the population files.
+
+    Returns:
+        list[dict]: A list of individuals with their names and mutation numbers.
+    """
+    individuals = []
+    for filename in os.listdir(population_dir):
+        if filename.endswith(".py") and filename.startswith("individual_"):
+            # Extract the numeric part of the filename for sorting
+            try:
+                mutation_number = int(filename.split("_")[1].split(".")[0])
+            except (IndexError, ValueError):
+                mutation_number = float("inf")  # Place non-standard files at the end
+            individuals.append({"name": filename, "mutation_number": mutation_number})
+
+    # Sort individuals numerically by mutation number
+    individuals.sort(key=lambda x: x["mutation_number"])
+    return individuals

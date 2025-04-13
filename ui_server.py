@@ -1,7 +1,7 @@
 # filepath: c:\CodeBot\ui_server.py
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from codebot_core import exchange_layer  # Ensure this import works
+from genetic.genetic_population import list_population, evaluate_population  # Import both functions
 import os
 
 app = Flask(__name__, static_folder="frontend", static_url_path="/")  # Serve the frontend folder
@@ -27,17 +27,43 @@ def handle_command():
     Handle commands sent from the web UI.
     """
     command = request.json.get("command", "")
+    page = request.json.get("page", 1)  # Current page for pagination
+
     if command == "evaluate population":
-        # Example list of genetic individuals (replace with actual logic)
-        genetic_individuals = [
-            {"id": 1, "name": "Individual 1", "fitness": 0.85},
-            {"id": 2, "name": "Individual 2", "fitness": 0.78},
-            {"id": 3, "name": "Individual 3", "fitness": 0.92},
+        # Path to the genetic_population folder
+        population_dir = os.path.join("storage", "genetic_population")
+        if not os.path.exists(population_dir):
+            return jsonify({"response": "No genetic population found.", "data": []})
+
+        # Use the list_population function to list individuals
+        try:
+            population = list_population(population_dir)
+        except Exception as e:
+            return jsonify({"response": f"Error listing population: {e}", "data": []})
+
+        # Pagination logic (10 individuals per page)
+        items_per_page = 10
+        start_index = (page - 1) * items_per_page
+        end_index = start_index + items_per_page
+        paginated_population = population[start_index:end_index]
+
+        # Determine if there are more pages
+        total_pages = (len(population) + items_per_page - 1) // items_per_page
+
+        # Format the response to display "Individual X"
+        formatted_population = [
+            {"name": f"Individual {ind['mutation_number'] + 1}"}
+            for ind in paginated_population
         ]
-        return jsonify({"response": "List of genetic individuals", "data": genetic_individuals})
+
+        return jsonify({
+            "response": f"Page {page} of {total_pages}",
+            "data": formatted_population,
+            "total_pages": total_pages
+        })
+
     else:
-        response = exchange_layer(command)
-        return jsonify({"response": response})
+        return jsonify({"response": "Command not recognized."})
 
 if __name__ == "__main__":
     print("Starting CodeBot Web UI server...")

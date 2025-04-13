@@ -1,5 +1,74 @@
 // Ensure DOM is fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', () => {
+    let currentPage = 1; // Track the current page
+
+    const responseOutput = document.getElementById("response-output");
+    const buttonGroup = document.querySelector(".button-group");
+
+    // Function to fetch and display individuals
+    function fetchIndividuals(page = 1) {
+        fetch("http://127.0.0.1:5000/command", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ command: "evaluate population", page })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Display the list of genetic individuals
+                const individuals = data.data;
+                let listHtml = `<h3>${data.response}</h3><ul>`;
+                individuals.forEach(individual => {
+                    listHtml += `<li>${individual.name}</li>`;
+                });
+                listHtml += "</ul>";
+
+                // Add pagination buttons
+                listHtml += `
+                    <div class="pagination-buttons">
+                        <button id="home-button" ${currentPage === 1 ? "disabled" : ""}>Home</button>
+                        <button id="prev-button" ${currentPage === 1 ? "disabled" : ""}>Previous</button>
+                        <button id="next-button" ${currentPage === data.total_pages ? "disabled" : ""}>Next</button>
+                    </div>
+                `;
+
+                responseOutput.innerHTML = listHtml;
+
+                // Add event listeners for pagination buttons
+                document.getElementById("home-button").addEventListener("click", () => {
+                    currentPage = 1;
+                    fetchIndividuals(currentPage);
+                });
+                document.getElementById("prev-button").addEventListener("click", () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        fetchIndividuals(currentPage);
+                    }
+                });
+                document.getElementById("next-button").addEventListener("click", () => {
+                    if (currentPage < data.total_pages) {
+                        currentPage++;
+                        fetchIndividuals(currentPage);
+                    }
+                });
+            })
+            .catch(error => {
+                responseOutput.textContent = `Error: ${error.message}`;
+            });
+    }
+
+    // Add event listener for the "Evaluate Population" button
+    buttonGroup.querySelector('[data-command="evaluate population"]').addEventListener("click", () => {
+        currentPage = 1; // Reset to the first page
+        fetchIndividuals(currentPage);
+    });
+
     // Handle "Send" button click
     const sendCommandButton = document.getElementById("send-command");
     if (sendCommandButton) {

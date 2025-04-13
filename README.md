@@ -1,7 +1,7 @@
 # CodeBot
 
 ## Overview
-CodeBot is now fully web-based. The terminal UI has been removed, and all interactions are handled through the web UI.
+CodeBot is now fully web-based. The terminal UI has been removed, and all interactions are handled through the web UI. It integrates advanced genetic algorithms, AI-powered code analysis, and self-improvement capabilities to optimize Python codebases.
 
 ---
 
@@ -16,6 +16,9 @@ CodeBot is now fully web-based. The terminal UI has been removed, and all intera
   - Logs fitness scores for debugging and analysis.
 - **Generational Evolution**:
   - Runs multiple generations of genetic algorithms to optimize code quality and functionality.
+- **Population Listing and Curation**:
+  - Lists individuals in the genetic population with proper ordering based on mutation numbers.
+  - Allows curation and selection of individuals for further evaluation or subpopulation creation.
 
 ### 2. **AI Integration**
 - **Code Analysis**:
@@ -36,13 +39,21 @@ CodeBot is now fully web-based. The terminal UI has been removed, and all intera
     - File-level metadata (e.g., character length, indentation, loop logic).
   - Stores metadata in `knowledge_base.json` for centralized access.
 
-### 4. **Logging and Debugging**
+### 4. **Web-Based UI**
+- **Command Interface**:
+  - Provides a clean and interactive web-based interface for managing genetic populations and executing commands.
+- **Pagination**:
+  - Displays genetic populations in groups of 10 with navigation options (Next, Previous, Home).
+- **Dynamic Updates**:
+  - Dynamically updates the UI with curated lists and evaluation results.
+
+### 5. **Logging and Debugging**
 - **Runtime Logs**:
   - Maintains detailed runtime logs for debugging and performance monitoring.
 - **Execution Logs**:
   - Logs execution results for each individual in genetic populations.
 
-### 5. **Folder and File Management**
+### 6. **Folder and File Management**
 - **Folder Structure Analysis**:
   - Analyzes and generates JSON representations of folder structures.
 - **File Flattening**:
@@ -79,6 +90,11 @@ c:\CodeBot\
 │   │   ├── evaluation_results\
 │   │       ├── individual_0.py_exec.log
 │   │       ├── individual_0.py_README.md
+├── frontend\
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css
+│   ├── favicon.ico
 ├── README.md
 ├── requirements.txt
 ├── runtime_exec.log
@@ -113,12 +129,12 @@ c:\CodeBot\
 ---
 
 ### **3. `evaluate_population_command`**
-- **Location**: `codebot_core.py`
+- **Location**: `ui_server.py`
 - **Description**:
-  - Evaluates genetic populations with pagination.
+  - Lists and evaluates genetic populations with pagination.
 - **Process**:
-  1. Lists available populations in groups of 10.
-  2. Allows navigation between pages using `.` (next) and `,` (previous).
+  1. Lists available populations in groups of 10 using `list_population` from `genetic_population.py`.
+  2. Allows navigation between pages using Next, Previous, and Home buttons.
   3. Evaluates the selected population using `evaluate_population` from `genetic_population.py`.
 
 ---
@@ -160,6 +176,13 @@ c:\CodeBot\
 - **Improved**: `evaluate_population_command` now handles invalid input gracefully.
 - **Updated**: README.md with detailed descriptions of functions and processes.
 
+### **April 13, 2025**
+- **Refactored**: `evaluate_population_command` to use `list_population` for listing individuals.
+- **Improved**: Pagination logic for listing genetic populations.
+- **Added**: Proper ordering of individuals based on mutation numbers.
+- **Enhanced**: Web UI with dynamic updates for curated lists and evaluation results.
+- **Fixed**: Issue where the list was not displayed correctly on the first click.
+
 ---
 
 ## **How to Use**
@@ -167,6 +190,12 @@ c:\CodeBot\
    ```bash
    python ui_server.py
    ```
+2. Open the web UI in your browser:
+   - URL: `http://127.0.0.1:5000`
+
+3. Use the command buttons in the web UI to interact with CodeBot:
+   - **Evaluate Population**: Lists and evaluates genetic populations.
+   - **Create Subpopulation**: Creates a new subpopulation from a chosen individual.
 
 ---
 
@@ -178,7 +207,7 @@ c:\CodeBot\
 
 2. **Evaluate Population**:
    - Command: `evaluate population`
-   - Description: Evaluates a genetic population with pagination.
+   - Description: Lists and evaluates a genetic population with pagination.
 
 3. **Create Subpopulation**:
    - Command: `create subpopulation`
