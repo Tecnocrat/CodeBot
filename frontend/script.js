@@ -59,7 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     return response.json();
                 })
                 .then(data => {
-                    responseOutput.textContent = data.response;
+                    if (command === "evaluate population" && data.data) {
+                        // Display the list of genetic individuals
+                        const individuals = data.data;
+                        let listHtml = "<ul>";
+                        individuals.forEach(individual => {
+                            listHtml += `<li>${individual.name} (Fitness: ${individual.fitness})</li>`;
+                        });
+                        listHtml += "</ul>";
+                        responseOutput.innerHTML = listHtml;
+                    } else {
+                        // Display the response for other commands
+                        responseOutput.textContent = data.response;
+                    }
                 })
                 .catch(error => {
                     responseOutput.textContent = `Error: ${error.message}`;

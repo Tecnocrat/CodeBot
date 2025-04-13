@@ -9,6 +9,7 @@
             "logging",
             "json",
             "subprocess",
+            "webbrowser",
             "rich.console",
             "rich.panel",
             "rich.prompt",
@@ -29,66 +30,17 @@
                 "parameters": []
             },
             {
-                "name": "generate_metadata",
-                "parameters": [
-                    "base_dir",
-                    "output_file"
-                ]
-            },
-            {
-                "name": "handle_errors",
-                "parameters": [
-                    "func"
-                ]
-            },
-            {
-                "name": "generate_metadata_command",
-                "parameters": []
-            },
-            {
-                "name": "generate_folder_structure_command",
-                "parameters": []
-            },
-            {
-                "name": "init_population_command",
-                "parameters": []
-            },
-            {
-                "name": "evaluate_population_command",
-                "parameters": []
-            },
-            {
-                "name": "evaluate_results_command",
-                "parameters": []
-            },
-            {
-                "name": "create_subpopulation_command",
-                "parameters": []
-            },
-            {
-                "name": "display_main_menu",
-                "parameters": []
-            },
-            {
-                "name": "main_menu",
-                "parameters": []
-            },
-            {
                 "name": "exchange_layer",
                 "parameters": [
                     "command"
                 ]
-            },
-            {
-                "name": "wrapper",
-                "parameters": []
             }
         ],
         "classes": [],
         "metadata": {
-            "character_length": 16028,
-            "average_indentation": 6.4,
-            "loop_count": 20
+            "character_length": 4437,
+            "average_indentation": 4.03921568627451,
+            "loop_count": 4
         }
     },
     "config.py": {
@@ -123,9 +75,18 @@
         "imports": [
             "flask",
             "flask_cors",
-            "codebot_core"
+            "codebot_core",
+            "os"
         ],
         "functions": [
+            {
+                "name": "serve_index",
+                "parameters": []
+            },
+            {
+                "name": "serve_favicon",
+                "parameters": []
+            },
             {
                 "name": "handle_command",
                 "parameters": []
@@ -133,9 +94,9 @@
         ],
         "classes": [],
         "metadata": {
-            "character_length": 557,
-            "average_indentation": 1.8823529411764706,
-            "loop_count": 1
+            "character_length": 1500,
+            "average_indentation": 3.7948717948717947,
+            "loop_count": 3
         }
     },
     "__init__.py": {

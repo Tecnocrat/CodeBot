@@ -103,6 +103,7 @@
     },
     "frontend": {
         "files": [
+            "favicon.ico",
             "index.html",
             "script.js",
             "style.css"
