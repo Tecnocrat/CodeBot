@@ -13,6 +13,8 @@ from genetic.genetic_population import (
 import os
 import logging
 import random  # Fix: Import the random module
+import threading
+import webbrowser  # Import for launching the browser
 
 # Configure logging
 LOG_FILE = os.path.join("storage", "runtime_exec.log")
@@ -45,33 +47,31 @@ def handle_command():
     command = request.json.get("command", "").lower().strip()
     args = request.json.get("args", {})  # Additional arguments for commands
 
+    # Process the command using the exchange layer logic
     try:
         if command == "init population":
+            source_file = args.get("source_file", "template.py")
             population_size = int(args.get("population_size", 10))
             dimensions = int(args.get("dimensions", 5))
             bounds = tuple(args.get("bounds", (0.0, 1.0)))
             output_dir = os.path.join("storage", "genetic_population")
             generate_population(source_file, population_size, dimensions, bounds, output_dir)
-            logging.info("Population initialized successfully.")
             return jsonify({"response": "Population initialized successfully."})
 
         elif command == "list population":
             population_dir = os.path.join("storage", "genetic_population")
             population = list_population(population_dir)
-            logging.info("Population listed successfully.")
             return jsonify({"response": "Population listed successfully.", "data": population})
 
         elif command == "evaluate population":
             population_dir = os.path.join("storage", "genetic_population")
             ai_engine = lambda log: random.uniform(0, 1)  # Example AI engine
             fitness_scores = evaluate_population(population_dir, ai_engine)
-            logging.info("Population evaluated successfully.")
             return jsonify({"response": "Population evaluated successfully.", "data": fitness_scores})
 
         elif command == "deduplicate population":
             output_dir = os.path.join("storage", "genetic_population")
             deduplicate_population(output_dir)
-            logging.info("Population deduplicated successfully.")
             return jsonify({"response": "Population deduplicated successfully."})
 
         elif command == "log":
@@ -86,6 +86,17 @@ def handle_command():
         logging.error(f"Error processing command '{command}': {e}")
         return jsonify({"response": f"Error: {e}"})
 
-if __name__ == "__main__":
+def start_ui_server():
+    """Start the Flask server and launch the browser."""
+    def open_browser():
+        """Open the default web browser."""
+        url = "http://127.0.0.1:5000"
+        logging.info(f"Launching browser to open {url}")
+        webbrowser.open(url)
+
+    # Start a thread to open the browser after a short delay
+    threading.Timer(1.0, open_browser).start()
+
+    # Start the Flask server
     logging.info("Starting CodeBot Web UI server...")
     app.run(debug=True)

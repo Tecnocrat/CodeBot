@@ -146,8 +146,8 @@ pre {
     right: 20px;
     width: 50px;
     height: 50px;
-    background-color: #121212; /* Default dark color */
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #121212;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -159,6 +159,11 @@ pre {
     transition: all 0.3s ease;
 }
 
+body.dark-theme .theme-toggle {
+    background-color: #121212;
+    color: #ffffff;
+}
+
 .theme-toggle:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
@@ -167,11 +172,6 @@ pre {
 .theme-toggle:active {
     transform: translateY(2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-body.dark-theme .theme-toggle {
-    background-color: #ffffff; /* Light color for dark mode */
-    color: #121212;
 }
 
 .clickable-individual {

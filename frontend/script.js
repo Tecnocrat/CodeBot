@@ -1,12 +1,16 @@
 // Ensure DOM is fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1; // Track the current page
-    let isDarkTheme = false; // Track the current theme
 
     const responseOutput = document.getElementById("response-output");
     const logOutput = document.getElementById("log-output");
     const buttonGroup = document.querySelector(".button-group");
     const themeToggle = document.getElementById("theme-toggle");
+
+    // Initialize theme based on local storage
+    const isDarkTheme = localStorage.getItem("dark-theme") === "true";
+    document.body.classList.toggle("dark-theme", isDarkTheme);
+    themeToggle.textContent = isDarkTheme ? "🌙" : "☀";
 
     // Function to send commands to the backend
     function sendCommand(command, args = {}) {
@@ -84,22 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Exit button not found in the DOM.');
     }
 
-    // Add event listener for the theme toggle
+    // Add event listener for theme toggle
     themeToggle.addEventListener("click", () => {
-        isDarkTheme = !isDarkTheme;
-        document.body.classList.toggle("dark-theme", isDarkTheme);
-
-        // Update the theme toggle appearance
-        if (isDarkTheme) {
-            themeToggle.style.backgroundColor = "#ffffff"; // Light color for dark mode
-            themeToggle.innerHTML = "&#x1F319;"; // Moon symbol
-        } else {
-            themeToggle.style.backgroundColor = "#121212"; // Dark color for light mode
-            themeToggle.innerHTML = "&#x2600;"; // Sun symbol
-        }
+        const isDark = document.body.classList.toggle("dark-theme");
+        localStorage.setItem("dark-theme", isDark);
+        themeToggle.textContent = isDark ? "🌙" : "☀";
     });
-
-    // Initialize the theme toggle appearance
-    themeToggle.style.backgroundColor = "#121212"; // Default to dark color
-    themeToggle.innerHTML = "&#x2600;"; // Default to sun symbol
 });
