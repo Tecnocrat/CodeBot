@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "C:\CodeBot\storage\genetic_population\individual_19.py", line 11, in <module>
-    from core.self_improvement import analyze_logs
-ModuleNotFoundError: No module named 'core'
-Execution failed: Command '['python', 'C:\\CodeBot\\storage\\genetic_population\\individual_19.py']' returned non-zero exit status 1.

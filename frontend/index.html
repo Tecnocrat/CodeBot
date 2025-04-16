@@ -16,17 +16,63 @@
             <button class="command-button" data-command="evaluate population" title="Evaluate the genetic population">Evaluate Population</button>
             <button class="command-button" data-command="deduplicate population" title="Deduplicate the genetic population">Deduplicate Population</button>
         </div>
-        <div class="response-section">
-            <h2>Response:</h2>
-            <div id="response-output">No response yet.</div>
+        <div class="ai-control">
+            <button id="ai-toggle" class="ai-toggle status-off" title="Toggle AI">
+                AI
+            </button>
+        </div>
+        <div id="loading-progress" class="progress-bar hidden">
+            <div id="progress-bar-fill"></div>
+        </div>
+        <div class="response-window">
+            <div class="response-header">
+                <span>Response Log</span>
+                <button id="clear-response" title="Clear Response Log">Clear</button>
+            </div>
+            <div id="response-output" class="response-content">
+                <p>No response yet.</p>
+            </div>
         </div>
         <div class="log-section">
             <h2>Logs:</h2>
             <div id="log-output" class="log-output"></div>
         </div>
     </div>
+    <div id="population-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Population Already Exists</h2>
+            <p>The genetic population folder is already populated. What would you like to do?</p>
+            <button id="delete-population" class="modal-button">Delete Current Population</button>
+            <button id="grow-population" class="modal-button">Grow Current Population</button>
+            <button id="cancel-modal" class="modal-button">Cancel</button>
+        </div>
+    </div>
+    <div id="init-population-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Initialize Population</h2>
+            <form id="init-population-form">
+                <label for="source-file">Source File:</label>
+                <input type="text" id="source-file" name="source_file" placeholder="Select a source file" readonly>
+                <button type="button" id="choose-file-button">Choose File</button>
+
+                <label for="population-size">Population Size:</label>
+                <input type="number" id="population-size" name="population_size" value="10" min="1" required>
+
+                <label for="dimensions">Dimensions:</label>
+                <input type="number" id="dimensions" name="dimensions" value="5" min="1" required>
+
+                <label for="bounds">Bounds (min, max):</label>
+                <input type="text" id="bounds" name="bounds" value="0.0,1.0" required>
+
+                <button type="submit">Initialize</button>
+            </form>
+            <button id="close-modal">Close</button>
+        </div>
+    </div>
     <!-- Dark Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light theme"></button>
+    <label for="source-file">Source File:</label>
+    <input type="text" id="source-file" name="source_file" placeholder="Enter source file path" value="codebot_core.py" required>
     <script src="script.js"></script>
 </body>
 </html>

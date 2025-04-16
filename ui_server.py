@@ -10,6 +10,7 @@ from genetic.genetic_population import (
     crossover,
     mutate_file
 )
+from core.ai_engine import preload_model
 import os
 import logging
 import random  # Fix: Import the random module
@@ -31,6 +32,9 @@ logging.basicConfig(
 app = Flask(__name__, static_folder="frontend", static_url_path="/")
 CORS(app)
 
+# Track AI engine state
+ai_engine_state = {"status": "off"}
+
 @app.route("/")
 def serve_index():
     """Serve the main index.html file for the web UI."""
@@ -41,43 +45,55 @@ def serve_favicon():
     """Serve the favicon.ico file for the web UI."""
     return send_from_directory(app.static_folder, "favicon.ico")
 
+@app.route("/check-population", methods=["GET"])
+def check_population():
+    """Check if the genetic_population folder is already populated."""
+    population_dir = os.path.join("storage", "genetic_population")
+    if os.listdir(population_dir):  # Check if the folder is not empty
+        return jsonify({"status": "populated"})
+    return jsonify({"status": "empty"})
+
 @app.route("/command", methods=["POST"])
 def handle_command():
     """Handle commands sent from the web UI."""
     command = request.json.get("command", "").lower().strip()
     args = request.json.get("args", {})  # Additional arguments for commands
 
-    # Process the command using the exchange layer logic
     try:
         if command == "init population":
-            source_file = args.get("source_file", "template.py")
-            population_size = int(args.get("population_size", 10))
-            dimensions = int(args.get("dimensions", 5))
-            bounds = tuple(args.get("bounds", (0.0, 1.0)))
-            output_dir = os.path.join("storage", "genetic_population")
-            generate_population(source_file, population_size, dimensions, bounds, output_dir)
-            return jsonify({"response": "Population initialized successfully."})
-
-        elif command == "list population":
+            action = args.get("action", "fresh")
             population_dir = os.path.join("storage", "genetic_population")
-            population = list_population(population_dir)
-            return jsonify({"response": "Population listed successfully.", "data": population})
+            source_file = args.get("source_file")
 
-        elif command == "evaluate population":
-            population_dir = os.path.join("storage", "genetic_population")
-            ai_engine = lambda log: random.uniform(0, 1)  # Example AI engine
-            fitness_scores = evaluate_population(population_dir, ai_engine)
-            return jsonify({"response": "Population evaluated successfully.", "data": fitness_scores})
+            # Validate the source file
+            if not source_file or not os.path.exists(source_file):
+                raise FileNotFoundError(f"Source file '{source_file}' does not exist.")
 
-        elif command == "deduplicate population":
-            output_dir = os.path.join("storage", "genetic_population")
-            deduplicate_population(output_dir)
-            return jsonify({"response": "Population deduplicated successfully."})
+            if action == "delete":
+                # Delete current population
+                for file in os.listdir(population_dir):
+                    file_path = os.path.join(population_dir, file)
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                logging.info("Deleted current population.")
 
-        elif command == "log":
-            message = args.get("message", "")
-            logging.info(message)
-            return jsonify({"response": "Log received."})
+            if action in ["fresh", "delete"]:
+                # Initialize a new population
+                population_size = int(args.get("population_size", 10))
+                dimensions = int(args.get("dimensions", 5))
+                bounds = tuple(map(float, args.get("bounds", (0.0, 1.0))))
+                generate_population(source_file, population_size, dimensions, bounds, population_dir)
+                return jsonify({"response": "Population initialized successfully."})
+
+            if action == "grow":
+                # Grow the current population
+                existing_files = [f for f in os.listdir(population_dir) if f.startswith("individual_")]
+                last_individual = max(int(f.split("_")[1].split(".")[0]) for f in existing_files)
+                population_size = int(args.get("population_size", 10))
+                dimensions = int(args.get("dimensions", 5))
+                bounds = tuple(map(float, args.get("bounds", (0.0, 1.0))))
+                generate_population(source_file, population_size, dimensions, bounds, population_dir, start_index=last_individual + 1)
+                return jsonify({"response": "Population grown successfully."})
 
         else:
             return jsonify({"response": "Command not recognized."})
@@ -85,6 +101,27 @@ def handle_command():
     except Exception as e:
         logging.error(f"Error processing command '{command}': {e}")
         return jsonify({"response": f"Error: {e}"})
+
+@app.route("/ai-engine/on", methods=["POST"])
+def turn_on_ai_engine():
+    """Turn ON the AI engine."""
+    global ai_engine_state
+    try:
+        ai_engine_state["status"] = "loading"
+        preload_model()  # Load the AI engine
+        ai_engine_state["status"] = "on"
+        return jsonify({"status": "loading"})
+    except Exception as e:
+        logging.error(f"Error loading AI engine: {e}")
+        ai_engine_state["status"] = "off"
+        return jsonify({"status": "error", "message": str(e)})
+
+@app.route("/ai-engine/off", methods=["POST"])
+def turn_off_ai_engine():
+    """Turn OFF the AI engine."""
+    global ai_engine_state
+    ai_engine_state["status"] = "off"
+    return jsonify({"status": "off"})
 
 def start_ui_server():
     """Start the Flask server and launch the browser."""

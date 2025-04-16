@@ -89,34 +89,23 @@ def ingest_knowledge(file_path):
     shutil.copy(file_path, target_path)
     print(f"Ingested knowledge from {file_path} to {target_path}")
 
-def generate_population(source_file, population_size, dimensions, bounds, output_dir):
+def generate_population(source_file, population_size, dimensions, bounds, output_dir, start_index=0):
     """
-    Generates a population of individuals by copying a source file and applying random mutations.
-
-    Args:
-        source_file (str): Path to the source file to replicate.
-        population_size (int): Number of individuals in the population.
-        dimensions (int): Number of dimensions for the population's parameter space.
-        bounds (tuple[float, float]): Bounds for each dimension.
-        output_dir (str): Directory to save the generated population.
-
-    Returns:
-        list[str]: List of file paths for the generated population.
+    Generates a population of Python scripts by replicating and mutating a source file.
     """
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    # Validate the source file
+    if not os.path.exists(source_file):
+        raise FileNotFoundError(f"Source file '{source_file}' does not exist.")
 
-    population = []
-    for i in range(population_size):
-        individual_path = os.path.join(output_dir, f"individual_{i}.py")
-        shutil.copy(source_file, individual_path)
-
-        # Apply random mutations to the individual
-        mutate_file(individual_path, dimensions, bounds)
-        population.append(individual_path)
-
-    logging.info(f"Generated population of size {population_size} in {output_dir}")
-    return population
+    os.makedirs(output_dir, exist_ok=True)
+    for i in range(start_index, start_index + population_size):
+        individual_file = os.path.join(output_dir, f"individual_{i}.py")
+        if os.path.exists(individual_file):
+            logging.warning(f"Skipping existing individual: {individual_file}")
+            continue
+        shutil.copy(source_file, individual_file)
+        mutate_file(individual_file, dimensions, bounds)
+        logging.info(f"Generated individual: {individual_file}")
 
 def deduplicate_population(output_dir):
     """
