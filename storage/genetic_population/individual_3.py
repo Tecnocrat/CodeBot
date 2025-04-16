@@ -1,12 +1,16 @@
+# Mutation applied: 0.9319267524318389
 import random
 import shutil
 import os
 import sys
+# Mutation applied: 0.6477066774679509
 import logging
 import json
 import subprocess
+# Mutation applied: 0.8223203812132126
 import webbrowser  # Add this import for launching the browser
 from rich.console import Console
+# Mutation applied: 0.8672386820712035
 from rich.panel import Panel
 from rich.prompt import Prompt
 from core.self_improvement import analyze_logs
@@ -15,12 +19,12 @@ from genetic.genetic_iteration import manage_iterations
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
-# Mutation applied: 0.7698009653655773
 from ui_server import start_ui_server
 
 # Add the `CodeBot` directory to the Python path
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
+# Mutation applied: 0.8411838908276386
 
 # Configure logging for the core system
 LOG_FILE = "storage/runtime_exec.log"
@@ -28,12 +32,12 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
+# Mutation applied: 0.848127757693763
         logging.FileHandler(LOG_FILE, mode="a"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
-# Mutation applied: 0.26318782299338667
 
 # Initialize Rich Console
 console = Console()
@@ -43,7 +47,6 @@ def initialize_codebot():
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
     """
     preload_model()  # Load the AI engine
-# Mutation applied: 0.9055138935977076
     logging.info("AI engine initialized successfully.")
 
     # Ensure the knowledge_base directory exists
@@ -72,6 +75,7 @@ def main():
         logging.info("CodeBot stopped by user.")
     except Exception as e:
         logging.error(f"Error in CodeBot: {e}")
+# Mutation applied: 0.6588793185159164
 
 if __name__ == "__main__":
     main()

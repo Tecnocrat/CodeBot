@@ -25,19 +25,23 @@ def analyze_folder_structure(base_dir, ignore_git=True):
     Returns:
         dict: A dictionary representing the folder structure.
     """
-    folder_structure = {}
-    for root, dirs, files in os.walk(base_dir):
-        # Filter out Git metadata if ignore_git is True
-        if ignore_git:
-            dirs[:] = [d for d in dirs if d != ".git"]
-            files = [f for f in files if not f.startswith(".git")]
+    try:
+        folder_structure = {}
+        for root, dirs, files in os.walk(base_dir):
+            # Filter out Git metadata if ignore_git is True
+            if ignore_git:
+                dirs[:] = [d for d in dirs if d != ".git"]
+                files = [f for f in files if not f.startswith(".git")]
 
-        relative_root = os.path.relpath(root, base_dir)
-        folder_structure[relative_root] = {
-            "files": files,
-            "subfolders": dirs
-        }
-    return folder_structure
+            relative_root = os.path.relpath(root, base_dir)
+            folder_structure[relative_root] = {
+                "files": files,
+                "subfolders": dirs
+            }
+        return folder_structure
+    except Exception as e:
+        logging.error(f"Error analyzing folder structure: {e}")
+        return {}
 
 def save_structure_to_json(base_dir, output_dir):
     """
@@ -100,20 +104,24 @@ def generate_knowledge_base(base_dir, output_file):
         base_dir (str): The root directory of the codebase.
         output_file (str): The path to save the metadata JSON file.
     """
-    knowledge_base = {}
-    for root, _, files in os.walk(base_dir):
-        for file in files:
-            if file.endswith(".py"):
-                file_path = os.path.join(root, file)
-                with open(file_path, "r", encoding="utf-8") as f:
-                    content = f.read()
-                knowledge_base[file] = {
-                    "path": file_path,
-                    "lines": len(content.splitlines()),
-                    "size": len(content),
-                }
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(knowledge_base, f, indent=4)
+    try:
+        knowledge_base = {}
+        for root, _, files in os.walk(base_dir):
+            for file in files:
+                if file.endswith(".py"):
+                    file_path = os.path.join(root, file)
+                    with open(file_path, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    knowledge_base[file] = {
+                        "path": file_path,
+                        "lines": len(content.splitlines()),
+                        "size": len(content),
+                    }
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(knowledge_base, f, indent=4)
+        logging.info(f"Knowledge base successfully saved to {output_file}")
+    except Exception as e:
+        logging.error(f"Error generating knowledge base: {e}")
 def update_imports(base_dir, knowledge_base_file):
     """
     Updates imports in all Python files based on the knowledge base.

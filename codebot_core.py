@@ -22,12 +22,11 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
 
 # Configure logging for the core system
-LOG_FILE = "storage/runtime_exec.log"
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(LOG_FILE, mode="a"),
+        logging.FileHandler("storage/runtime_exec.log", mode="a"),
         logging.StreamHandler()
     ]
 )
@@ -40,24 +39,28 @@ def initialize_codebot():
     """
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
     """
-    preload_model()  # Load the AI engine
-    logging.info("AI engine initialized successfully.")
+    try:
+        preload_model()  # Load the AI engine
+        logging.info("AI engine initialized successfully.")
 
-    # Ensure the knowledge_base directory exists
-    knowledge_base_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
-    os.makedirs(knowledge_base_dir, exist_ok=True)
+        # Ensure the knowledge_base directory exists
+        knowledge_base_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
+        os.makedirs(knowledge_base_dir, exist_ok=True)
 
-    # Generate metadata for knowledge_base.json
-    knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
-    generate_knowledge_base(BASE_DIR, knowledge_base_file)
-    logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
+        # Generate metadata for knowledge_base.json
+        knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
+        generate_knowledge_base(BASE_DIR, knowledge_base_file)
+        logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
-    # Generate folder structure for folder_structure.json
-    folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
-    folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
-    with open(folder_structure_file, "w", encoding="utf-8") as f:
-        json.dump(folder_structure, f, indent=4)
-    logging.info(f"Folder structure generated and saved to {folder_structure_file}")
+        # Generate folder structure for folder_structure.json
+        folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
+        folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
+        with open(folder_structure_file, "w", encoding="utf-8") as f:
+            json.dump(folder_structure, f, indent=4)
+        logging.info(f"Folder structure generated and saved to {folder_structure_file}")
+
+    except Exception as e:
+        logging.error(f"Error during initialization: {e}")
 
 def main():
     """Main entry point for CodeBot."""

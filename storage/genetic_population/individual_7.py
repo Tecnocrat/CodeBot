@@ -2,19 +2,18 @@ import random
 import shutil
 import os
 import sys
-# Mutation applied: 0.5765119333489113
 import logging
 import json
+# Mutation applied: 0.7973267565121294
 import subprocess
-# Mutation applied: 0.652131498288042
 import webbrowser  # Add this import for launching the browser
 from rich.console import Console
 from rich.panel import Panel
-# Mutation applied: 0.6026968372960076
 from rich.prompt import Prompt
 from core.self_improvement import analyze_logs
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
 from genetic.genetic_iteration import manage_iterations
+# Mutation applied: 0.4698374735143096
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
@@ -22,7 +21,6 @@ from ui_server import start_ui_server
 
 # Add the `CodeBot` directory to the Python path
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-# Mutation applied: 0.7436269330159594
 sys.path.append(BASE_DIR)
 
 # Configure logging for the core system
@@ -32,7 +30,9 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(LOG_FILE, mode="a"),
+# Mutation applied: 0.7880920141427848
         logging.StreamHandler()
+# Mutation applied: 0.1430502418628202
     ]
 )
 logger = logging.getLogger(__name__)
@@ -43,6 +43,7 @@ console = Console()
 def initialize_codebot():
     """
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
+# Mutation applied: 0.5937883886825139
     """
     preload_model()  # Load the AI engine
     logging.info("AI engine initialized successfully.")
@@ -54,7 +55,6 @@ def initialize_codebot():
     # Generate metadata for knowledge_base.json
     knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
     generate_knowledge_base(BASE_DIR, knowledge_base_file)
-# Mutation applied: 0.8755058315394031
     logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
     # Generate folder structure for folder_structure.json
@@ -63,7 +63,6 @@ def initialize_codebot():
     with open(folder_structure_file, "w", encoding="utf-8") as f:
         json.dump(folder_structure, f, indent=4)
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
-# Mutation applied: 0.8442947670706488
 
 def main():
     """Main entry point for CodeBot."""

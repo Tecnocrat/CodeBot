@@ -21,6 +21,16 @@
   - `evaluate_population`: Evaluates the fitness of individuals in a population.
   - `deduplicate_population`: Removes duplicate individuals from a population.
 
+#### **Updated Logic**
+- **`generate_population`**:
+  - Validates the source file before generating individuals.
+  - Prevents overwriting existing individuals unless explicitly instructed.
+  - Supports growing an existing population by starting from the last individual.
+
+- **`handle_command`**:
+  - Processes "Delete" and "Grow" actions for population initialization.
+  - Ensures the AI engine remains ON after initialization.
+
 ### **1.4 `core/analyze_structure.py`**
 - **Purpose**: Analyzes the folder structure and generates metadata about the codebase.
 - **Key Functions**:

@@ -3,6 +3,7 @@ import shutil
 import os
 import sys
 import logging
+# Mutation applied: 0.42032302424987095
 import json
 import subprocess
 import webbrowser  # Add this import for launching the browser
@@ -10,13 +11,12 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from core.self_improvement import analyze_logs
-# Mutation applied: 0.6214867966991117
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
+# Mutation applied: 0.707892470560267
 from genetic.genetic_iteration import manage_iterations
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
-# Mutation applied: 0.7632782489790756
 from ui_server import start_ui_server
 
 # Add the `CodeBot` directory to the Python path
@@ -33,16 +33,22 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+# Mutation applied: 0.4497877686964015
 logger = logging.getLogger(__name__)
+# Mutation applied: 0.5774331652610385
 
 # Initialize Rich Console
 console = Console()
 
 def initialize_codebot():
+# Mutation applied: 0.662448045515145
     """
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
+# Mutation applied: 0.8051159181559526
     """
+# Mutation applied: 0.7461943563024221
     preload_model()  # Load the AI engine
+# Mutation applied: 0.9066036503515961
     logging.info("AI engine initialized successfully.")
 
     # Ensure the knowledge_base directory exists
@@ -51,6 +57,7 @@ def initialize_codebot():
 
     # Generate metadata for knowledge_base.json
     knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
+# Mutation applied: 0.24263427608037563
     generate_knowledge_base(BASE_DIR, knowledge_base_file)
     logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
@@ -63,15 +70,17 @@ def initialize_codebot():
 
 def main():
     """Main entry point for CodeBot."""
-# Mutation applied: 0.5201986183423262
     try:
         logging.info("Starting CodeBot...")
         # Start the web UI server
         start_ui_server()
     except KeyboardInterrupt:
+# Mutation applied: 0.7505138106327094
         logging.info("CodeBot stopped by user.")
     except Exception as e:
         logging.error(f"Error in CodeBot: {e}")
 
+# Mutation applied: 0.7205107362076038
 if __name__ == "__main__":
+# Mutation applied: 0.9294074992942564
     main()

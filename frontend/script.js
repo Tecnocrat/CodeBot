@@ -264,8 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle "Choose File" button click and form submission
     const chooseFileButton = document.getElementById("choose-file-button");
     const sourceFileInput = document.getElementById("source-file");
-    const initPopulationForm = document.getElementById("init-population-form");
 
+    // Handle "Choose File" button click
     chooseFileButton.addEventListener("click", () => {
         const fileInput = document.createElement("input");
         fileInput.type = "file";
@@ -273,12 +273,15 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.addEventListener("change", (event) => {
             const file = event.target.files[0];
             if (file) {
-                sourceFileInput.value = file.path; // Use the file path
+                sourceFileInput.value = file.path; // Display the selected file path
             }
         });
         fileInput.click();
     });
 
+    const initPopulationForm = document.getElementById("init-population-form");
+
+    // Handle form submission
     initPopulationForm.addEventListener("submit", (event) => {
         event.preventDefault();
 

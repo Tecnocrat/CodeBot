@@ -52,8 +52,10 @@
             <h2>Initialize Population</h2>
             <form id="init-population-form">
                 <label for="source-file">Source File:</label>
-                <input type="text" id="source-file" name="source_file" placeholder="Select a source file" readonly>
-                <button type="button" id="choose-file-button">Choose File</button>
+                <div class="file-selector">
+                    <input type="text" id="source-file" name="source_file" placeholder="Select a source file" readonly>
+                    <button type="button" id="choose-file-button-modal">Choose File</button>
+                </div>
 
                 <label for="population-size">Population Size:</label>
                 <input type="number" id="population-size" name="population_size" value="10" min="1" required>
@@ -72,7 +74,10 @@
     <!-- Dark Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light theme"></button>
     <label for="source-file">Source File:</label>
-    <input type="text" id="source-file" name="source_file" placeholder="Enter source file path" value="codebot_core.py" required>
+    <div class="file-selector">
+        <input type="text" id="source-file" name="source_file" placeholder="Select a source file" readonly>
+        <button type="button" id="choose-file-button">Choose File</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

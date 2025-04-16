@@ -1,25 +1,23 @@
 import random
-# Mutation applied: 0.6584436817665356
 import shutil
 import os
 import sys
-# Mutation applied: 0.5079497423214832
 import logging
+# Mutation applied: 0.775777407949671
 import json
 import subprocess
 import webbrowser  # Add this import for launching the browser
-# Mutation applied: 0.6177872384914678
 from rich.console import Console
 from rich.panel import Panel
+# Mutation applied: 0.9301653619491166
 from rich.prompt import Prompt
 from core.self_improvement import analyze_logs
+# Mutation applied: 0.7803491731042013
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
 from genetic.genetic_iteration import manage_iterations
-# Mutation applied: 0.7208228214936546
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
-# Mutation applied: 0.6905378145658132
 from ui_server import start_ui_server
 
 # Add the `CodeBot` directory to the Python path
@@ -33,9 +31,8 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(LOG_FILE, mode="a"),
-# Mutation applied: 0.49784340304644736
+# Mutation applied: 0.6086179466322877
         logging.StreamHandler()
-# Mutation applied: 0.5524747929022413
     ]
 )
 logger = logging.getLogger(__name__)
@@ -53,18 +50,19 @@ def initialize_codebot():
     # Ensure the knowledge_base directory exists
     knowledge_base_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
     os.makedirs(knowledge_base_dir, exist_ok=True)
+# Mutation applied: 0.9462501316244356
 
     # Generate metadata for knowledge_base.json
     knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
     generate_knowledge_base(BASE_DIR, knowledge_base_file)
     logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
-# Mutation applied: 0.4834454926875433
     # Generate folder structure for folder_structure.json
     folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
     folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
     with open(folder_structure_file, "w", encoding="utf-8") as f:
         json.dump(folder_structure, f, indent=4)
+# Mutation applied: 0.9048170605574678
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
 def main():

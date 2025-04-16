@@ -1,0 +1,198 @@
+{
+    ".": {
+        "files": [
+            "codebot_core.py",
+            "config.py",
+            "functionality_map.md",
+            "README.md",
+            "requirements.txt",
+            "runtime_exec.log",
+            "ui_server.py",
+            "__init__.py"
+        ],
+        "subfolders": [
+            ".vs",
+            ".vscode",
+            "core",
+            "frontend",
+            "genetic",
+            "storage",
+            "__pycache__"
+        ]
+    },
+    ".vs": {
+        "files": [
+            "slnx.sqlite",
+            "VSWorkspaceState.json"
+        ],
+        "subfolders": [
+            "CodeBot"
+        ]
+    },
+    ".vs\\CodeBot": {
+        "files": [],
+        "subfolders": [
+            "copilot-chat",
+            "CopilotIndices",
+            "FileContentIndex",
+            "v17"
+        ]
+    },
+    ".vs\\CodeBot\\copilot-chat": {
+        "files": [],
+        "subfolders": [
+            "33dd74cd"
+        ]
+    },
+    ".vs\\CodeBot\\copilot-chat\\33dd74cd": {
+        "files": [],
+        "subfolders": [
+            "sessions"
+        ]
+    },
+    ".vs\\CodeBot\\copilot-chat\\33dd74cd\\sessions": {
+        "files": [],
+        "subfolders": []
+    },
+    ".vs\\CodeBot\\CopilotIndices": {
+        "files": [],
+        "subfolders": [
+            "17.13.441.19478"
+        ]
+    },
+    ".vs\\CodeBot\\CopilotIndices\\17.13.441.19478": {
+        "files": [
+            "CodeChunks.db",
+            "SemanticSymbols.db"
+        ],
+        "subfolders": []
+    },
+    ".vs\\CodeBot\\FileContentIndex": {
+        "files": [
+            "c7f9f262-99c0-4386-afd5-794d8a8ad759.vsidx"
+        ],
+        "subfolders": []
+    },
+    ".vs\\CodeBot\\v17": {
+        "files": [
+            ".wsuo",
+            "DocumentLayout.backup.json",
+            "DocumentLayout.json"
+        ],
+        "subfolders": []
+    },
+    ".vscode": {
+        "files": [
+            "launch.json"
+        ],
+        "subfolders": []
+    },
+    "core": {
+        "files": [
+            "ai_engine.py",
+            "analyze_structure.py",
+            "self_audit.py",
+            "self_improvement.py",
+            "__init__.py"
+        ],
+        "subfolders": [
+            "__pycache__"
+        ]
+    },
+    "core\\__pycache__": {
+        "files": [
+            "ai_engine.cpython-313.pyc",
+            "analyze_structure.cpython-313.pyc",
+            "self_improvement.cpython-313.pyc",
+            "__init__.cpython-313.pyc"
+        ],
+        "subfolders": []
+    },
+    "frontend": {
+        "files": [
+            "favicon.ico",
+            "index.html",
+            "script.js",
+            "style.css"
+        ],
+        "subfolders": []
+    },
+    "genetic": {
+        "files": [
+            "genetic_algorithm.py",
+            "genetic_iteration.py",
+            "genetic_optimizer.py",
+            "genetic_population.py",
+            "genetic_structure.py",
+            "__init__.py"
+        ],
+        "subfolders": [
+            "__pycache__"
+        ]
+    },
+    "genetic\\__pycache__": {
+        "files": [
+            "genetic_algorithm.cpython-313.pyc",
+            "genetic_iteration.cpython-313.pyc",
+            "genetic_optimizer.cpython-313.pyc",
+            "genetic_population.cpython-313.pyc",
+            "__init__.cpython-313.pyc"
+        ],
+        "subfolders": []
+    },
+    "storage": {
+        "files": [
+            "runtime_exec.log",
+            "__init__.py"
+        ],
+        "subfolders": [
+            "genetic_population",
+            "knowledge_base"
+        ]
+    },
+    "storage\\genetic_population": {
+        "files": [
+            "individual_0.py",
+            "individual_1.py",
+            "individual_2.py",
+            "individual_3.py",
+            "individual_4.py",
+            "individual_5.py",
+            "individual_6.py",
+            "individual_7.py",
+            "individual_8.py",
+            "individual_9.py"
+        ],
+        "subfolders": [
+            "evaluation_results"
+        ]
+    },
+    "storage\\genetic_population\\evaluation_results": {
+        "files": [
+            "individual_0.py_exec.log",
+            "individual_0.py_README.md"
+        ],
+        "subfolders": [
+            "evaluation_results"
+        ]
+    },
+    "storage\\genetic_population\\evaluation_results\\evaluation_results": {
+        "files": [],
+        "subfolders": []
+    },
+    "storage\\knowledge_base": {
+        "files": [
+            "folder_structure.json",
+            "knowledge_base.json"
+        ],
+        "subfolders": []
+    },
+    "__pycache__": {
+        "files": [
+            "codebot_core.cpython-313.pyc",
+            "config.cpython-313.pyc",
+            "ui_server.cpython-313.pyc"
+        ],
+        "subfolders": []
+    }
+}

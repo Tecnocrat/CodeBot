@@ -1,9 +1,8 @@
 import random
 import shutil
-# Mutation applied: 0.6426802296391158
 import os
 import sys
-# Mutation applied: 0.3854919043372904
+# Mutation applied: 0.6041795517852154
 import logging
 import json
 import subprocess
@@ -19,28 +18,32 @@ from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
 from ui_server import start_ui_server
 
+# Mutation applied: 0.8630860135970022
 # Add the `CodeBot` directory to the Python path
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
 
 # Configure logging for the core system
 LOG_FILE = "storage/runtime_exec.log"
+# Mutation applied: 0.4514085895673066
 logging.basicConfig(
     level=logging.DEBUG,
+# Mutation applied: 0.8842742397556002
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(LOG_FILE, mode="a"),
+# Mutation applied: 0.0490094848499932
         logging.StreamHandler()
     ]
 )
+# Mutation applied: 0.6230895416216148
 logger = logging.getLogger(__name__)
 
-# Mutation applied: 0.5609222371221769
 # Initialize Rich Console
 console = Console()
+# Mutation applied: 0.72023213659911
 
 def initialize_codebot():
-# Mutation applied: 0.8854112206430855
     """
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
     """
@@ -53,6 +56,7 @@ def initialize_codebot():
 
     # Generate metadata for knowledge_base.json
     knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
+# Mutation applied: 0.5764989236545471
     generate_knowledge_base(BASE_DIR, knowledge_base_file)
     logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
@@ -60,6 +64,7 @@ def initialize_codebot():
     folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
     folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
     with open(folder_structure_file, "w", encoding="utf-8") as f:
+# Mutation applied: 0.8408037625032454
         json.dump(folder_structure, f, indent=4)
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
@@ -74,6 +79,6 @@ def main():
     except Exception as e:
         logging.error(f"Error in CodeBot: {e}")
 
-# Mutation applied: 0.46783746909659807
+# Mutation applied: 0.8760430077003295
 if __name__ == "__main__":
     main()

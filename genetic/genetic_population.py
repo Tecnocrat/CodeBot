@@ -89,7 +89,7 @@ def ingest_knowledge(file_path):
     shutil.copy(file_path, target_path)
     print(f"Ingested knowledge from {file_path} to {target_path}")
 
-def generate_population(source_file, population_size, dimensions, bounds, output_dir, start_index=0):
+def generate_population(source_file, population_size, dimensions, bounds, output_dir, start_index=None):
     """
     Generates a population of Python scripts by replicating and mutating a source file.
     """
@@ -98,11 +98,17 @@ def generate_population(source_file, population_size, dimensions, bounds, output
         raise FileNotFoundError(f"Source file '{source_file}' does not exist.")
 
     os.makedirs(output_dir, exist_ok=True)
+
+    # Determine the starting index
+    if start_index is None:
+        existing_files = [f for f in os.listdir(output_dir) if f.startswith("individual_")]
+        if existing_files:
+            start_index = max(int(f.split("_")[1].split(".")[0]) for f in existing_files) + 1
+        else:
+            start_index = 0
+
     for i in range(start_index, start_index + population_size):
         individual_file = os.path.join(output_dir, f"individual_{i}.py")
-        if os.path.exists(individual_file):
-            logging.warning(f"Skipping existing individual: {individual_file}")
-            continue
         shutil.copy(source_file, individual_file)
         mutate_file(individual_file, dimensions, bounds)
         logging.info(f"Generated individual: {individual_file}")

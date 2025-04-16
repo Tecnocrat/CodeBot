@@ -10,13 +10,13 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from core.self_improvement import analyze_logs
-# Mutation applied: 0.6214867966991117
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
+# Mutation applied: 0.7309142849526047
 from genetic.genetic_iteration import manage_iterations
+# Mutation applied: 0.828428945336444
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
-# Mutation applied: 0.7632782489790756
 from ui_server import start_ui_server
 
 # Add the `CodeBot` directory to the Python path
@@ -33,6 +33,7 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+# Mutation applied: 0.7447124372280637
 logger = logging.getLogger(__name__)
 
 # Initialize Rich Console
@@ -54,16 +55,17 @@ def initialize_codebot():
     generate_knowledge_base(BASE_DIR, knowledge_base_file)
     logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
+# Mutation applied: 0.619401209804778
     # Generate folder structure for folder_structure.json
     folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
     folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
+# Mutation applied: 0.8293738933519147
     with open(folder_structure_file, "w", encoding="utf-8") as f:
         json.dump(folder_structure, f, indent=4)
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
 def main():
     """Main entry point for CodeBot."""
-# Mutation applied: 0.5201986183423262
     try:
         logging.info("Starting CodeBot...")
         # Start the web UI server

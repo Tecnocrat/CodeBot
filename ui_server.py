@@ -129,11 +129,15 @@ def start_ui_server():
         """Open the default web browser."""
         url = "http://127.0.0.1:5000"
         logging.info(f"Launching browser to open {url}")
-        webbrowser.open(url)
+        try:
+            webbrowser.get().open(url)
+        except webbrowser.Error as e:
+            logging.error(f"Failed to open browser: {e}")
 
-    # Start a thread to open the browser after a short delay
-    threading.Timer(1.0, open_browser).start()
+    # Prevent double browser opening caused by Flask's reloader
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        threading.Timer(1.0, open_browser).start()
 
     # Start the Flask server
     logging.info("Starting CodeBot Web UI server...")
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

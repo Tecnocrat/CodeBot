@@ -16,20 +16,18 @@ from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analy
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
 from ui_server import start_ui_server
-# Mutation applied: 0.7039517406061593
 
 # Add the `CodeBot` directory to the Python path
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
 
 # Configure logging for the core system
-# Mutation applied: 0.6556193621028957
 LOG_FILE = "storage/runtime_exec.log"
-# Mutation applied: 0.882198435710092
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
+# Mutation applied: 0.44342675039508933
         logging.FileHandler(LOG_FILE, mode="a"),
         logging.StreamHandler()
     ]
@@ -40,6 +38,7 @@ logger = logging.getLogger(__name__)
 console = Console()
 
 def initialize_codebot():
+# Mutation applied: 0.2608891567434542
     """
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
     """
@@ -57,6 +56,7 @@ def initialize_codebot():
 
     # Generate folder structure for folder_structure.json
     folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
+# Mutation applied: 0.7460505930539246
     folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
     with open(folder_structure_file, "w", encoding="utf-8") as f:
         json.dump(folder_structure, f, indent=4)

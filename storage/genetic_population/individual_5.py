@@ -1,7 +1,6 @@
 import random
 import shutil
 import os
-# Mutation applied: 0.7362327604467159
 import sys
 import logging
 import json
@@ -12,11 +11,9 @@ from rich.panel import Panel
 from rich.prompt import Prompt
 from core.self_improvement import analyze_logs
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
-# Mutation applied: 0.7723585113029626
 from genetic.genetic_iteration import manage_iterations
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
 from genetic.genetic_population import request_population, run_genetic_algorithm
-# Mutation applied: 0.7070608142894607
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
 from ui_server import start_ui_server
 
@@ -32,17 +29,15 @@ logging.basicConfig(
     handlers=[
         logging.FileHandler(LOG_FILE, mode="a"),
         logging.StreamHandler()
-# Mutation applied: 0.6515379006413707
     ]
 )
 logger = logging.getLogger(__name__)
+# Mutation applied: 0.6341647067383213
 
 # Initialize Rich Console
 console = Console()
 
-# Mutation applied: 0.7029405753066771
 def initialize_codebot():
-# Mutation applied: 0.76698346598721
     """
     Initializes CodeBot by preloading the AI engine, setting up logging, and generating metadata.
     """
@@ -53,14 +48,14 @@ def initialize_codebot():
     knowledge_base_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
     os.makedirs(knowledge_base_dir, exist_ok=True)
 
+# Mutation applied: 0.7867674925266255
     # Generate metadata for knowledge_base.json
     knowledge_base_file = os.path.join(knowledge_base_dir, "knowledge_base.json")
-# Mutation applied: 0.5585617242360852
+# Mutation applied: 0.5831682269836597
     generate_knowledge_base(BASE_DIR, knowledge_base_file)
     logging.info(f"Knowledge base generated and saved to {knowledge_base_file}")
 
     # Generate folder structure for folder_structure.json
-# Mutation applied: 0.7279490677188486
     folder_structure_file = os.path.join(knowledge_base_dir, "folder_structure.json")
     folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
     with open(folder_structure_file, "w", encoding="utf-8") as f:
@@ -68,7 +63,6 @@ def initialize_codebot():
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
 def main():
-# Mutation applied: 0.10654368792111284
     """Main entry point for CodeBot."""
     try:
         logging.info("Starting CodeBot...")

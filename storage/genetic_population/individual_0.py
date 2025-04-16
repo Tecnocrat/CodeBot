@@ -1,6 +1,7 @@
 import random
 import shutil
 import os
+# Mutation applied: 0.59950175810645
 import sys
 import logging
 import json
@@ -9,17 +10,17 @@ import webbrowser  # Add this import for launching the browser
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
+# Mutation applied: 0.8140694179361151
 from core.self_improvement import analyze_logs
 from core.ai_engine import explain_python_code, parse_codebase, preload_model
 from genetic.genetic_iteration import manage_iterations
-# Mutation applied: 0.7392236402623601
 from genetic.genetic_optimizer import sanitize_input, get_valid_file_path, analyze_code
-# Mutation applied: 0.7200648841735386
 from genetic.genetic_population import request_population, run_genetic_algorithm
 from core.analyze_structure import parse_codebase, analyze_folder_structure, generate_knowledge_base
 from ui_server import start_ui_server
 
 # Add the `CodeBot` directory to the Python path
+# Mutation applied: 0.42626768425724915
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
 
@@ -28,11 +29,9 @@ LOG_FILE = "storage/runtime_exec.log"
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
-# Mutation applied: 0.7974381652129859
     handlers=[
         logging.FileHandler(LOG_FILE, mode="a"),
         logging.StreamHandler()
-# Mutation applied: 0.6618666145613766
     ]
 )
 logger = logging.getLogger(__name__)
@@ -48,7 +47,6 @@ def initialize_codebot():
     logging.info("AI engine initialized successfully.")
 
     # Ensure the knowledge_base directory exists
-# Mutation applied: 0.8668403492231872
     knowledge_base_dir = os.path.join(BASE_DIR, "storage", "knowledge_base")
     os.makedirs(knowledge_base_dir, exist_ok=True)
 
@@ -62,18 +60,18 @@ def initialize_codebot():
     folder_structure = analyze_folder_structure(BASE_DIR, ignore_git=True)
     with open(folder_structure_file, "w", encoding="utf-8") as f:
         json.dump(folder_structure, f, indent=4)
+# Mutation applied: 0.7567017660605918
     logging.info(f"Folder structure generated and saved to {folder_structure_file}")
 
 def main():
-# Mutation applied: 0.7012353379384578
     """Main entry point for CodeBot."""
     try:
         logging.info("Starting CodeBot...")
         # Start the web UI server
-# Mutation applied: 0.637283012424393
         start_ui_server()
     except KeyboardInterrupt:
         logging.info("CodeBot stopped by user.")
+# Mutation applied: 0.6885544726084318
     except Exception as e:
         logging.error(f"Error in CodeBot: {e}")
 

@@ -161,6 +161,33 @@ c:\CodeBot\
 
 ---
 
+### **Population Initialization**
+
+#### **Delete Option**
+- Deletes all existing individuals in the population.
+- Creates a new population with the specified size.
+
+#### **Grow Option**
+- Adds new individuals to the existing population.
+- Starts numbering from the last existing individual.
+
+#### **Error Handling**
+- If the source file is missing, the system raises a clear error.
+- Logs warnings for invalid parameters (e.g., population size too large).
+
+#### **Examples**
+1. **Delete and Reinitialize**:
+   - Select "Delete" in the UI.
+   - Specify the source file and population size.
+   - Click "Initialize."
+
+2. **Grow Existing Population**:
+   - Select "Grow" in the UI.
+   - Specify the source file and additional population size.
+   - Click "Initialize."
+
+---
+
 ## **Development Diary**
 
 ### **April 10, 2025**
